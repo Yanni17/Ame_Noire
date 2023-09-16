@@ -1,4 +1,4 @@
-import com.example.shoptest.data.datamodels.Clothes
+import com.example.shoptest.data.datamodels.models.Clothes
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit

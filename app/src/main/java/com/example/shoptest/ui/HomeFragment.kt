@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
+import com.example.shoptest.adapter.ProduktAdapter
 import com.example.shoptest.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -21,12 +22,25 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         viewModel.loadData()
-
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        viewModel.getAllHerren().observe(viewLifecycleOwner){
+            binding.herrenRV.adapter = ProduktAdapter(it,viewModel)
+        }
+
+        viewModel.getAllDamen().observe(viewLifecycleOwner){
+            binding.damenRV.adapter = ProduktAdapter(it,viewModel)
+        }
+
+        binding.werbungIV1.setImageResource(R.drawable.summer)
+        binding.werbung2IV.setImageResource(R.drawable.nike1)
+
+    }
 }

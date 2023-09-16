@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.shoptest.data.datamodels.Clothes
+import com.example.shoptest.data.datamodels.models.Clothes
 
 @Database(entities = [Clothes::class], version = 1)
 abstract class ClothesDatabase : RoomDatabase(){

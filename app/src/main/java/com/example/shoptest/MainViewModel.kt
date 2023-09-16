@@ -3,9 +3,11 @@ package com.example.shoptest
 import ClothesApi
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.shoptest.data.datamodels.AppRepository
 import com.example.shoptest.data.datamodels.local.getDatabase
+import com.example.shoptest.data.datamodels.models.Clothes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -25,5 +27,21 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             repository.getClothes()
         }
 
+    }
+
+    fun getAllHerren(): LiveData<List<Clothes>>{
+            return repository.getAllHerren()
+    }
+
+    fun getAllDamen(): LiveData<List<Clothes>>{
+        return repository.getAllDamen()
+    }
+
+    fun getAllElectrics(): LiveData<List<Clothes>>{
+        return repository.getAllElectrics()
+    }
+
+    fun getAllJewelry(): LiveData<List<Clothes>>{
+        return repository.getAllJewelry()
     }
 }

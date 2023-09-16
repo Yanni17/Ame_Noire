@@ -1,4 +1,4 @@
-package com.example.shoptest.data.datamodels
+package com.example.shoptest.data.datamodels.models
 
 import androidx.room.Embedded
 import androidx.room.Entity
