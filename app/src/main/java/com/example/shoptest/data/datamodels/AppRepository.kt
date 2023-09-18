@@ -22,7 +22,13 @@ class AppRepository(private val api: ClothesApi,private val database: ClothesDat
 
             var clothes = api.retrofitService.getAllProducts()
             Log.e(TAG,clothes.toString())
-            database.clothesDatabaseDao.insertAll(clothes)
+
+
+            if (database.clothesDatabaseDao.count() == 0){
+
+                database.clothesDatabaseDao.insertAll(clothes)
+
+            }
 
         }catch (e: Exception){
             Log.e(TAG,"Error loading Data from API: $e")

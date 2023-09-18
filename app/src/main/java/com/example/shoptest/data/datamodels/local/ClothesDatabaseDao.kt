@@ -29,11 +29,8 @@ interface ClothesDatabaseDao {
     @Query("SELECT * FROM clothes_table WHERE category = 'jewelery'")
     fun getJewelryItems(): LiveData<List<Clothes>>
 
-
-
-
-
-
+    @Query ("SELECT COUNT(*) FROM clothes_table")
+    suspend fun count(): Int
 
 
 }
