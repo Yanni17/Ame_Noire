@@ -3,6 +3,7 @@ package com.example.shoptest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.shoptest.databinding.ActivityMainBinding
 
@@ -19,6 +20,20 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         binding.bottomNavigationView.setupWithNavController(navController)
+
+
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.homeFragment -> {
+                    navController.popBackStack(R.id.homeFragment, false)
+                    false
+                }
+
+                else -> {
+                    NavigationUI.onNavDestinationSelected(item, navController)
+                }
+            }
+        }
 
 
     }

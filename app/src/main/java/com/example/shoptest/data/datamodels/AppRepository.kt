@@ -12,24 +12,23 @@ const val TAG = "AppRepositoryTAG"
 class AppRepository(private val api: ClothesApi,private val database: ClothesDatabase) {
 
     val allClothes = database.clothesDatabaseDao.getAll()
-//    val allHerren = database.clothesDatabaseDao.getMenClothingItems()
-//    val allDamen = database.clothesDatabaseDao.getWomenClothingItems()
-//    val allElectrics = database.clothesDatabaseDao.getElectronicsItems()
-//    val allJewelry = database.clothesDatabaseDao.getJewelryItems()
 
     suspend fun getClothes(){
         try {
 
-            var clothes = api.retrofitService.getAllProducts()
-            Log.e(TAG,clothes.toString())
+            // ??? auf zwei stellen nachdem komma !
 
+            var clothes = api.retrofitService.getAllProducts().toMutableList()
 
-            if (database.clothesDatabaseDao.count() == 0){
-
-                database.clothesDatabaseDao.insertAll(clothes)
-
+            for ((index, clothe) in clothes.withIndex()) {
+                val formattedPrice = String.format("%.2f", clothe.price)
+                clothes[index].price = formattedPrice.toDouble()
+                Log.e("preistest", "${clothe.price} $formattedPrice")
             }
 
+            if (database.clothesDatabaseDao.count() == 0){
+                database.clothesDatabaseDao.insertAll(clothes)
+            }
         }catch (e: Exception){
             Log.e(TAG,"Error loading Data from API: $e")
         }

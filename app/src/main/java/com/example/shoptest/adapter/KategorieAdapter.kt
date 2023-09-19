@@ -2,10 +2,12 @@ package com.example.shoptest.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.data.datamodels.models.Kategorie
 import com.example.shoptest.databinding.KategorieItemBinding
+import com.example.shoptest.ui.SearchFragmentDirections
 
 
 class KategorieAdapter(
@@ -29,6 +31,12 @@ class KategorieAdapter(
         val item = dataset[position]
 
         holder.binding.textView2.text = item.name
+
+        holder.binding.kategorieCV.setOnClickListener{
+
+            it.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToProductsFragment(item.name))
+
+        }
 
     }
 

@@ -15,6 +15,5 @@ fun loadCategories(): List<Kategorie>{
 
         )
     return kategorien
-
 }
 }

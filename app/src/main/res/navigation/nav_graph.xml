@@ -14,7 +14,11 @@
         android:id="@+id/searchFragment"
         android:name="com.example.shoptest.ui.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.example.shoptest.ui.FavoriteFragment"
@@ -24,7 +28,11 @@
         android:id="@+id/productsFragment"
         android:name="com.example.shoptest.ui.ProductsFragment"
         android:label="fragment_products"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.shoptest.ui.DetailFragment"
