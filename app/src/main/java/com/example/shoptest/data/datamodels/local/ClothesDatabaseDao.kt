@@ -10,7 +10,6 @@ import com.example.shoptest.data.datamodels.models.Clothes
 @Dao
 interface ClothesDatabaseDao {
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: List<Clothes>)
 
@@ -31,6 +30,5 @@ interface ClothesDatabaseDao {
 
     @Query ("SELECT COUNT(*) FROM clothes_table")
     suspend fun count(): Int
-
 
 }

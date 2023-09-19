@@ -1,0 +1,20 @@
+<!-- res/drawable/cardview_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Hintergrund mit abgerundeten Ecken -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" /> <!-- Eckenradius -->
+            <solid android:color="@color/grey" /> <!-- Hintergrundfarbe -->
+        </shape>
+    </item>
+    <!-- Rand (Stroke) -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" /> <!-- Eckenradius, sollte derselbe wie oben sein -->
+            <solid android:color="@android:color/transparent" /> <!-- Transparenter Hintergrund, um den Rand zu sehen -->
+            <stroke
+                android:width="4dp"
+            android:color="@color/gold" /> <!-- Farbe des Rands -->
+        </shape>
+    </item>
+</layer-list>
