@@ -9,11 +9,11 @@ import java.lang.Exception
 
 const val TAG = "AppRepositoryTAG"
 
-class AppRepository(private val api: ClothesApi,private val database: ClothesDatabase) {
+class AppRepository(private val api: ClothesApi, private val database: ClothesDatabase) {
 
     val allClothes = database.clothesDatabaseDao.getAll()
 
-    suspend fun getClothes(){
+    suspend fun getClothes() {
         try {
 
             // ??? auf zwei stellen nachdem komma !
@@ -26,27 +26,45 @@ class AppRepository(private val api: ClothesApi,private val database: ClothesDat
                 Log.e("preistest", "${clothe.price} $formattedPrice")
             }
 
-            if (database.clothesDatabaseDao.count() == 0){
+            if (database.clothesDatabaseDao.count() == 0) {
                 database.clothesDatabaseDao.insertAll(clothes)
             }
-        }catch (e: Exception){
-            Log.e(TAG,"Error loading Data from API: $e")
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading Data from API: $e")
         }
     }
 
-    fun getAllHerren(): LiveData<List<Clothes>>{
+    fun getAllHerren(): LiveData<List<Clothes>> {
         return database.clothesDatabaseDao.getMenClothingItems()
     }
 
-    fun getAllDamen(): LiveData<List<Clothes>>{
+    fun getAllDamen(): LiveData<List<Clothes>> {
         return database.clothesDatabaseDao.getWomenClothingItems()
     }
 
-    fun getAllElectrics(): LiveData<List<Clothes>>{
+    fun getAllElectrics(): LiveData<List<Clothes>> {
         return database.clothesDatabaseDao.getElectronicsItems()
     }
-    fun getAllJewelry(): LiveData<List<Clothes>>{
+
+    fun getAllJewelry(): LiveData<List<Clothes>> {
         return database.clothesDatabaseDao.getJewelryItems()
+    }
+
+    fun getAllLiked(): LiveData<List<Clothes>> {
+        return database.clothesDatabaseDao.getAllLiked()
+    }
+
+    fun updateLike(liked: Int, id: Int) {
+        try {
+            database.clothesDatabaseDao.updateLike(liked, id)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error update Like: $e")
+        }
+    }
+
+    fun getDetail(id: Int): LiveData<Clothes> {
+        return database.clothesDatabaseDao.getDetails(id)
     }
 
 }

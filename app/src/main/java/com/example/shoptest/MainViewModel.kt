@@ -25,7 +25,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         get() = _datasource
 
     init {
-        _datasource.postValue(Datasource().loadCategories())
+        _datasource.postValue(Datasource(application).loadCategories())
         loadData()
     }
 
@@ -51,5 +51,17 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
     fun getAllJewelry(): LiveData<List<Clothes>>{
         return repository.getAllJewelry()
+    }
+    fun getAllLiked(): LiveData<List<Clothes>>{
+        return repository.getAllLiked()
+    }
+
+    fun updateLike(liked: Int,id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateLike(liked,id)
+        }
+    }
+    fun getDetail(id: Int): LiveData<Clothes>{
+        return repository.getDetail(id)
     }
 }

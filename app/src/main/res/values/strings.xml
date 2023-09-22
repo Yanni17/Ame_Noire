@@ -6,5 +6,6 @@
     <string name="damen">Damen</string>
     <string name="elektronik">Elektronik</string>
     <string name="schmuck">Schmuck</string>
+    <string name="favoriten">Ihre Favoriten sind aktuell noch leer.</string>
 
 </resources>

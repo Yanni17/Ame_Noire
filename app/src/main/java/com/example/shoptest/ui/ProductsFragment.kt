@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.ProduktListAdapter
@@ -17,31 +20,45 @@ class ProductsFragment : Fragment() {
 
     private lateinit var binding: FragmentProductsBinding
 
+    private val produktListAdapter: ProduktListAdapter by lazy { ProduktListAdapter(viewModel) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProductsBinding.inflate(inflater,container,false)
+        binding = FragmentProductsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val mainActivity = activity as MainActivity
+
         var kategorie = requireArguments().getString("name")
 
-        when (kategorie){
-            "Herren" -> viewModel.getAllHerren().observe(viewLifecycleOwner){
-                binding.produktRV.adapter = ProduktListAdapter(it,viewModel)
+        binding.produktRV.adapter = produktListAdapter
+
+
+        when (kategorie) {
+            "Herren" -> viewModel.getAllHerren().observe(viewLifecycleOwner) {
+                produktListAdapter.submitList(it)
+                mainActivity.setToolbarTitle("Herren")
             }
-            "Damen" -> viewModel.getAllDamen().observe(viewLifecycleOwner){
-                binding.produktRV.adapter = ProduktListAdapter(it,viewModel)
+
+            "Damen" -> viewModel.getAllDamen().observe(viewLifecycleOwner) {
+                produktListAdapter.submitList(it)
+                mainActivity.setToolbarTitle("Damen")
             }
-            "Elektronik" -> viewModel.getAllElectrics().observe(viewLifecycleOwner){
-                binding.produktRV.adapter = ProduktListAdapter(it,viewModel)
+
+            "Elektronik" -> viewModel.getAllElectrics().observe(viewLifecycleOwner) {
+                produktListAdapter.submitList(it)
+                mainActivity.setToolbarTitle("Elektronik")
             }
-            "Schmuck" -> viewModel.getAllJewelry().observe(viewLifecycleOwner){
-                binding.produktRV.adapter = ProduktListAdapter(it,viewModel)
+
+            "Schmuck" -> viewModel.getAllJewelry().observe(viewLifecycleOwner) {
+                produktListAdapter.submitList(it)
+                mainActivity.setToolbarTitle("Schmuck")
             }
         }
 

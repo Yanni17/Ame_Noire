@@ -1,17 +1,21 @@
 package com.example.shoptest.data.datamodels
 
 
+import android.content.Context
+import com.example.shoptest.R
 import com.example.shoptest.data.datamodels.models.Kategorie
 
-class Datasource {
+class Datasource(
+    val context: Context
+) {
 
 fun loadCategories(): List<Kategorie>{
 
     val kategorien = mutableListOf(
-        Kategorie("Herren"),
-        Kategorie("Damen"),
-        Kategorie("Elektronik"),
-        Kategorie("Schmuck"),
+        Kategorie(context.getString(R.string.herren)),
+        Kategorie(context.getString(R.string.damen)),
+        Kategorie(context.getString(R.string.elektronik)),
+        Kategorie(context.getString(R.string.schmuck)),
 
         )
     return kategorien

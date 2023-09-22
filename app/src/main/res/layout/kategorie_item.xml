@@ -8,7 +8,7 @@
     app:cardBackgroundColor="@color/grey"
     app:cardCornerRadius="8dp"
     app:contentPadding="24dp"
-    app:strokeColor="@color/gold"
+    app:strokeColor="@color/grey"
     app:strokeWidth="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,8 +21,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="TextView"
-            android:textColor="@color/white"
-            android:textSize="32sp"
+            android:textColor="@color/text"
+            android:textSize="24sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

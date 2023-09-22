@@ -2,12 +2,14 @@ package com.example.shoptest.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.ListItemBinding
+import com.example.shoptest.ui.HomeFragmentDirections
 
 class ProduktAdapter(
     private var dataset: List<Clothes>,
@@ -31,9 +33,29 @@ class ProduktAdapter(
 
         with(holder) {
             binding.produktIV.load(item.image)
-            binding.produktDescriptionTV.text = item.description
-            binding.likeBTN.setImageResource(R.drawable.baseline_favorite_border_24)
-            binding.preisTV.text = "${item.price} €"
+            binding.title2TV.text = item.title
+            binding.preisTV.text = String.format("%.2f", item.price) + " €"
         }
+
+        if (item.isLiked){
+            holder.binding.likeBTN.setImageResource(R.drawable.baseline_favorite_24)
+        }else {
+            holder.binding.likeBTN.setImageResource(R.drawable.baseline_favorite_border_24)
+        }
+
+        holder.binding.likeBTN.setOnClickListener {
+            item.isLiked = !item.isLiked
+            viewModel.updateLike(if(item.isLiked) 1 else 0, item.id)
+        }
+
+        holder.binding.cardView1.setOnClickListener{
+            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
+        }
+
+    }
+
+    fun update(list: List<Clothes>) {
+        dataset = list
+        notifyDataSetChanged()
     }
 }

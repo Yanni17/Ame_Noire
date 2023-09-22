@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.ProduktAdapter
@@ -30,13 +33,21 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val mainActivity = activity as MainActivity
+        mainActivity.setToolbarTitle("Home")
 
-        viewModel.getAllHerren().observe(viewLifecycleOwner){
-            binding.herrenRV.adapter = ProduktAdapter(it,viewModel)
+        var adapter = ProduktAdapter(emptyList(), viewModel)
+        binding.herrenRV.adapter = adapter
+
+        var adapter2 = ProduktAdapter(emptyList(), viewModel)
+        binding.damenRV.adapter = adapter2
+
+        viewModel.getAllHerren().observe(viewLifecycleOwner) {
+            adapter.update(it)
         }
 
-        viewModel.getAllDamen().observe(viewLifecycleOwner){
-            binding.damenRV.adapter = ProduktAdapter(it,viewModel)
+        viewModel.getAllDamen().observe(viewLifecycleOwner) {
+            adapter2.update(it)
         }
 
         binding.werbungIV1.setImageResource(R.drawable.summer)

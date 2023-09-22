@@ -2,11 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView1"
     android:layout_width="120dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardElevation="8dp"
-    app:cardBackgroundColor="@color/grey">
+    app:cardBackgroundColor="@color/grey"
+    app:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
 
         <ImageView
             android:id="@+id/produktIV"
-            android:layout_width="110dp"
+            android:layout_width="match_parent"
             android:layout_height="120dp"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,16 +32,17 @@
             app:layout_constraintTop_toBottomOf="@+id/produktIV" />
 
         <TextView
-            android:id="@+id/produktDescriptionTV"
+            android:id="@+id/title2TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="8dp"
-            android:paddingRight="8dp"
-            android:paddingLeft="8dp"
             android:maxLines="2"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textSize="12sp"
             android:text="TextView"
-            android:textColor="@color/white"
+            android:textColor="@color/text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +66,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/space" />
 

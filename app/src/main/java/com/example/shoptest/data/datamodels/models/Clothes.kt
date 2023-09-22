@@ -13,6 +13,7 @@ data class Clothes(
     var description: String,
     var category: String,
     var image: String,
+    var isLiked: Boolean = false,
     @Embedded
     var rating: Rating
 
