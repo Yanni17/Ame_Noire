@@ -12,6 +12,7 @@ import coil.load
 import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
+import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
@@ -24,7 +25,7 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDetailBinding.inflate(inflater,container,false)
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -36,17 +37,19 @@ class DetailFragment : Fragment() {
 
         var id = requireArguments().getInt("id")
 
-        viewModel.getDetail(id).observe(viewLifecycleOwner){
-            with(binding){
+
+        viewModel.getDetail(id).observe(viewLifecycleOwner) {
+
+            with(binding) {
                 imageView4.load(it.image)
                 preis4TV.text = String.format("%.2f", it.price) + " €"
                 descriptionTV2.text = it.description
                 title4TV.text = it.title
                 ratingBTN2.setImageResource(R.drawable.baseline_star_24)
                 ratingTV2.text = it.rating.rate.toString()
-                if (it.isLiked){
+                if (it.isLiked) {
                     likeBTN2.setImageResource(R.drawable.baseline_favorite_24)
-                }else {
+                } else {
                     likeBTN2.setImageResource(R.drawable.baseline_favorite_border_24)
                 }
             }

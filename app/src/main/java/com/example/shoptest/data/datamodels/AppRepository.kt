@@ -16,15 +16,7 @@ class AppRepository(private val api: ClothesApi, private val database: ClothesDa
     suspend fun getClothes() {
         try {
 
-            // ??? auf zwei stellen nachdem komma !
-
             var clothes = api.retrofitService.getAllProducts().toMutableList()
-
-            for ((index, clothe) in clothes.withIndex()) {
-                val formattedPrice = String.format("%.2f", clothe.price)
-                clothes[index].price = formattedPrice.toDouble()
-                Log.e("preistest", "${clothe.price} $formattedPrice")
-            }
 
             if (database.clothesDatabaseDao.count() == 0) {
                 database.clothesDatabaseDao.insertAll(clothes)

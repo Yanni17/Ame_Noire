@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "693099737387",
+    "project_id": "ame-noire-238af",
+    "storage_bucket": "ame-noire-238af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693099737387:android:1e3f637c9cedc20e2f156e",
+        "android_client_info": {
+          "package_name": "com.example.shoptest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMLEOw4ztAWtwtKWlfhL8-tXgl9SuL5ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,11 +2,7 @@ package com.example.shoptest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
-import androidx.appcompat.app.ActionBar
-import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -28,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.materialToolbar)
         setSupportActionBar(toolbar)
-        setToolbarTitle("Home")
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
