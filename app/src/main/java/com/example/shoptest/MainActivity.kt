@@ -27,10 +27,16 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
+
             when (item.itemId) {
                 R.id.homeFragment -> {
                     navController.popBackStack(R.id.homeFragment, false)
                     false
+                }
+
+                R.id.cashoutFragment -> {
+                    navController.navigate(R.id.cashoutFragment)
+                    true
                 }
 
                 R.id.searchFragment -> {
@@ -43,12 +49,16 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.profilFragment -> {
+                    navController.navigate(R.id.profilFragment)
+                    true
+                }
+
                 else -> {
                     NavigationUI.onNavDestinationSelected(item, navController)
                 }
             }
         }
-
     }
 
     fun setToolbarTitle(title: String) {

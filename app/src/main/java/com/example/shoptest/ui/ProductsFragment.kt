@@ -13,6 +13,7 @@ import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.ProduktListAdapter
 import com.example.shoptest.databinding.FragmentProductsBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProductsFragment : Fragment() {
 
@@ -32,6 +33,11 @@ class ProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
+        // Um die Sichtbarkeit anszuschalten:
+        bottomNavigationView.visibility = View.VISIBLE
 
         val mainActivity = activity as MainActivity
 

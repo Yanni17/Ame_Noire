@@ -9,7 +9,7 @@
     <string name="favoriten">Ihre Favoriten sind aktuell noch leer.</string>
     <string name="register">Registrieren</string>
     <string name="einloggen">Einloggen</string>
-    <string name="welcome">Herzlich Willkommen</string>
+    <string name="welcome">Herzlich Willkommen!</string>
     <string name="already_signup"> Bereits registriert?</string>
     <string name="Passwort">Passwort</string>
     <string name="email_adress">E-Mail-Adresse</string>
@@ -18,6 +18,5 @@
     <string name="noch_keinen_Account">Noch keinen Account?</string>
     <string name="name">Name</string>
     <string name="telefonnummer">Telefonnummer</string>
-
 
 </resources>

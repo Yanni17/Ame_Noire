@@ -22,6 +22,7 @@
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/text"
+            android:fontFamily="@font/supreme_regular"
             android:textSize="24sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"

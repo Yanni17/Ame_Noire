@@ -13,6 +13,7 @@ import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.FavoriteAdapter
 import com.example.shoptest.databinding.FragmentFavoriteBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FavoriteFragment : Fragment() {
 
@@ -30,6 +31,11 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
+        // Um die Sichtbarkeit anszuschalten:
+        bottomNavigationView.visibility = View.VISIBLE
 
         val mainActivity = activity as MainActivity
         mainActivity.setToolbarTitle("Favoriten")

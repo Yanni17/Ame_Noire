@@ -13,6 +13,7 @@ import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.KategorieAdapter
 import com.example.shoptest.databinding.FragmentSearchBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SearchFragment : Fragment() {
 
@@ -32,6 +33,11 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
+        // Um die Sichtbarkeit anszuschalten:
+        bottomNavigationView.visibility = View.VISIBLE
 
         val mainActivity = activity as MainActivity
         mainActivity.setToolbarTitle("Suche")

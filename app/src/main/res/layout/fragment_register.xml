@@ -14,8 +14,10 @@
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:layout_marginTop="96dp"
+        android:fontFamily="@font/supreme_regular"
         android:textSize="32sp"
         android:textStyle="bold"
+        android:textColor="@color/text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,6 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/welcome"
+        android:fontFamily="@font/supreme_regular"
+        android:textSize="16sp"
+        android:textColor="@color/text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header2TV" />
 
@@ -84,6 +89,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/gradient"
         android:text="@string/register"
+        android:fontFamily="@font/supreme_regular"
         android:textSize="16sp"
         android:textColor="?colorOnSecondary"
         app:backgroundTint="@null"
@@ -97,6 +103,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/already_signup"
+        android:textSize="16sp"
+        android:fontFamily="@font/supreme_regular"
+        android:textColor="@color/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerBTN" />
 
@@ -106,6 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/einloggen"
+        android:fontFamily="@font/supreme_regular"
         android:textColor="@color/gold"
         android:textSize="16sp"
         android:textStyle="bold"
