@@ -1,5 +1,6 @@
 package com.example.shoptest.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -13,7 +14,7 @@ import com.example.shoptest.ui.HomeFragmentDirections
 
 class ProduktAdapter(
     private var dataset: List<Clothes>,
-    private var viewModel: MainViewModel
+    private var viewModel: MainViewModel,
 ) : RecyclerView.Adapter<ProduktAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -44,14 +45,19 @@ class ProduktAdapter(
         }
 
         holder.binding.likeBTN.setOnClickListener {
-            item.isLiked = !item.isLiked
-            viewModel.updateLike(if(item.isLiked) 1 else 0, item.id)
+
+            if(!item.isLiked){
+
+                viewModel.addLikedItem(item.id)
+
+            }else viewModel.removeLikedItem(item.id)
+
+            viewModel.updateLike(!item.isLiked, item.id)
         }
 
         holder.binding.cardView1.setOnClickListener{
             it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
         }
-
     }
 
     fun update(list: List<Clothes>) {

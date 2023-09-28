@@ -35,7 +35,7 @@ interface ClothesDatabaseDao {
     fun getDetails(id : Int): LiveData<Clothes>
 
     @Query("UPDATE clothes_table SET isLiked = :liked WHERE id = :id")
-    fun updateLike(liked: Int, id: Int)
+    fun updateLike(liked: Boolean, id: Int)
 
     @Query ("SELECT * FROM clothes_table WHERE isLiked = 1")
     fun getAllLiked(): LiveData<List<Clothes>>

@@ -26,22 +26,23 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
+    // Firestore.
     val firebaseAuth = FirebaseAuth.getInstance()
     val firestore = FirebaseFirestore.getInstance()
-
+    val listOfClothes =  mutableListOf<Int>()
     private val _user: MutableLiveData<FirebaseUser?> = MutableLiveData()
     val user: LiveData<FirebaseUser?>
         get() = _user
-
     lateinit var profileRef: DocumentReference
 
+
+    // ROOM.
     private val database = getDatabase(application)
-
     private val repository = AppRepository(ClothesApi, database)
-
     private val _datasource = MutableLiveData<List<Kategorie>>()
     val datasource: LiveData<List<Kategorie>>
         get() = _datasource
+
 
     init {
         _datasource.postValue(Datasource(application).loadCategories())
@@ -55,9 +56,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+
     //FIREBASE_
 
     fun setupUserEnv() {
+
         _user.value = firebaseAuth.currentUser
 
         firebaseAuth.currentUser?.let {
@@ -108,13 +111,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun signOut() {
+
+        if (listOfClothes != null ){
+            for (item in listOfClothes){
+                updateLike(false,item)
+            }
+        }
         firebaseAuth.signOut()
+        listOfClothes.clear()
         _user.value = firebaseAuth.currentUser
     }
 
     fun signIn(email: String, password: String) {
 
-        if (email.isEmpty() || password.isEmpty()){
+        if (email.isEmpty() || password.isEmpty()) {
 
             val toast = Toast.makeText(
                 getApplication(),
@@ -129,9 +139,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
             if (it.isSuccessful) {
                 setupUserEnv()
+
+                firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get().addOnSuccessListener {
+                    var profile = it.toObject(Profile::class.java)
+                    if (profile?.likedList != null){
+                        for (item in profile!!.likedList){
+                            addLikedItem(item)
+                            updateLike(true,item)
+                        }
+                    }
+                }
             } else {
 
-                Log.e("Error","${it.exception}")
+                Log.e("Error", "${it.exception}")
 
                 if (it.exception is FirebaseAuthInvalidUserException) {
                     // e-mail existiert nicht
@@ -149,7 +169,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         Toast.LENGTH_LONG
                     )
                     toast.show()
-                }else {
+                } else {
                     // alle anderen
                     val toast = Toast.makeText(
                         getApplication(),
@@ -163,14 +183,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    //FIRESTOR_
-
-
-
-
-
-
-
+    //FIRESTORE_
+    fun addLikedItem(id: Int) {
+        listOfClothes.add(id)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("likedList",listOfClothes)
+    }
+    fun removeLikedItem(id: Int){
+        listOfClothes.remove(id)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("likedList",listOfClothes)
+        Log.e("Test2",listOfClothes.toString())
+    }
 
 
     //ROOM_
@@ -195,7 +217,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return repository.getAllLiked()
     }
 
-    fun updateLike(liked: Int, id: Int) {
+    fun updateLike(liked: Boolean, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateLike(liked, id)
         }

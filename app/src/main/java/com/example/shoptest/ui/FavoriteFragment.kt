@@ -45,15 +45,11 @@ class FavoriteFragment : Fragment() {
         binding.favoriteRV.adapter = adapter
 
         viewModel.getAllLiked().observe(viewLifecycleOwner){
-
             adapter.update(it)
 
             if(adapter.itemCount == 0){
-
                 binding.emptyTextView.visibility = View.VISIBLE
-
             }else {
-
                 binding.emptyTextView.visibility = View.GONE
 
             }

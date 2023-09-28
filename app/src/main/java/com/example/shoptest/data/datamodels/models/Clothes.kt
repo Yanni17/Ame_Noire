@@ -7,15 +7,15 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "clothes_table")
 data class Clothes(
     @PrimaryKey
-    var id: Int,
-    var title: String,
-    var price: Double,
-    var description: String,
-    var category: String,
-    var image: String,
+    var id: Int = 0,
+    var title: String = "",
+    var price: Double = 0.0,
+    var description: String = "",
+    var category: String = "",
+    var image: String = "",
     var isLiked: Boolean = false,
     @Embedded
-    var rating: Rating
+    var rating: Rating = Rating()
 
     ) {
 }

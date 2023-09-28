@@ -35,8 +35,14 @@ class ProduktListAdapter(
                 }
 
                 imageButton.setOnClickListener {
-                    item.isLiked = !item.isLiked
-                    viewModel.updateLike(if (item.isLiked) 1 else 0, item.id)
+
+                    if(!item.isLiked){
+
+                        viewModel.addLikedItem(item.id)
+
+                    }else viewModel.removeLikedItem(item.id)
+
+                    viewModel.updateLike(!item.isLiked, item.id)
 
                     if (item.isLiked) {
                         imageButton.setImageResource(R.drawable.baseline_favorite_24)

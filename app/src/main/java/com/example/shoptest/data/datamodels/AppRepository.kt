@@ -16,11 +16,8 @@ class AppRepository(private val api: ClothesApi, private val database: ClothesDa
     suspend fun getClothes() {
         try {
 
-            var clothes = api.retrofitService.getAllProducts().toMutableList()
-
-            if (database.clothesDatabaseDao.count() == 0) {
-                database.clothesDatabaseDao.insertAll(clothes)
-            }
+            var clothes = api.retrofitService.getAllProducts()
+            if (database.clothesDatabaseDao.count() == 0) database.clothesDatabaseDao.insertAll(clothes)
 
         } catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
@@ -47,7 +44,7 @@ class AppRepository(private val api: ClothesApi, private val database: ClothesDa
         return database.clothesDatabaseDao.getAllLiked()
     }
 
-    fun updateLike(liked: Int, id: Int) {
+    fun updateLike(liked: Boolean, id: Int) {
         try {
             database.clothesDatabaseDao.updateLike(liked, id)
         } catch (e: Exception) {

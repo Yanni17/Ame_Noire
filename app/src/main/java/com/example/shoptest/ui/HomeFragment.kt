@@ -42,6 +42,7 @@ class HomeFragment : Fragment() {
         val mainActivity = activity as MainActivity
         mainActivity.setToolbarTitle("Home")
 
+
         var adapter = ProduktAdapter(emptyList(), viewModel)
         binding.herrenRV.adapter = adapter
 

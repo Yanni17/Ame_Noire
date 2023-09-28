@@ -46,8 +46,15 @@ class FavoriteAdapter(
 
         }
         holder.binding.imageButton2.setOnClickListener {
-            item.isLiked = !item.isLiked
-            viewModel.updateLike(if (item.isLiked) 1 else 0, item.id)
+
+            if(!item.isLiked){
+
+                viewModel.addLikedItem(item.id)
+
+            }else viewModel.removeLikedItem(item.id)
+
+            viewModel.updateLike(!item.isLiked, item.id)
+
         }
         holder.binding.favortieCV.setOnClickListener {
             it.findNavController()
