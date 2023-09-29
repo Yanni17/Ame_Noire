@@ -18,5 +18,10 @@
     <string name="noch_keinen_Account">Noch keinen Account?</string>
     <string name="name">Name</string>
     <string name="telefonnummer">Telefonnummer</string>
+    <string name="exampleEmail">example@web.de</string>
+    <string name="examplePhoneNumber">01234567891</string>
+    <string name="exampleName">Jonny Jones</string>
+    <string name="welcomeText">Erkunde unsere App, entdecke unsere neusten Kollektionen und finde dein neues Lieblingsoutfit.</string>
+    <string name="welcomeSplash">WILLKOMMEN</string>
 
 </resources>

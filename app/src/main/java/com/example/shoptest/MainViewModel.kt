@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    // Firestore.
+    // Firestore - Firebase.
     val firebaseAuth = FirebaseAuth.getInstance()
     val firestore = FirebaseFirestore.getInstance()
     val listOfClothes =  mutableListOf<Int>()

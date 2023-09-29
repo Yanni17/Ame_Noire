@@ -14,6 +14,7 @@ import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.FragmentDetailBinding
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DetailFragment : Fragment() {
@@ -36,11 +37,16 @@ class DetailFragment : Fragment() {
         val mainActivity = activity as MainActivity
         mainActivity.setToolbarTitle("Produkt Detail")
 
-        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
         // Um die Sichtbarkeit anszuschalten:
+        val bottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
 
+        val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
+        toolbar.visibility = View.VISIBLE
+
+
+        //Argument holen
         var id = requireArguments().getInt("id")
 
 

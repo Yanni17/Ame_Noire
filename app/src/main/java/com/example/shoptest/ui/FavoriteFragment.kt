@@ -13,6 +13,7 @@ import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.FavoriteAdapter
 import com.example.shoptest.databinding.FragmentFavoriteBinding
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FavoriteFragment : Fragment() {
@@ -25,31 +26,35 @@ class FavoriteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFavoriteBinding.inflate(inflater,container,false)
+        binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
         // Um die Sichtbarkeit anszuschalten:
+        val bottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
+
+        val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
+        toolbar.visibility = View.VISIBLE
+
 
         val mainActivity = activity as MainActivity
         mainActivity.setToolbarTitle("Favoriten")
 
 
-        var adapter = FavoriteAdapter(emptyList(),viewModel)
+        var adapter = FavoriteAdapter(emptyList(), viewModel)
         binding.favoriteRV.adapter = adapter
 
-        viewModel.getAllLiked().observe(viewLifecycleOwner){
+        viewModel.getAllLiked().observe(viewLifecycleOwner) {
             adapter.update(it)
 
-            if(adapter.itemCount == 0){
+            if (adapter.itemCount == 0) {
                 binding.emptyTextView.visibility = View.VISIBLE
-            }else {
+            } else {
                 binding.emptyTextView.visibility = View.GONE
 
             }

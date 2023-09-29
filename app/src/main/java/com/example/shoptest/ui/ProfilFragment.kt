@@ -11,6 +11,7 @@ import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.databinding.FragmentProfilBinding
+import com.google.android.material.appbar.MaterialToolbar
 
 class ProfilFragment : Fragment() {
 
@@ -27,6 +28,9 @@ class ProfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
+        toolbar.visibility = View.VISIBLE
 
         val mainActivity = activity as MainActivity
         mainActivity.setToolbarTitle("Profil")

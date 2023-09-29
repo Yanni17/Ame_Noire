@@ -12,6 +12,7 @@ import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.databinding.FragmentRegisterBinding
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -25,7 +26,7 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRegisterBinding.inflate(inflater,container,false)
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,23 +35,28 @@ class RegisterFragment : Fragment() {
 
         val mainActivity = activity as MainActivity
         mainActivity.setToolbarTitle("")
-
-        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
+        toolbar.visibility = View.VISIBLE
 
         // Um die Sichtbarkeit anszuschalten:
+        val bottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.GONE
 
+        // Icon setzen
+        binding.icon2IV.setImageResource(R.drawable.app_icon2)
+
         binding.registerBTN.setOnClickListener {
-            val email = binding.emailET.text.toString()
-            val password = binding.editTextTextPassword.text.toString()
-            val telefonNummer = binding.telefonNummerET.text.toString()
+            val email = binding.loginMailET.text.toString()
+            val password = binding.loginPwET.text.toString()
+            val telefonNummer = binding.phoneET.text.toString()
             val name = binding.nameET.text.toString()
 
-            viewmodel.signUp(email,password,name,telefonNummer)
+            viewmodel.signUp(email, password, name, telefonNummer)
         }
 
-        viewmodel.user.observe(viewLifecycleOwner){
-            if (it != null ){
+        viewmodel.user.observe(viewLifecycleOwner) {
+            if (it != null) {
                 findNavController().navigate(R.id.homeFragment)
             }
         }
