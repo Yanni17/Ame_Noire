@@ -1,7 +1,9 @@
 package com.example.shoptest.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 
@@ -16,7 +18,8 @@ import com.example.shoptest.ui.ProductsFragmentDirections
 import com.squareup.moshi.internal.Util
 
 class ProduktListAdapter(
-    var viewModel: MainViewModel
+    var viewModel: MainViewModel,
+    var context: Context
 ) : ListAdapter<Clothes, ProduktListAdapter.ItemViewHolder>(UtilDiffClothes()) {
 
     inner class ItemViewHolder(val binding: ProduktItemBinding) :
@@ -36,19 +39,31 @@ class ProduktListAdapter(
 
                 imageButton.setOnClickListener {
 
-                    if(!item.isLiked){
+                    if (viewModel.firebaseAuth.currentUser != null){
 
-                        viewModel.addLikedItem(item.id)
+                        if(!item.isLiked){
 
-                    }else viewModel.removeLikedItem(item.id)
+                            viewModel.addLikedItem(item.id)
 
-                    viewModel.updateLike(!item.isLiked, item.id)
+                        }else viewModel.removeLikedItem(item.id)
 
-                    if (item.isLiked) {
-                        imageButton.setImageResource(R.drawable.baseline_favorite_24)
-                    } else {
-                        imageButton.setImageResource(R.drawable.baseline_favorite_border_24)
+                        viewModel.updateLike(!item.isLiked, item.id)
+
+                        if (item.isLiked) {
+                            imageButton.setImageResource(R.drawable.baseline_favorite_24)
+                        } else {
+                            imageButton.setImageResource(R.drawable.baseline_favorite_border_24)
+                        }
+                    }else {
+                        val toast = Toast.makeText(
+                            context,
+                            "Sie müssen sich erst Anmelden!",
+                            Toast.LENGTH_LONG)
+                        toast.show()
                     }
+
+
+
                 }
 
                 binding.cardView.setOnClickListener {

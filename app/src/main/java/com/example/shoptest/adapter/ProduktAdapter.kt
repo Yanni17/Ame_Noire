@@ -1,8 +1,10 @@
 package com.example.shoptest.adapter
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -15,6 +17,7 @@ import com.example.shoptest.ui.HomeFragmentDirections
 class ProduktAdapter(
     private var dataset: List<Clothes>,
     private var viewModel: MainViewModel,
+    private var context: Context
 ) : RecyclerView.Adapter<ProduktAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -46,13 +49,25 @@ class ProduktAdapter(
 
         holder.binding.likeBTN.setOnClickListener {
 
-            if(!item.isLiked){
+            if (viewModel.firebaseAuth.currentUser != null){
 
-                viewModel.addLikedItem(item.id)
+                if(!item.isLiked){
 
-            }else viewModel.removeLikedItem(item.id)
+                    viewModel.addLikedItem(item.id)
 
-            viewModel.updateLike(!item.isLiked, item.id)
+                }else viewModel.removeLikedItem(item.id)
+
+                viewModel.updateLike(!item.isLiked, item.id)
+
+            }else {
+                val toast = Toast.makeText(
+                    context,
+                    "Sie müssen sich erst Anmelden!",
+                    Toast.LENGTH_LONG)
+                toast.show()
+            }
+
+
         }
 
         holder.binding.cardView1.setOnClickListener{

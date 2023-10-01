@@ -47,10 +47,10 @@ class HomeFragment : Fragment() {
         mainActivity.setToolbarTitle("Home")
 
 
-        var adapter = ProduktAdapter(emptyList(), viewModel)
+        var adapter = ProduktAdapter(emptyList(), viewModel,requireContext())
         binding.herrenRV.adapter = adapter
 
-        var adapter2 = ProduktAdapter(emptyList(), viewModel)
+        var adapter2 = ProduktAdapter(emptyList(), viewModel,requireContext())
         binding.damenRV.adapter = adapter2
 
         viewModel.getAllHerren().observe(viewLifecycleOwner) {

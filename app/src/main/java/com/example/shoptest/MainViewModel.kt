@@ -3,6 +3,8 @@ package com.example.shoptest
 import ClothesApi
 import android.app.Application
 import android.util.Log
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -225,5 +227,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getDetail(id: Int): LiveData<Clothes> {
         return repository.getDetail(id)
+    }
+
+    fun startScaleAnimation(view: View) {
+        val animation = AnimationUtils.loadAnimation(getApplication(), R.anim.scale_up)
+        view.startAnimation(animation)
     }
 }

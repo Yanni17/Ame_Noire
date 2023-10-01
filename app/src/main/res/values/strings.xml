@@ -23,5 +23,9 @@
     <string name="exampleName">Jonny Jones</string>
     <string name="welcomeText">Erkunde unsere App, entdecke unsere neusten Kollektionen und finde dein neues Lieblingsoutfit.</string>
     <string name="welcomeSplash">WILLKOMMEN</string>
+    <string name="ohneAnmeldung">Registrier dich oder logge dich ein, um zu sehen, was du bereits gespeichert hast.</string>
+    <string name="keineSorge">Keine Sorge!</string>
+    <string name="hallo">Hallo,</string>
+
 
 </resources>

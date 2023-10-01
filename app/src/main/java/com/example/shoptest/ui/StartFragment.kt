@@ -1,6 +1,7 @@
 package com.example.shoptest.ui
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,7 @@ class StartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStartBinding.inflate(inflater, container, false)
+        viewmodel.startScaleAnimation(binding.logoIV)
         return binding.root
     }
 
@@ -39,20 +41,15 @@ class StartFragment : Fragment() {
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.GONE
 
-
-
-        if (viewmodel.firebaseAuth.currentUser != null) {
+        val handler = Handler()
+        // Verzögerung in Millisekunden
+        val delayMillis = 4000L
+        // Die Aktion ausführen, nachdem die Verzögerung abgelaufen ist
+        handler.postDelayed({
             findNavController().navigate(R.id.homeFragment)
-        }
+        }, delayMillis)
 
 
-        binding.loginBTN2.setOnClickListener {
-            it.findNavController().navigate(R.id.loginFragment)
-        }
-
-        binding.registerBTN2.setOnClickListener {
-            it.findNavController().navigate(R.id.registerFragment2)
-        }
     }
 
 }

@@ -1,0 +1,8 @@
+<!-- res/drawable/gradient_stroke.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:startColor="#C8686868"
+        android:endColor="#000000"
+        android:angle="80"
+        />
+</shape>

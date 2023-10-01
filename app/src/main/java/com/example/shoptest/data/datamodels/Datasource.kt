@@ -9,15 +9,17 @@ class Datasource(
     val context: Context
 ) {
 
-fun loadCategories(): List<Kategorie>{
+    fun loadCategories(): List<Kategorie> {
 
-    val kategorien = mutableListOf(
-        Kategorie(context.getString(R.string.herren)),
-        Kategorie(context.getString(R.string.damen)),
-        Kategorie(context.getString(R.string.elektronik)),
-        Kategorie(context.getString(R.string.schmuck)),
+        val kategorien = mutableListOf(
+            Kategorie(context.getString(R.string.herren)),
+            Kategorie(context.getString(R.string.damen)),
+            Kategorie(context.getString(R.string.elektronik)),
+            Kategorie(context.getString(R.string.schmuck)),
 
-        )
-    return kategorien
-}
+            )
+        return kategorien
+    }
+
+
 }

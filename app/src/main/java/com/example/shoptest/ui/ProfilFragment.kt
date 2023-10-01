@@ -22,7 +22,7 @@ class ProfilFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProfilBinding.inflate(inflater,container,false)
+        binding = FragmentProfilBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,10 +35,32 @@ class ProfilFragment : Fragment() {
         val mainActivity = activity as MainActivity
         mainActivity.setToolbarTitle("Profil")
 
-        binding.logOutBTN.setOnClickListener {
-            viewmodel.signOut()
-            it.findNavController().navigate(R.id.loginFragment)
+        if (viewmodel.firebaseAuth.currentUser != null) {
+            binding.loggoutCV.visibility = View.VISIBLE
+            binding.aktuellerNameTV.visibility = View.VISIBLE
+            binding.angabenCV.visibility = View.VISIBLE
+            binding.bestellungenCV.visibility = View.VISIBLE
+            binding.begrueUngTV.visibility = View.VISIBLE
+            binding.hilfeCV.visibility = View.VISIBLE
+            binding.zahlungsmethodenCV.visibility = View.VISIBLE
+            binding.werbung4IV.visibility = View.VISIBLE
+
+
+            binding.loggoutCV.setOnClickListener {
+                viewmodel.signOut()
+                it.findNavController().navigate(R.id.loginFragment)
+            }
+        } else {
+            binding.noaccountCV.visibility = View.VISIBLE
+
+            binding.anmelde2BTN.setOnClickListener {
+                it.findNavController().navigate(R.id.loginFragment)
+            }
+            binding.registrieren2BTN.setOnClickListener {
+                it.findNavController().navigate(R.id.registerFragment2)
+            }
         }
+
     }
 
 }

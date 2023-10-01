@@ -22,7 +22,7 @@ class ProductsFragment : Fragment() {
 
     private lateinit var binding: FragmentProductsBinding
 
-    private val produktListAdapter: ProduktListAdapter by lazy { ProduktListAdapter(viewModel) }
+    private val produktListAdapter: ProduktListAdapter by lazy { ProduktListAdapter(viewModel,requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

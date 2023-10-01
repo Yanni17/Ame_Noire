@@ -5,17 +5,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.example.shoptest.MainActivity
+import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
+import com.example.shoptest.databinding.FragmentCashoutBinding
 
 class CashoutFragment : Fragment() {
+
+    private lateinit var binding: FragmentCashoutBinding
+    val viewmodel: MainViewModel by activityViewModels()
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cashout, container, false)
+        binding = FragmentCashoutBinding.inflate(inflater,container,false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val mainActivity = activity as MainActivity
+        mainActivity.setToolbarTitle("Warenkorb")
+
     }
 
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
@@ -42,21 +43,32 @@ class FavoriteFragment : Fragment() {
         toolbar.visibility = View.VISIBLE
 
 
-        val mainActivity = activity as MainActivity
-        mainActivity.setToolbarTitle("Favoriten")
-
-
         var adapter = FavoriteAdapter(emptyList(), viewModel)
         binding.favoriteRV.adapter = adapter
 
-        viewModel.getAllLiked().observe(viewLifecycleOwner) {
-            adapter.update(it)
+        val mainActivity = activity as MainActivity
+        mainActivity.setToolbarTitle("Favoriten")
 
-            if (adapter.itemCount == 0) {
-                binding.emptyTextView.visibility = View.VISIBLE
-            } else {
-                binding.emptyTextView.visibility = View.GONE
+        if (viewModel.firebaseAuth.currentUser != null){
+            binding.favoriteRV.visibility = View.VISIBLE
+            viewModel.getAllLiked().observe(viewLifecycleOwner) {
+                adapter.update(it)
 
+                if (adapter.itemCount == 0) {
+                    binding.emptyTextView.visibility = View.VISIBLE
+                } else {
+                    binding.emptyTextView.visibility = View.GONE
+                }
+            }
+        }else {
+
+            binding.favoriteCV.visibility = View.VISIBLE
+
+            binding.anmeldeBTN.setOnClickListener {
+                it.findNavController().navigate(R.id.loginFragment)
+            }
+            binding.registrierenBTN.setOnClickListener {
+                it.findNavController().navigate(R.id.registerFragment2)
             }
         }
 

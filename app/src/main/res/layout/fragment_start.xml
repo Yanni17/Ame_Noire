@@ -7,7 +7,7 @@
     tools:context=".ui.StartFragment">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/backgroundIV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
@@ -17,71 +17,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginBTN2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Anmelden"
-        android:textColor="@color/text"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:backgroundTint="@color/transparent"
-        app:cornerRadius="1dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/gold"
-        app:strokeWidth="1dp" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/registerBTN2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="Registrieren"
-        android:textColor="@color/text"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:backgroundTint="@color/transparent"
-        app:cornerRadius="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/loginBTN2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/gold"
-        app:strokeWidth="1dp" />
-
-    <TextView
-        android:id="@+id/textTV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:text="@string/welcomeText"
-        android:textColor="@color/text"
-        app:layout_constraintBottom_toTopOf="@+id/registerBTN2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/welcomeTV"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/welcomeSplash"
-        android:fontFamily="@font/supreme_regular"
-        android:textStyle="bold"
-        android:textSize="40sp"
-        android:textColor="@color/text"
-        app:layout_constraintBottom_toTopOf="@+id/textTV"
+        android:layout_marginBottom="48dp"
+        android:progressTint="@color/gold"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundIV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/logoIV"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/app_icon_transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
