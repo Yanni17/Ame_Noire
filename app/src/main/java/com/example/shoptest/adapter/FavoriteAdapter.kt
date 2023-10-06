@@ -61,6 +61,10 @@ class FavoriteAdapter(
                 .navigate(FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(item.id))
         }
 
+//        holder.binding.button.setOnClickListener {
+//            viewModel.addCartItem(Pair(item.id,1))
+//        }
+
 
     }
 

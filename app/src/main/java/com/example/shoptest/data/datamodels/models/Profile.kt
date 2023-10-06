@@ -4,6 +4,6 @@ class Profile(
     var name: String = "",
     var telefonNummer: String = "",
     var likedList: List<Int> = emptyList(),
-    var cartList: List<Int> = emptyList()
+    var cartList: List<Pair<Int,Int>> = emptyList()
 
 )

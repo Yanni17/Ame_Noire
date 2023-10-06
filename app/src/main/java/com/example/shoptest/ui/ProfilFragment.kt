@@ -1,6 +1,7 @@
 package com.example.shoptest.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,11 @@ import androidx.navigation.findNavController
 import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
+import com.example.shoptest.data.datamodels.models.Profile
 import com.example.shoptest.databinding.FragmentProfilBinding
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.tasks.await
 
 class ProfilFragment : Fragment() {
 
@@ -36,6 +40,7 @@ class ProfilFragment : Fragment() {
         mainActivity.setToolbarTitle("Profil")
 
         if (viewmodel.firebaseAuth.currentUser != null) {
+
             binding.loggoutCV.visibility = View.VISIBLE
             binding.aktuellerNameTV.visibility = View.VISIBLE
             binding.angabenCV.visibility = View.VISIBLE
@@ -44,7 +49,17 @@ class ProfilFragment : Fragment() {
             binding.hilfeCV.visibility = View.VISIBLE
             binding.zahlungsmethodenCV.visibility = View.VISIBLE
             binding.werbung4IV.visibility = View.VISIBLE
+            binding.retourenCV.visibility = View.VISIBLE
 
+            viewmodel.profileRef.get().addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val profile = documentSnapshot.toObject<Profile>()
+                    if (profile != null) {
+                        val userName = profile.name
+                        binding.aktuellerNameTV.text = userName
+                    }
+                }
+            }
 
             binding.loggoutCV.setOnClickListener {
                 viewmodel.signOut()
@@ -52,7 +67,6 @@ class ProfilFragment : Fragment() {
             }
         } else {
             binding.noaccountCV.visibility = View.VISIBLE
-
             binding.anmelde2BTN.setOnClickListener {
                 it.findNavController().navigate(R.id.loginFragment)
             }
@@ -62,5 +76,4 @@ class ProfilFragment : Fragment() {
         }
 
     }
-
 }

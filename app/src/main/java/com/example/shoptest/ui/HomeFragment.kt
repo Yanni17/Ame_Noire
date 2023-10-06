@@ -1,10 +1,12 @@
 package com.example.shoptest.ui
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.VideoView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
@@ -47,10 +49,10 @@ class HomeFragment : Fragment() {
         mainActivity.setToolbarTitle("Home")
 
 
-        var adapter = ProduktAdapter(emptyList(), viewModel,requireContext())
+        var adapter = ProduktAdapter(emptyList(), viewModel, requireContext())
         binding.herrenRV.adapter = adapter
 
-        var adapter2 = ProduktAdapter(emptyList(), viewModel,requireContext())
+        var adapter2 = ProduktAdapter(emptyList(), viewModel, requireContext())
         binding.damenRV.adapter = adapter2
 
         viewModel.getAllHerren().observe(viewLifecycleOwner) {
@@ -61,8 +63,16 @@ class HomeFragment : Fragment() {
             adapter2.update(it)
         }
 
-        binding.werbungIV1.setImageResource(R.drawable.summer)
-        binding.werbung2IV.setImageResource(R.drawable.nike1)
+        binding.werbung2IV.setImageResource(R.drawable.summer)
+        //binding.werbungIV1.setImageResource(R.drawable.summer)
+
+
+        val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video}" // Pfad zur MP4-Datei in den Ressourcen
+        binding.werbungIV1.setVideoURI(Uri.parse(videoPath))
+        binding.werbungIV1.start()
+
+
+
 
     }
 }

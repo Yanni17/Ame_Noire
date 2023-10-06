@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +33,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val firebaseAuth = FirebaseAuth.getInstance()
     val firestore = FirebaseFirestore.getInstance()
     val listOfClothes =  mutableListOf<Int>()
+    val listOfCartItems = mutableListOf<Pair<Int,Int>>()
     private val _user: MutableLiveData<FirebaseUser?> = MutableLiveData()
     val user: LiveData<FirebaseUser?>
         get() = _user
@@ -48,7 +50,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         _datasource.postValue(Datasource(application).loadCategories())
-        loadData()
+        //loadData()
         setupUserEnv()
     }
 
@@ -70,7 +72,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun signUp(email: String, password: String, name: String, telefonnummer: String) {
+    fun signUp(email: String, password: String, name: String, telefonnummer: String){
+
+
 
         if (email.isEmpty() || password.isEmpty() || name.isEmpty() || telefonnummer.isEmpty()) {
 
@@ -97,6 +101,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 setupUserEnv()
                 val profile = Profile(name, telefonnummer)
                 profileRef.set(profile)
+
+                Toast.makeText(getApplication(),"Registrierung erfolgreich!",Toast.LENGTH_LONG).show()
 
             } else {
 
@@ -151,6 +157,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         }
                     }
                 }
+                Toast.makeText(getApplication(),"Erfolgreich Angemeldet!",Toast.LENGTH_LONG).show()
             } else {
 
                 Log.e("Error", "${it.exception}")
@@ -194,6 +201,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         listOfClothes.remove(id)
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("likedList",listOfClothes)
         Log.e("Test2",listOfClothes.toString())
+    }
+
+    fun addCartItem(pair: Pair<Int,Int>){
+        listOfCartItems.add(pair)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
     }
 
 
