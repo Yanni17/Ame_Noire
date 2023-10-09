@@ -208,6 +208,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
     }
 
+    fun removeCartItem(pair: Pair<Int,Int>){
+        listOfCartItems.remove(pair)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
+    }
+
 
     //ROOM_
 

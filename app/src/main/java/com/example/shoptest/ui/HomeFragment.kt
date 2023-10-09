@@ -67,11 +67,22 @@ class HomeFragment : Fragment() {
         //binding.werbungIV1.setImageResource(R.drawable.summer)
 
 
-        val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video}" // Pfad zur MP4-Datei in den Ressourcen
+        //val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video}" // Pfad zur MP4-Datei in den Ressourcen
+        //binding.werbungIV1.setVideoURI(Uri.parse(videoPath))
+        //binding.werbungIV1.start()
+
+        val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video}"
         binding.werbungIV1.setVideoURI(Uri.parse(videoPath))
-        binding.werbungIV1.start()
 
+        // Vorpuffern des Videos
+        binding.werbungIV1.setOnPreparedListener { mp ->
+            mp.start()
+        }
 
+        // Optional: Überwache den Abschluss des Videos und wiederhole es bei Bedarf
+        binding.werbungIV1.setOnCompletionListener { mp ->
+            mp.start()
+        }
 
 
     }

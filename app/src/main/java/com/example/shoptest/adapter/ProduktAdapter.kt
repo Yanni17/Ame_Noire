@@ -41,37 +41,37 @@ class ProduktAdapter(
             binding.preisTV.text = String.format("%.2f", item.price) + " €"
         }
 
-        if (item.isLiked){
+        if (item.isLiked) {
             holder.binding.likeBTN.setImageResource(R.drawable.baseline_favorite_24)
-        }else {
+        } else {
             holder.binding.likeBTN.setImageResource(R.drawable.baseline_favorite_border_24)
         }
 
         holder.binding.likeBTN.setOnClickListener {
 
-            if (viewModel.firebaseAuth.currentUser != null){
+            if (viewModel.firebaseAuth.currentUser != null) {
 
-                if(!item.isLiked){
+                if (!item.isLiked) {
 
                     viewModel.addLikedItem(item.id)
 
-                }else viewModel.removeLikedItem(item.id)
+                } else viewModel.removeLikedItem(item.id)
 
                 viewModel.updateLike(!item.isLiked, item.id)
 
-            }else {
+            } else {
                 val toast = Toast.makeText(
                     context,
                     "Sie müssen sich erst Anmelden!",
-                    Toast.LENGTH_LONG)
+                    Toast.LENGTH_LONG
+                )
                 toast.show()
             }
-
-
         }
 
-        holder.binding.cardView1.setOnClickListener{
-            it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
+        holder.binding.cardView1.setOnClickListener {
+            it.findNavController()
+                .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
         }
     }
 

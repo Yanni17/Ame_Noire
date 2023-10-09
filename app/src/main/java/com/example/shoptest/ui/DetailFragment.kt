@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
@@ -49,7 +50,6 @@ class DetailFragment : Fragment() {
         //Argument holen
         var id = requireArguments().getInt("id")
 
-
         viewModel.getDetail(id).observe(viewLifecycleOwner) {
 
             with(binding) {
@@ -66,6 +66,12 @@ class DetailFragment : Fragment() {
                 }
             }
         }
+
+        binding.likeBTN2.setOnClickListener {
+
+        }
+
+
     }
 
 }

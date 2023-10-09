@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
+
+
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
 
             when (item.itemId) {
