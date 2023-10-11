@@ -48,7 +48,6 @@ class HomeFragment : Fragment() {
         val mainActivity = activity as MainActivity
         mainActivity.setToolbarTitle("Home")
 
-
         var adapter = ProduktAdapter(emptyList(), viewModel, requireContext())
         binding.herrenRV.adapter = adapter
 
@@ -64,23 +63,19 @@ class HomeFragment : Fragment() {
         }
 
         binding.werbung2IV.setImageResource(R.drawable.summer)
-        //binding.werbungIV1.setImageResource(R.drawable.summer)
-
-
-        //val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video}" // Pfad zur MP4-Datei in den Ressourcen
-        //binding.werbungIV1.setVideoURI(Uri.parse(videoPath))
-        //binding.werbungIV1.start()
 
         val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video}"
         binding.werbungIV1.setVideoURI(Uri.parse(videoPath))
 
         // Vorpuffern des Videos
         binding.werbungIV1.setOnPreparedListener { mp ->
+            mp.setVolume(0F,0F)
             mp.start()
         }
 
         // Optional: Überwache den Abschluss des Videos und wiederhole es bei Bedarf
         binding.werbungIV1.setOnCompletionListener { mp ->
+            mp.setVolume(0F,0F)
             mp.start()
         }
 

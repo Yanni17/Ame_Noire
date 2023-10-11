@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
+import com.example.shoptest.data.datamodels.models.CartItem
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.FavoriteItemBinding
 import com.example.shoptest.ui.FavoriteFragmentDirections
@@ -61,9 +62,9 @@ class FavoriteAdapter(
                 .navigate(FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(item.id))
         }
 
-//        holder.binding.button.setOnClickListener {
-//            viewModel.addCartItem(Pair(item.id,1))
-//        }
+        holder.binding.button.setOnClickListener {
+            viewModel.addToCart(item.id)
+        }
 
 
     }

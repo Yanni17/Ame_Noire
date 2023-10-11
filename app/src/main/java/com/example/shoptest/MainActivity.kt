@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
 
-
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
 
             when (item.itemId) {
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.searchFragment -> {
                     navController.navigate(R.id.searchFragment)
-                    true // true, um das Element auszuwählen
+                    true
                 }
 
                 R.id.favoriteFragment -> {

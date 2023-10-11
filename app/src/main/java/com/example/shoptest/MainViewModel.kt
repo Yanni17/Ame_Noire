@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.shoptest.data.datamodels.AppRepository
 import com.example.shoptest.data.datamodels.Datasource
 import com.example.shoptest.data.datamodels.local.getDatabase
+import com.example.shoptest.data.datamodels.models.CartItem
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.data.datamodels.models.Kategorie
 import com.example.shoptest.data.datamodels.models.Profile
@@ -33,7 +34,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val firebaseAuth = FirebaseAuth.getInstance()
     val firestore = FirebaseFirestore.getInstance()
     val listOfClothes =  mutableListOf<Int>()
-    val listOfCartItems = mutableListOf<Pair<Int,Int>>()
+    var listOfCartItems = mutableListOf<CartItem>()
     private val _user: MutableLiveData<FirebaseUser?> = MutableLiveData()
     val user: LiveData<FirebaseUser?>
         get() = _user
@@ -47,10 +48,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val datasource: LiveData<List<Kategorie>>
         get() = _datasource
 
+    val allClothes = repository.allClothes
+
 
     init {
         _datasource.postValue(Datasource(application).loadCategories())
-        //loadData()
         setupUserEnv()
     }
 
@@ -69,6 +71,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         firebaseAuth.currentUser?.let {
             profileRef = firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+            profileRef.get().addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val profile = documentSnapshot.toObject(Profile::class.java)
+                    val cartList = profile?.cartList // Warenkorbliste
+                    listOfCartItems = cartList!!.toMutableList()
+                }
+            }
         }
     }
 
@@ -127,6 +136,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
         firebaseAuth.signOut()
         listOfClothes.clear()
+        listOfCartItems.clear()
         _user.value = firebaseAuth.currentUser
     }
 
@@ -203,16 +213,46 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         Log.e("Test2",listOfClothes.toString())
     }
 
-    fun addCartItem(pair: Pair<Int,Int>){
-        listOfCartItems.add(pair)
+    fun addCartItem(cartItem: CartItem){
+        listOfCartItems.add(cartItem)
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
     }
 
-    fun removeCartItem(pair: Pair<Int,Int>){
-        listOfCartItems.remove(pair)
+    fun removeCartItem(cartItem: CartItem){
+        listOfCartItems.remove(cartItem)
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
     }
 
+    fun removeFromCart(productId: Int) {
+
+        val existingItem = listOfCartItems.find { it.productId == productId }
+        if (existingItem != null) {
+            if (existingItem.quantity > 1) {
+                // Wenn die Menge größer als 1 ist, verringere sie um 1
+                existingItem.quantity--
+            } else {
+                // Wenn die Menge 1 ist oder kleiner, entferne den Artikel aus dem Warenkorb
+                listOfCartItems.remove(existingItem)
+            }
+            firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
+        }
+    }
+
+
+    fun addToCart(productId: Int) {
+
+        val existingItem = listOfCartItems.find { it.productId == productId }
+        if (existingItem != null) {
+            // Artikel ist bereits im Warenkorb, erhöhe die Menge
+            existingItem.quantity++
+        } else {
+            // Artikel ist nicht im Warenkorb, füge ihn hinzu
+            val newItem = CartItem(productId, 1)
+            listOfCartItems.add(newItem)
+        }
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
+
+    }
 
     //ROOM_
 
