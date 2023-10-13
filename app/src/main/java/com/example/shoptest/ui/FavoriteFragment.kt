@@ -43,7 +43,7 @@ class FavoriteFragment : Fragment() {
         toolbar.visibility = View.VISIBLE
 
 
-        var adapter = FavoriteAdapter(emptyList(), viewModel)
+        var adapter = FavoriteAdapter(emptyList(), viewModel,requireContext())
         binding.favoriteRV.adapter = adapter
 
         val mainActivity = activity as MainActivity
@@ -56,8 +56,14 @@ class FavoriteFragment : Fragment() {
 
                 if (adapter.itemCount == 0) {
                     binding.emptyTextView.visibility = View.VISIBLE
+                    binding.Int2TV.visibility = View.GONE
+                    binding.aktuelleFavTV.visibility = View.GONE
                 } else {
                     binding.emptyTextView.visibility = View.GONE
+                    binding.Int2TV.visibility = View.VISIBLE
+                    binding.aktuelleFavTV.visibility = View.VISIBLE
+                    binding.Int2TV.text = adapter.itemCount.toString()
+                    binding.aktuelleFavTV.text = "Artikel"
                 }
             }
         }else {

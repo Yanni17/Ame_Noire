@@ -1,11 +1,22 @@
 package com.example.shoptest.adapter
 
 import android.content.Context
+import android.graphics.Color
+import android.transition.ChangeBounds
+import android.transition.ChangeImageTransform
+import android.transition.ChangeTransform
+import android.transition.TransitionSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.shoptest.MainViewModel
@@ -69,10 +80,18 @@ class ProduktAdapter(
             }
         }
 
-        holder.binding.cardView1.setOnClickListener {
-            it.findNavController()
-                .navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id))
+
+        holder.binding.cardView1.setOnClickListener { view ->
+
+            val navOptions = NavOptions.Builder()
+                .setEnterAnim(R.anim.slide_in_right) // Hier kannst du deine eigene Animation festlegen
+                .setExitAnim(R.anim.slide_out_left) // Hier kannst du deine eigene Animation festlegen
+                .build()
+
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id)
+            view.findNavController().navigate(action,navOptions)
         }
+
     }
 
     fun update(list: List<Clothes>) {

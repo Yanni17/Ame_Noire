@@ -26,6 +26,12 @@
     <string name="ohneAnmeldung">Registrier dich oder logge dich ein, um zu sehen, was du bereits gespeichert hast.</string>
     <string name="keineSorge">Keine Sorge!</string>
     <string name="hallo">Hallo,</string>
+    <string name="leereTasche">In deiner Tasche ist nichts drin.</string>
+    <string name="anmeldenFuerCashout">Registrier dich oder logge dich ein, um zu sehen, was du bereits in deiner Tasche hast.</string>
+    <string name="noProfil">Deine aktuellen Bestellungen und all deine Angaben erneuern, wann immer du möchtest.</string>
+    <string name="animation">articleImageTransition</string>
+    <string name="erfolgreichWarenkorb">Artikel wurde erfolgreich in Ihr Warenkorb gelegt</string>
+    <string name="bezahlen">Bezahlen</string>
 
 
 </resources>

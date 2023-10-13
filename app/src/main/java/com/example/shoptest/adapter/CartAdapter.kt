@@ -50,8 +50,6 @@ class CartAdapter(
             it.findNavController().navigate(R.id.cashoutFragment)
         }
 
-
-
     }
 
     fun updateData(list: List<Clothes>){

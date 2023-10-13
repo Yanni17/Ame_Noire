@@ -2,9 +2,14 @@ package com.example.shoptest.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 
 import androidx.recyclerview.widget.ListAdapter
@@ -66,9 +71,55 @@ class ProduktListAdapter(
 
                 }
 
-                binding.cardView.setOnClickListener {
-                    it.findNavController().navigate(ProductsFragmentDirections.actionProductsFragmentToDetailFragment(item.id))
+                binding.cardView.setOnClickListener { view ->
+                    // Hier kannst du die gewünschte Animation erstellen und auf das ImageView anwenden
+                    val scaleUpAnimation = ScaleAnimation(
+                        1f, 2f, // Start- und Endskalierungsfaktor in X-Richtung
+                        1f, 2f, // Start- und Endskalierungsfaktor in Y-Richtung
+                        Animation.RELATIVE_TO_SELF, 0.5f, // Punkt, um den skaliert wird (hier: Mitte X)
+                        Animation.RELATIVE_TO_SELF, 0.5f  // Punkt, um den skaliert wird (hier: Mitte Y)
+                    )
+                    scaleUpAnimation.duration = 300 // Dauer der Animation in Millisekunden
+
+                    // Setze einen Listener für die Animation
+                    scaleUpAnimation.setAnimationListener(object : Animation.AnimationListener {
+                        override fun onAnimationStart(animation: Animation?) {
+                            // Die Animation startet
+                            binding.preis2TV.visibility = View.GONE
+                            binding.imageButton.visibility = View.GONE
+                            binding.titleTV.visibility = View.GONE
+                        }
+
+                        override fun onAnimationEnd(animation: Animation?) {
+                            // Hier kannst du die Navigation zum Detailfragment starten
+                            val imageTransitionName = view.context.getString(R.string.animation)
+                            val extras = FragmentNavigatorExtras(
+                                binding.imageView to imageTransitionName
+                            )
+
+                            val action = ProductsFragmentDirections.actionProductsFragmentToDetailFragment(item.id)
+                            view.findNavController().navigate(action, extras)
+                        }
+
+                        override fun onAnimationRepeat(animation: Animation?) {
+                            // Die Animation wiederholt sich (normalerweise nicht relevant)
+                        }
+                    })
+
+                    // Füge die Animation zum ImageView hinzu
+                    binding.imageView.startAnimation(scaleUpAnimation)
                 }
+
+
+//                binding.cardView.setOnClickListener {
+//
+//                    val navOptions = NavOptions.Builder()
+//                        .setEnterAnim(R.anim.slide_in_right) // Hier kannst du deine eigene Animation festlegen
+//                        .setExitAnim(R.anim.slide_out_left) // Hier kannst du deine eigene Animation festlegen
+//                        .build()
+//
+//                    it.findNavController().navigate(ProductsFragmentDirections.actionProductsFragmentToDetailFragment(item.id))
+//                }
 
             }
         }

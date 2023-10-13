@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
@@ -39,7 +40,6 @@ class CashoutFragment : Fragment() {
         val cartAdapter = CartAdapter(emptyList(), viewmodel)
         binding.cartRV.adapter = cartAdapter
 
-
         // Im Fragment oder ViewModel
         viewmodel.allClothes.observe(viewLifecycleOwner) { clothesList ->
             // Dieser Codeblock wird aufgerufen, wenn sich die Daten in allClothes ändern
@@ -59,6 +59,25 @@ class CashoutFragment : Fragment() {
                             cartList!!.any { it.productId == clothes.id }
                         }
                         cartAdapter.updateData(productsInCart)
+
+                        var total = 0.0
+
+                        if (cartAdapter.itemCount == 0) {
+                            binding.noBasketTV.visibility = View.VISIBLE
+                        } else {
+                            binding.noBasketTV.visibility = View.GONE
+                            binding.cartRV.visibility = View.VISIBLE
+                            binding.bezahlenBTN.visibility = View.VISIBLE
+                            binding.priceTV.visibility = View.VISIBLE
+                            binding.totalTV.visibility = View.VISIBLE
+
+                            for (produkt in productsInCart) {
+                                val quantity = cartList?.find { it.productId == produkt.id }?.quantity ?: 0
+                                total += produkt.price * quantity
+                            }
+                            binding.priceTV.text = String.format("%.2f €", total)
+                        }
+
                         Log.e("List2", "$clothesList")
                         Log.e("List", "$productsInCart")
                     } else {
@@ -68,12 +87,14 @@ class CashoutFragment : Fragment() {
                     // Fehler bei der Firestore-Abfrage.
                 }
             } else {
-                val toast = Toast.makeText(
-                    requireContext(),
-                    "Warenkorb ist leer",
-                    Toast.LENGTH_LONG
-                )
-                toast.show()
+                binding.cashoutCV.visibility = View.VISIBLE
+
+                binding.anmeldeBTN.setOnClickListener {
+                    it.findNavController().navigate(R.id.loginFragment)
+                }
+                binding.registrierenBTN.setOnClickListener {
+                    it.findNavController().navigate(R.id.registerFragment2)
+                }
             }
         }
 

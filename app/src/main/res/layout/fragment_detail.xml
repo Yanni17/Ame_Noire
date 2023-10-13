@@ -7,7 +7,8 @@
     tools:context=".ui.DetailFragment" >
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/produktIV"
+        android:transitionName="@string/animation"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:scaleType="fitXY"
@@ -27,7 +28,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/produktIV" />
 
     <ImageButton
         android:id="@+id/ratingBTN2"
@@ -38,7 +39,7 @@
         android:background="@color/transparent"
         android:src="@drawable/baseline_star_24"
         app:layout_constraintEnd_toStartOf="@+id/ratingTV2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/produktIV" />
 
     <TextView
         android:id="@+id/ratingTV2"

@@ -1,12 +1,12 @@
 package com.example.shoptest.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
@@ -15,7 +15,6 @@ import com.example.shoptest.data.datamodels.models.Profile
 import com.example.shoptest.databinding.FragmentProfilBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.firestore.ktx.toObject
-import kotlinx.coroutines.tasks.await
 
 class ProfilFragment : Fragment() {
 
@@ -63,7 +62,15 @@ class ProfilFragment : Fragment() {
 
             binding.loggoutCV.setOnClickListener {
                 viewmodel.signOut()
-                it.findNavController().navigate(R.id.loginFragment)
+
+                val navOptions = NavOptions.Builder()
+                    .setEnterAnim(R.anim.slide_in_right) // Hier kannst du deine eigene Animation festlegen
+                    .setExitAnim(R.anim.slide_out_left) // Hier kannst du deine eigene Animation festlegen
+                    .build()
+
+                it.findNavController().navigate(R.id.homeFragment, null, navOptions)
+
+                //it.findNavController().navigate(R.id.homeFragment)
             }
         } else {
             binding.noaccountCV.visibility = View.VISIBLE
