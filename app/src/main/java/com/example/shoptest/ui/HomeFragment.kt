@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.VideoView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -43,10 +44,12 @@ class HomeFragment : Fragment() {
         bottomNavigationView.visibility = View.VISIBLE
 
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
-        toolbar.visibility = View.VISIBLE
+        toolbar.visibility = View.GONE
 
-        val mainActivity = activity as MainActivity
-        mainActivity.setToolbarTitle("Home")
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+
+        // Text der TextViews
+        titleTextView.text = "HOME"
 
         var adapter = ProduktAdapter(emptyList(), viewModel, requireContext())
         binding.herrenRV.adapter = adapter
@@ -69,16 +72,17 @@ class HomeFragment : Fragment() {
 
         // Vorpuffern des Videos
         binding.werbungIV1.setOnPreparedListener { mp ->
-            mp.setVolume(0F,0F)
+            mp.setVolume(0F, 0F)
             mp.start()
         }
 
         // Optional: Überwache den Abschluss des Videos und wiederhole es bei Bedarf
         binding.werbungIV1.setOnCompletionListener { mp ->
-            mp.setVolume(0F,0F)
+            mp.setVolume(0F, 0F)
             mp.start()
         }
 
 
     }
+
 }

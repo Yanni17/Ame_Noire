@@ -89,7 +89,7 @@ class ProduktAdapter(
                 .build()
 
             val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id)
-            view.findNavController().navigate(action,navOptions)
+            view.findNavController().navigate(action, navOptions)
         }
 
     }

@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import coil.load
 import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
@@ -42,12 +44,17 @@ class SearchFragment : Fragment() {
         // Um die Sichtbarkeit anszuschalten:
         bottomNavigationView.visibility = View.VISIBLE
 
-        val mainActivity = activity as MainActivity
-        mainActivity.setToolbarTitle("Suche")
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+
+        // Ändere den Text des TextViews
+        titleTextView.text = "SUCHE"
+
+        binding.imageView2.setImageResource(R.drawable.test31)
 
         viewModel.datasource.observe(viewLifecycleOwner) {
             binding.kategorieRV.adapter = KategorieAdapter(it, viewModel)
         }
+
 
     }
 }

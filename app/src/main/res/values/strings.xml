@@ -31,7 +31,7 @@
     <string name="noProfil">Deine aktuellen Bestellungen und all deine Angaben erneuern, wann immer du möchtest.</string>
     <string name="animation">articleImageTransition</string>
     <string name="erfolgreichWarenkorb">Artikel wurde erfolgreich in Ihr Warenkorb gelegt</string>
-    <string name="bezahlen">Bezahlen</string>
+    <string name="bezahlen">BEZAHLEN</string>
 
 
 </resources>

@@ -15,8 +15,8 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:transitionName="@string/animation"
+            android:id="@+id/ivImage"
+            android:transitionName="image_big"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:scaleType="fitXY"
@@ -36,7 +36,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/ivImage" />
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -46,7 +46,7 @@
             android:layout_marginEnd="8dp"
             android:background="@color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/ivImage"
             app:srcCompat="@drawable/baseline_favorite_border_24" />
 
         <TextView

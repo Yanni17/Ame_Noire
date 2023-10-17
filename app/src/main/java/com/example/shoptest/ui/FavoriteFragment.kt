@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
@@ -46,8 +49,16 @@ class FavoriteFragment : Fragment() {
         var adapter = FavoriteAdapter(emptyList(), viewModel,requireContext())
         binding.favoriteRV.adapter = adapter
 
-        val mainActivity = activity as MainActivity
-        mainActivity.setToolbarTitle("Favoriten")
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+
+        // Ändere den Text des TextViews
+        titleTextView.text = "FAVORITEN"
+
+        val spinner = requireActivity().findViewById<Spinner>(R.id.spinner)
+        val spinnerItems = arrayOf("Zuletzt Hinzugefügt", "Preis absteigend", "Preis aufsteigend")
+        val adapter2 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
+        spinner.adapter = adapter2
+
 
         if (viewModel.firebaseAuth.currentUser != null){
             binding.favoriteRV.visibility = View.VISIBLE
@@ -58,12 +69,14 @@ class FavoriteFragment : Fragment() {
                     binding.emptyTextView.visibility = View.VISIBLE
                     binding.Int2TV.visibility = View.GONE
                     binding.aktuelleFavTV.visibility = View.GONE
+                    binding.spinner.visibility = View.GONE
                 } else {
                     binding.emptyTextView.visibility = View.GONE
                     binding.Int2TV.visibility = View.VISIBLE
                     binding.aktuelleFavTV.visibility = View.VISIBLE
                     binding.Int2TV.text = adapter.itemCount.toString()
                     binding.aktuelleFavTV.text = "Artikel"
+                    binding.spinner.visibility = View.VISIBLE
                 }
             }
         }else {

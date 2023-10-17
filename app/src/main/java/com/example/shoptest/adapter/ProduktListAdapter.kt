@@ -33,7 +33,7 @@ class ProduktListAdapter(
 
             with(binding) {
                 titleTV.text = item.title
-                imageView.load(item.image)
+                ivImage.load(item.image)
                 preis2TV.text = String.format("%.2f", item.price) + " €"
 
                 if (item.isLiked) {
@@ -44,13 +44,13 @@ class ProduktListAdapter(
 
                 imageButton.setOnClickListener {
 
-                    if (viewModel.firebaseAuth.currentUser != null){
+                    if (viewModel.firebaseAuth.currentUser != null) {
 
-                        if(!item.isLiked){
+                        if (!item.isLiked) {
 
                             viewModel.addLikedItem(item.id)
 
-                        }else viewModel.removeLikedItem(item.id)
+                        } else viewModel.removeLikedItem(item.id)
 
                         viewModel.updateLike(!item.isLiked, item.id)
 
@@ -59,76 +59,32 @@ class ProduktListAdapter(
                         } else {
                             imageButton.setImageResource(R.drawable.baseline_favorite_border_24)
                         }
-                    }else {
+                    } else {
                         val toast = Toast.makeText(
                             context,
                             "Sie müssen sich erst Anmelden!",
-                            Toast.LENGTH_LONG)
+                            Toast.LENGTH_LONG
+                        )
                         toast.show()
                     }
 
 
-
                 }
 
-                binding.cardView.setOnClickListener { view ->
-                    // Hier kannst du die gewünschte Animation erstellen und auf das ImageView anwenden
-                    val scaleUpAnimation = ScaleAnimation(
-                        1f, 2f, // Start- und Endskalierungsfaktor in X-Richtung
-                        1f, 2f, // Start- und Endskalierungsfaktor in Y-Richtung
-                        Animation.RELATIVE_TO_SELF, 0.5f, // Punkt, um den skaliert wird (hier: Mitte X)
-                        Animation.RELATIVE_TO_SELF, 0.5f  // Punkt, um den skaliert wird (hier: Mitte Y)
-                    )
-                    scaleUpAnimation.duration = 300 // Dauer der Animation in Millisekunden
+                binding.ivImage.setOnClickListener { view ->
 
-                    // Setze einen Listener für die Animation
-                    scaleUpAnimation.setAnimationListener(object : Animation.AnimationListener {
-                        override fun onAnimationStart(animation: Animation?) {
-                            // Die Animation startet
-                            binding.preis2TV.visibility = View.GONE
-                            binding.imageButton.visibility = View.GONE
-                            binding.titleTV.visibility = View.GONE
-                        }
+                    val extras = FragmentNavigatorExtras(binding.ivImage to "image_big")
+                    val action =
+                        ProductsFragmentDirections.actionProductsFragmentToDetailFragment(item.id)
+                    view.findNavController().navigate(action, extras)
 
-                        override fun onAnimationEnd(animation: Animation?) {
-                            // Hier kannst du die Navigation zum Detailfragment starten
-                            val imageTransitionName = view.context.getString(R.string.animation)
-                            val extras = FragmentNavigatorExtras(
-                                binding.imageView to imageTransitionName
-                            )
-
-                            val action = ProductsFragmentDirections.actionProductsFragmentToDetailFragment(item.id)
-                            view.findNavController().navigate(action, extras)
-                        }
-
-                        override fun onAnimationRepeat(animation: Animation?) {
-                            // Die Animation wiederholt sich (normalerweise nicht relevant)
-                        }
-                    })
-
-                    // Füge die Animation zum ImageView hinzu
-                    binding.imageView.startAnimation(scaleUpAnimation)
                 }
-
-
-//                binding.cardView.setOnClickListener {
-//
-//                    val navOptions = NavOptions.Builder()
-//                        .setEnterAnim(R.anim.slide_in_right) // Hier kannst du deine eigene Animation festlegen
-//                        .setExitAnim(R.anim.slide_out_left) // Hier kannst du deine eigene Animation festlegen
-//                        .build()
-//
-//                    it.findNavController().navigate(ProductsFragmentDirections.actionProductsFragmentToDetailFragment(item.id))
-//                }
-
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding = ProduktItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
         return ItemViewHolder(binding)
     }
 
@@ -137,9 +93,7 @@ class ProduktListAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-
         holder.bind(getItem(position))
-
     }
 
     private class UtilDiffClothes : DiffUtil.ItemCallback<Clothes>() {

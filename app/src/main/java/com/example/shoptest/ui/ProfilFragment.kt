@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -35,8 +37,8 @@ class ProfilFragment : Fragment() {
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
 
-        val mainActivity = activity as MainActivity
-        mainActivity.setToolbarTitle("Profil")
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+        titleTextView.text = "ACCOUNT"
 
         if (viewmodel.firebaseAuth.currentUser != null) {
 
@@ -54,7 +56,7 @@ class ProfilFragment : Fragment() {
                 if (documentSnapshot.exists()) {
                     val profile = documentSnapshot.toObject<Profile>()
                     if (profile != null) {
-                        val userName = profile.name
+                        val userName = profile.name.uppercase()
                         binding.aktuellerNameTV.text = userName
                     }
                 }
@@ -63,14 +65,22 @@ class ProfilFragment : Fragment() {
             binding.loggoutCV.setOnClickListener {
                 viewmodel.signOut()
 
+                val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                alertDialogBuilder.setTitle("Ausloggen")
+                alertDialogBuilder.setMessage("Sie haben sich erfolgreich ausgeloggt!")
+                alertDialogBuilder.setPositiveButton("OK") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                val alertDialog = alertDialogBuilder.create()
+                alertDialog.show()
+
                 val navOptions = NavOptions.Builder()
-                    .setEnterAnim(R.anim.slide_in_right) // Hier kannst du deine eigene Animation festlegen
-                    .setExitAnim(R.anim.slide_out_left) // Hier kannst du deine eigene Animation festlegen
+                    .setEnterAnim(R.anim.slide_in_right)
+                    .setExitAnim(R.anim.slide_out_left)
                     .build()
 
                 it.findNavController().navigate(R.id.homeFragment, null, navOptions)
 
-                //it.findNavController().navigate(R.id.homeFragment)
             }
         } else {
             binding.noaccountCV.visibility = View.VISIBLE

@@ -3,9 +3,15 @@
 
     <style name="Ame_NoireTheme" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/background</item>
+
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorSurface">@color/background</item>
         <item name="android:windowContentTransitions">true</item>
+
+    </style>
+
+    <style name="CustomBottomNavMenuActiveItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/grey</item>
     </style>
 
 </resources>

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -16,6 +17,7 @@ import com.example.shoptest.adapter.CartAdapter
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.data.datamodels.models.Profile
 import com.example.shoptest.databinding.FragmentCashoutBinding
+import com.google.android.material.appbar.MaterialToolbar
 
 class CashoutFragment : Fragment() {
 
@@ -34,13 +36,17 @@ class CashoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mainActivity = activity as MainActivity
-        mainActivity.setToolbarTitle("Warenkorb")
-
         val cartAdapter = CartAdapter(emptyList(), viewmodel)
         binding.cartRV.adapter = cartAdapter
 
-        // Im Fragment oder ViewModel
+        val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
+        toolbar.visibility = View.VISIBLE
+
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+
+        // Ändere den Text des TextViews
+        titleTextView.text = "WARENKORB"
+
         viewmodel.allClothes.observe(viewLifecycleOwner) { clothesList ->
             // Dieser Codeblock wird aufgerufen, wenn sich die Daten in allClothes ändern
             if (viewmodel.firebaseAuth.currentUser != null) {
@@ -70,6 +76,8 @@ class CashoutFragment : Fragment() {
                             binding.bezahlenBTN.visibility = View.VISIBLE
                             binding.priceTV.visibility = View.VISIBLE
                             binding.totalTV.visibility = View.VISIBLE
+                            binding.lieferkostenTV.visibility = View.VISIBLE
+
 
                             for (produkt in productsInCart) {
                                 val quantity = cartList?.find { it.productId == produkt.id }?.quantity ?: 0
@@ -78,8 +86,6 @@ class CashoutFragment : Fragment() {
                             binding.priceTV.text = String.format("%.2f €", total)
                         }
 
-                        Log.e("List2", "$clothesList")
-                        Log.e("List", "$productsInCart")
                     } else {
                         // Das Profil des Benutzers existiert nicht.
                     }

@@ -70,8 +70,9 @@ class FavoriteAdapter(
             val snackbar = Snackbar.make(it, message, Snackbar.LENGTH_SHORT)
 
             snackbar.view.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
-            snackbar.setBackgroundTint(ContextCompat.getColor(context,R.color.grey))
-            val textView = snackbar.view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+            snackbar.setBackgroundTint(ContextCompat.getColor(context, R.color.grey))
+            val textView =
+                snackbar.view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
             textView.setTextColor(context.getColor(R.color.text))
 
             snackbar.show()

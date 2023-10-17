@@ -14,9 +14,8 @@ data class Clothes(
     var category: String = "",
     var image: String = "",
     var isLiked: Boolean = false,
-    //var inCart: Boolean = false,
     @Embedded
     var rating: Rating = Rating()
 
-    ) {
+) {
 }

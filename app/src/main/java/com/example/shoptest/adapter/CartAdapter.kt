@@ -41,7 +41,7 @@ class CartAdapter(
         var cartList = viewModel.listOfCartItems
         var produkt = cartList.find { it.productId == item.id }
 
-        Log.e("Cartlist","$cartList")
+        Log.e("Cartlist", "$cartList")
         holder.binding.IntTV.text = produkt!!.quantity.toString()
 
         holder.binding.imageButton3.setOnClickListener {
@@ -52,7 +52,7 @@ class CartAdapter(
 
     }
 
-    fun updateData(list: List<Clothes>){
+    fun updateData(list: List<Clothes>) {
         dataset = list
         notifyDataSetChanged()
     }

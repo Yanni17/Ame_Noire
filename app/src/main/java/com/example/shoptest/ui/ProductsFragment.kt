@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
@@ -43,7 +44,7 @@ class ProductsFragment : Fragment() {
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
 
-        val mainActivity = activity as MainActivity
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
 
         var kategorie = requireArguments().getString("name")
 
@@ -53,22 +54,22 @@ class ProductsFragment : Fragment() {
         when (kategorie) {
             "Herren" -> viewModel.getAllHerren().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
-                mainActivity.setToolbarTitle("Herren")
+                titleTextView.text = "HERREN"
             }
 
             "Damen" -> viewModel.getAllDamen().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
-                mainActivity.setToolbarTitle("Damen")
+                titleTextView.text = "DAMEN"
             }
 
             "Elektronik" -> viewModel.getAllElectrics().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
-                mainActivity.setToolbarTitle("Elektronik")
+                titleTextView.text = "ELEKTRONIK"
             }
 
             "Schmuck" -> viewModel.getAllJewelry().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
-                mainActivity.setToolbarTitle("Schmuck")
+                titleTextView.text = "SCHMUCK"
             }
         }
 

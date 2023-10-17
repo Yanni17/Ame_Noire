@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment -> {
                     navController.popBackStack(R.id.homeFragment, false)
                     false
+
                 }
 
                 R.id.cashoutFragment -> {

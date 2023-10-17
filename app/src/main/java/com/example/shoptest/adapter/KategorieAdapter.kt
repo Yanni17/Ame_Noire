@@ -47,7 +47,7 @@ class KategorieAdapter(
                 .setExitAnim(R.anim.slide_out_left)
                 .build()
 
-            it.findNavController().navigate(action,navOptions)
+            it.findNavController().navigate(action, navOptions)
         }
 
         //it.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToProductsFragment(item.name))

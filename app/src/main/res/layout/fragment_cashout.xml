@@ -114,18 +114,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="0dp"
         android:background="@drawable/gradient"
         android:fontFamily="@font/supreme_regular"
         android:text="@string/bezahlen"
         android:textColor="?colorOnSecondary"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/totalTV"
@@ -134,6 +133,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
         android:text="Total:"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bezahlenBTN"
@@ -146,9 +146,23 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:text="TextView"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bezahlenBTN"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/lieferkostenTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="(ohne Lieferkosten)"
+        android:fontFamily="@font/supreme_regular"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/bezahlenBTN"
+        app:layout_constraintEnd_toStartOf="@+id/priceTV" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,13 +33,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     // Firestore - Firebase.
     val firebaseAuth = FirebaseAuth.getInstance()
     val firestore = FirebaseFirestore.getInstance()
-    val listOfClothes =  mutableListOf<Int>()
+    var listOfClothes = mutableListOf<Int>()
     var listOfCartItems = mutableListOf<CartItem>()
     private val _user: MutableLiveData<FirebaseUser?> = MutableLiveData()
     val user: LiveData<FirebaseUser?>
         get() = _user
     lateinit var profileRef: DocumentReference
-
 
     // ROOM.
     private val database = getDatabase(application)
@@ -49,7 +48,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _datasource
 
     val allClothes = repository.allClothes
-
 
     init {
         _datasource.postValue(Datasource(application).loadCategories())
@@ -61,7 +59,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             repository.getClothes()
         }
     }
-
 
     //FIREBASE_
 
@@ -76,14 +73,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     val profile = documentSnapshot.toObject(Profile::class.java)
                     val cartList = profile?.cartList // Warenkorbliste
                     listOfCartItems = cartList!!.toMutableList()
+                    val likedList = profile?.likedList
+                    listOfClothes = likedList!!.toMutableList()
                 }
             }
         }
     }
 
-    fun signUp(email: String, password: String, name: String, telefonnummer: String){
-
-
+    fun signUp(email: String, password: String, name: String, telefonnummer: String) {
 
         if (email.isEmpty() || password.isEmpty() || name.isEmpty() || telefonnummer.isEmpty()) {
 
@@ -111,7 +108,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 val profile = Profile(name, telefonnummer)
                 profileRef.set(profile)
 
-                Toast.makeText(getApplication(),"Registrierung erfolgreich!",Toast.LENGTH_LONG).show()
+                Toast.makeText(getApplication(), "Registrierung erfolgreich!", Toast.LENGTH_LONG)
+                    .show()
 
             } else {
 
@@ -129,13 +127,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun signOut() {
 
-        if (listOfClothes != null ){
-            for (item in listOfClothes){
-                updateLike(false,item)
+        if (listOfClothes != null) {
+            for (item in listOfClothes) {
+                updateLike(false, item)
             }
+            listOfClothes.clear()
         }
         firebaseAuth.signOut()
-        listOfClothes.clear()
         listOfCartItems.clear()
         _user.value = firebaseAuth.currentUser
     }
@@ -158,16 +156,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             if (it.isSuccessful) {
                 setupUserEnv()
 
-                firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get().addOnSuccessListener {
-                    var profile = it.toObject(Profile::class.java)
-                    if (profile?.likedList != null){
-                        for (item in profile!!.likedList){
-                            addLikedItem(item)
-                            updateLike(true,item)
+                firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).get()
+                    .addOnSuccessListener {
+                        var profile = it.toObject(Profile::class.java)
+                        if (profile?.likedList != null) {
+                            for (item in profile!!.likedList) {
+                                addLikedItem(item)
+                                updateLike(true, item)
+                            }
                         }
                     }
-                }
-                Toast.makeText(getApplication(),"Erfolgreich Angemeldet!",Toast.LENGTH_LONG).show()
+                Toast.makeText(getApplication(), "Erfolgreich Angemeldet!", Toast.LENGTH_LONG)
+                    .show()
             } else {
 
                 Log.e("Error", "${it.exception}")
@@ -205,22 +205,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     //FIRESTORE_
     fun addLikedItem(id: Int) {
         listOfClothes.add(id)
-        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("likedList",listOfClothes)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+            .update("likedList", listOfClothes)
     }
-    fun removeLikedItem(id: Int){
+
+    fun removeLikedItem(id: Int) {
         listOfClothes.remove(id)
-        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("likedList",listOfClothes)
-        Log.e("Test2",listOfClothes.toString())
-    }
-
-    fun addCartItem(cartItem: CartItem){
-        listOfCartItems.add(cartItem)
-        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
-    }
-
-    fun removeCartItem(cartItem: CartItem){
-        listOfCartItems.remove(cartItem)
-        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+            .update("likedList", listOfClothes)
     }
 
     fun removeFromCart(productId: Int) {
@@ -228,13 +220,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val existingItem = listOfCartItems.find { it.productId == productId }
         if (existingItem != null) {
             if (existingItem.quantity > 1) {
-                // Wenn die Menge größer als 1 ist, verringere sie um 1
                 existingItem.quantity--
             } else {
-                // Wenn die Menge 1 ist oder kleiner, entferne den Artikel aus dem Warenkorb
                 listOfCartItems.remove(existingItem)
             }
-            firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
+            firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+                .update("cartList", listOfCartItems)
         }
     }
 
@@ -243,14 +234,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         val existingItem = listOfCartItems.find { it.productId == productId }
         if (existingItem != null) {
-            // Artikel ist bereits im Warenkorb, erhöhe die Menge
             existingItem.quantity++
         } else {
-            // Artikel ist nicht im Warenkorb, füge ihn hinzu
             val newItem = CartItem(productId, 1)
             listOfCartItems.add(newItem)
         }
-        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid).update("cartList",listOfCartItems)
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+            .update("cartList", listOfCartItems)
 
     }
 
@@ -290,4 +280,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val animation = AnimationUtils.loadAnimation(getApplication(), R.anim.scale_up)
         view.startAnimation(animation)
     }
+
+
 }

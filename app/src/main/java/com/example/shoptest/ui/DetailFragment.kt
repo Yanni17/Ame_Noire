@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import coil.load
 import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
@@ -28,6 +30,16 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private val viewModel: MainViewModel by activityViewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Im Zielfragment
+        val inflater = TransitionInflater.from(context)
+        val transition = inflater.inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition = transition
+        sharedElementReturnTransition = transition
+
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +52,6 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mainActivity = activity as MainActivity
-        mainActivity.setToolbarTitle("Produkt Detail")
-
         // Um die Sichtbarkeit anszuschalten:
         val bottomNavigationView =
             requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -51,13 +60,18 @@ class DetailFragment : Fragment() {
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
 
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+
+        // Ändere den Text des TextViews
+        titleTextView.text = "PRODUKT DETAILS"
+
         //Argument holen
         var id = requireArguments().getInt("id")
 
         viewModel.getDetail(id).observe(viewLifecycleOwner) { item ->
 
             with(binding) {
-                produktIV.load(item.image)
+                ivImage.load(item.image)
                 preis4TV.text = String.format("%.2f", item.price) + " €"
                 descriptionTV2.text = item.description
                 title4TV.text = item.title
@@ -79,12 +93,26 @@ class DetailFragment : Fragment() {
                     val message = requireContext().getString(R.string.erfolgreichWarenkorb)
                     val snackbar = Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT)
 
-                    snackbar.view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
-                    snackbar.setBackgroundTint(ContextCompat.getColor(requireContext(),R.color.grey))
-                    val textView = snackbar.view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+                    snackbar.view.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.black
+                        )
+                    )
+                    snackbar.setBackgroundTint(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.grey
+                        )
+                    )
+                    val textView =
+                        snackbar.view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
                     textView.setTextColor(requireContext().getColor(R.color.text))
 
                     snackbar.show()
+
+                    it.findNavController().navigateUp()
+
 
                 } else {
                     val toast = Toast.makeText(
@@ -94,18 +122,19 @@ class DetailFragment : Fragment() {
                     )
                     toast.show()
                 }
+
             }
 
             binding.likeBTN2.setOnClickListener {
 
-                if (viewModel.firebaseAuth.currentUser != null){
+                if (viewModel.firebaseAuth.currentUser != null) {
 
-                if (!item.isLiked) {
-                    viewModel.addLikedItem(item.id)
-                } else viewModel.removeLikedItem(item.id)
-                viewModel.updateLike(!item.isLiked, item.id)
+                    if (!item.isLiked) {
+                        viewModel.addLikedItem(item.id)
+                    } else viewModel.removeLikedItem(item.id)
+                    viewModel.updateLike(!item.isLiked, item.id)
 
-                }else {
+                } else {
                     val toast = Toast.makeText(
                         requireContext(),
                         "Sie sind nicht angemeldet.",

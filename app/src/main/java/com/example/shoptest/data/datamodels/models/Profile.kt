@@ -6,4 +6,4 @@ class Profile(
     var likedList: List<Int> = emptyList(),
     var cartList: List<CartItem> = emptyList(),
 
-)
+    )
