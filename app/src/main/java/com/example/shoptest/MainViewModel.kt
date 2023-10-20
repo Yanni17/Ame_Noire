@@ -86,7 +86,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
             val toast = Toast.makeText(
                 getApplication(),
-                "Bitte füllen Sie alle Felder aus!",
+                "${getApplication<Application>().getString(R.string.felder)}",
                 Toast.LENGTH_LONG
             )
             toast.show()
@@ -94,7 +94,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         } else if (password.length < 6) {
             val toast = Toast.makeText(
                 getApplication(),
-                "Das Passwort muss mindestens 6 Zeichen lang sein.",
+                "${getApplication<Application>().getString(R.string.passwort)}",
                 Toast.LENGTH_LONG
             )
             toast.show()
@@ -108,7 +108,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 val profile = Profile(name, telefonnummer)
                 profileRef.set(profile)
 
-                Toast.makeText(getApplication(), "Registrierung erfolgreich!", Toast.LENGTH_LONG)
+                Toast.makeText(
+                    getApplication(),
+                    "${getApplication<Application>().getString(R.string.registrierung)}",
+                    Toast.LENGTH_LONG
+                )
                     .show()
 
             } else {
@@ -116,7 +120,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 if (it.exception is FirebaseAuthUserCollisionException) {
                     val toast = Toast.makeText(
                         getApplication(),
-                        "Die E-Mail-Adresse wird bereits verwendet.",
+                        "${getApplication<Application>().getString(R.string.e_mail)}",
                         Toast.LENGTH_LONG
                     )
                     toast.show()
@@ -144,7 +148,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
             val toast = Toast.makeText(
                 getApplication(),
-                "Bitte füllen Sie die Felder aus!",
+                "${getApplication<Application>().getString(R.string.felder)}",
                 Toast.LENGTH_LONG
             )
             toast.show()
@@ -166,7 +170,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                             }
                         }
                     }
-                Toast.makeText(getApplication(), "Erfolgreich Angemeldet!", Toast.LENGTH_LONG)
+                Toast.makeText(
+                    getApplication(),
+                    "${getApplication<Application>().getString(R.string.angemeldet)}",
+                    Toast.LENGTH_LONG
+                )
                     .show()
             } else {
 
@@ -176,7 +184,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     // e-mail existiert nicht
                     val toast = Toast.makeText(
                         getApplication(),
-                        "Die eingegebene E-Mail ist nicht registriert.",
+                        "${getApplication<Application>().getString(R.string.falsche_mail)}",
                         Toast.LENGTH_LONG
                     )
                     toast.show()
@@ -184,7 +192,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     // passwort falsch
                     val toast = Toast.makeText(
                         getApplication(),
-                        "Das eingegebene Passwort ist falsch.",
+                        "${getApplication<Application>().getString(R.string.falsches_passwort)}",
                         Toast.LENGTH_LONG
                     )
                     toast.show()
@@ -192,7 +200,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     // alle anderen
                     val toast = Toast.makeText(
                         getApplication(),
-                        "Fehler bei der Anmeldung. Bitte versuchen Sie es erneut.",
+                        "${getApplication<Application>().getString(R.string.fehler_anmeldung)}",
                         Toast.LENGTH_LONG
                     )
                     toast.show()

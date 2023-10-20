@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.VideoView
 import androidx.appcompat.app.ActionBar
@@ -18,6 +19,8 @@ import com.example.shoptest.adapter.ProduktAdapter
 import com.example.shoptest.databinding.FragmentHomeBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.Timer
+import java.util.TimerTask
 
 class HomeFragment : Fragment() {
 
@@ -65,10 +68,14 @@ class HomeFragment : Fragment() {
             adapter2.update(it)
         }
 
-        binding.werbung2IV.setImageResource(R.drawable.summer)
+        // WERBUNG
+        binding.werbung2IV.setImageResource(R.drawable.lfdy3)
+        binding.werbung3IV.setImageResource(R.drawable.pegador)
+        binding.werbung4IV.setImageResource(R.drawable.peso1)
 
-        val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video}"
+        val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video2}"
         binding.werbungIV1.setVideoURI(Uri.parse(videoPath))
+
 
         // Vorpuffern des Videos
         binding.werbungIV1.setOnPreparedListener { mp ->
@@ -81,7 +88,6 @@ class HomeFragment : Fragment() {
             mp.setVolume(0F, 0F)
             mp.start()
         }
-
 
     }
 

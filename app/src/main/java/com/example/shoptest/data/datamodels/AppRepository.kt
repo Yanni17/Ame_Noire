@@ -14,6 +14,7 @@ class AppRepository(private val api: ClothesApi, private val database: ClothesDa
     val allClothes = database.clothesDatabaseDao.getAll()
 
     suspend fun getClothes() {
+
         try {
 
             var clothes = api.retrofitService.getAllProducts()

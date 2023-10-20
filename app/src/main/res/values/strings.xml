@@ -32,6 +32,44 @@
     <string name="animation">articleImageTransition</string>
     <string name="erfolgreichWarenkorb">Artikel wurde erfolgreich in Ihr Warenkorb gelegt</string>
     <string name="bezahlen">BEZAHLEN</string>
-
+    <string name="suche">SUCHE</string>
+    <string name="suche1">Suche</string>
+    <string name="herren1">HERREN</string>
+    <string name="damen1">DAMEN</string>
+    <string name="elektronik1">ELEKTRONIK</string>
+    <string name="schmuck1">SCHMUCK</string>
+    <string name="produkt_details">PRODUKT DETAILS</string>
+    <string name="in_den_warenkorb">IN DEN WARENKORB</string>
+    <string name="beschreibung">BESCHREIBUNG</string>
+    <string name="favoriten2">Favoriten</string>
+    <string name="favoriten3">FAVORITEN</string>
+    <string name="warenkorb">Warenkorb</string>
+    <string name="warenkorb1">WARENKORB</string>
+    <string name="warenkorb2">Sie haben aktuell nichts im Warenkorb.</string>
+    <string name="profil">Profil</string>
+    <string name="bequem">Machs dir bequem…</string>
+    <string name="bestellungen">Meine Bestellungen</string>
+    <string name="angaben">Meine Angaben</string>
+    <string name="zahlungsmethoden">Zahlungsmethoden</string>
+    <string name="retouren">Meine Retouren</string>
+    <string name="hilfe">Hilfe?</string>
+    <string name="ausloggen">Ausloggen</string>
+    <string name="artikel">Artikel</string>
+    <string name="zuletzt_hinzugefuegt">Zuletzt Hinzugefügt</string>
+    <string name="preis_absteigend">Preis absteigend</string>
+    <string name="preis_aufsteigend">Preis aufsteigend</string>
+    <string name="lieferkosten">(ohne Liferkosten)</string>
+    <string name="anzahl">Anzahl:</string>
+    <string name="hinzufügen">HINZUFÜGEN</string>
+    <string name="berühmte">Angesehene Marken</string>
+    <string name="felder">Bitte füllen Sie alle Felder aus!</string>
+    <string name="passwort">Das Passwort muss mindestens 6 Zeichen lang sein.</string>
+    <string name="registrierung">Registrierung erfolgreich!</string>
+    <string name="e_mail">Die E-Mail-Adresse wird bereits verwendet.</string>
+    <string name="angemeldet">Erfolgreich Angemeldet!</string>
+    <string name="falsche_mail">Die eingegebene E-Mail ist nicht registriert.</string>
+    <string name="falsches_passwort">Falsches Passwort!</string>
+    <string name="fehler_anmeldung">Fehler bei der Anmeldung. Bitte versuchen Sie es erneut.</string>
+    <string name="erfolgreich_ausgeloggt">Sie haben sich erfolgreich ausgeloggt!</string>
 
 </resources>

@@ -47,7 +47,7 @@ class SearchFragment : Fragment() {
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
 
         // Ändere den Text des TextViews
-        titleTextView.text = "SUCHE"
+        titleTextView.text = (requireActivity().getString(R.string.suche))
 
         binding.imageView2.setImageResource(R.drawable.test31)
 

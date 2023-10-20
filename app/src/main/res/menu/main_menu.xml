@@ -5,21 +5,21 @@
         android:icon="@drawable/baseline_home_24"
         android:id="@+id/homeFragment" />
 
-    <item android:title="Suche"
+    <item android:title="@string/suche1"
         android:icon="@drawable/baseline_search_24"
         android:id="@+id/searchFragment"
         />
-    <item android:title="Favoriten"
+    <item android:title="@string/favoriten2"
         android:id="@+id/favoriteFragment"
         android:icon="@drawable/baseline_favorite_24"/>
 
-    <item android:title="Warenkorb"
+    <item android:title="@string/warenkorb"
         android:id="@+id/cashoutFragment"
         android:icon="@drawable/baseline_shopping_basket_24"/>
     <item
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Profil"
+        android:title="@string/profil"
         android:id="@+id/profilFragment"
         android:icon="@drawable/baseline_person_24"/>
 

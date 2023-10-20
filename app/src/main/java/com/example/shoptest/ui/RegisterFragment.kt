@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -33,10 +34,13 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mainActivity = activity as MainActivity
-        mainActivity.setToolbarTitle("")
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
+
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+
+        // Ändere den Text des TextViews
+        titleTextView.text = ("")
 
         // Um die Sichtbarkeit anszuschalten:
         val bottomNavigationView =

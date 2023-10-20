@@ -52,27 +52,26 @@ class ProductsFragment : Fragment() {
 
 
         when (kategorie) {
-            "Herren" -> viewModel.getAllHerren().observe(viewLifecycleOwner) {
+
+            "Herren","Men" -> viewModel.getAllHerren().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
-                titleTextView.text = "HERREN"
+                titleTextView.text = "${getString(R.string.herren1)}"
             }
 
-            "Damen" -> viewModel.getAllDamen().observe(viewLifecycleOwner) {
+            "Damen","Women" -> viewModel.getAllDamen().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
-                titleTextView.text = "DAMEN"
+                titleTextView.text = "${getString(R.string.damen1)}"
             }
 
-            "Elektronik" -> viewModel.getAllElectrics().observe(viewLifecycleOwner) {
+            "Elektronik","Electronics" -> viewModel.getAllElectrics().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
-                titleTextView.text = "ELEKTRONIK"
+                titleTextView.text = "${getString(R.string.elektronik1)}"
             }
 
-            "Schmuck" -> viewModel.getAllJewelry().observe(viewLifecycleOwner) {
+            "Schmuck","Jewelry" -> viewModel.getAllJewelry().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
-                titleTextView.text = "SCHMUCK"
+                titleTextView.text = "${getString(R.string.schmuck1)}"
             }
         }
-
     }
-
 }

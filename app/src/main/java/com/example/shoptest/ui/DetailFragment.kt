@@ -63,7 +63,7 @@ class DetailFragment : Fragment() {
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
 
         // Ändere den Text des TextViews
-        titleTextView.text = "PRODUKT DETAILS"
+        titleTextView.text = "${getString(R.string.produkt_details)}"
 
         //Argument holen
         var id = requireArguments().getInt("id")

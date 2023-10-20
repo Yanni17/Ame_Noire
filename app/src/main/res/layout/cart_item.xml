@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:text="Anzahl:"
+            android:text="@string/anzahl"
             app:layout_constraintEnd_toStartOf="@+id/IntTV"
             app:layout_constraintTop_toTopOf="parent" />
 

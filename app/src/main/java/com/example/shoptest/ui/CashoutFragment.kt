@@ -45,7 +45,7 @@ class CashoutFragment : Fragment() {
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
 
         // Ändere den Text des TextViews
-        titleTextView.text = "WARENKORB"
+        titleTextView.text = "${getString(R.string.warenkorb1)}"
 
         viewmodel.allClothes.observe(viewLifecycleOwner) { clothesList ->
             // Dieser Codeblock wird aufgerufen, wenn sich die Daten in allClothes ändern

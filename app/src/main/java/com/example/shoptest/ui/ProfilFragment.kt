@@ -63,11 +63,12 @@ class ProfilFragment : Fragment() {
             }
 
             binding.loggoutCV.setOnClickListener {
+
                 viewmodel.signOut()
 
                 val alertDialogBuilder = AlertDialog.Builder(requireContext())
-                alertDialogBuilder.setTitle("Ausloggen")
-                alertDialogBuilder.setMessage("Sie haben sich erfolgreich ausgeloggt!")
+                alertDialogBuilder.setTitle("${getString(R.string.ausloggen)}")
+                alertDialogBuilder.setMessage("${getString(R.string.erfolgreich_ausgeloggt)}")
                 alertDialogBuilder.setPositiveButton("OK") { dialog, _ ->
                     dialog.dismiss()
                 }

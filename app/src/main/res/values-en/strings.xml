@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Âme Noire</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="herren">Men</string>
+    <string name="damen">Women</string>
+    <string name="elektronik">Electronics</string>
+    <string name="schmuck">Jewelry</string>
+    <string name="favoriten">Your favorites are currently empty.</string>
+    <string name="register">Register</string>
+    <string name="einloggen">Log in</string>
+    <string name="welcome">Welcome!</string>
+    <string name="already_signup"> Already registered?</string>
+    <string name="Passwort">Password</string>
+    <string name="email_adress">E-mail address</string>
+    <string name="google_login">Continue with Google</string>
+    <string name="apple_login">Continue with Apple</string>
+    <string name="noch_keinen_Account">No account yet?</string>
+    <string name="name">Name</string>
+    <string name="telefonnummer">Phone number</string>
+    <string name="exampleEmail">example@web.de</string>
+    <string name="examplePhoneNumber">01234567891</string>
+    <string name="exampleName">Jonny Jones</string>
+    <string name="welcomeText">Explore our app, discover our latest collections and find your new favorite outfit.</string>
+    <string name="welcomeSplash">WELCOME</string>
+    <string name="ohneAnmeldung">Register or log in to see what you have already saved.</string>
+    <string name="keineSorge">Dont worry!</string>
+    <string name="hallo">Hello,</string>
+    <string name="leereTasche">Theres nothing in your bag.</string>
+    <string name="anmeldenFuerCashout">Register or log in to see what you already have in your bag.</string>
+    <string name="noProfil">Renew your current orders and all your details whenever you want.</string>
+    <string name="animation">articleImageTransition</string>
+    <string name="erfolgreichWarenkorb">Item was successfully added to your shopping cart</string>
+    <string name="bezahlen">CHECKOUT</string>
+    <string name="suche">SEARCH</string>
+    <string name="suche1">Search</string>
+    <string name="herren1">MEN</string>
+    <string name="damen1">WOMEN</string>
+    <string name="elektronik1">ELECTRONICS</string>
+    <string name="schmuck1">JEWELRY</string>
+    <string name="produkt_details">PRODUCT DETAILS</string>
+    <string name="in_den_warenkorb">ADD TO CART</string>
+    <string name="beschreibung">DESCRIPTION</string>
+    <string name="favoriten2">Favorites</string>
+    <string name="favoriten3">FAVORITES</string>
+    <string name="warenkorb">Cart</string>
+    <string name="warenkorb1">CART</string>
+    <string name="warenkorb2">You currently have nothing in your Cart.</string>
+    <string name="profil">Profile</string>
+    <string name="bequem">Get comfortable…</string>
+    <string name="bestellungen">All orders</string>
+    <string name="angaben">Details</string>
+    <string name="zahlungsmethoden">Payment methods</string>
+    <string name="retouren">Returns</string>
+    <string name="hilfe">Help?</string>
+    <string name="ausloggen">Log out</string>
+    <string name="artikel">Article</string>
+    <string name="zuletzt_hinzugefuegt">Last added</string>
+    <string name="preis_absteigend">Price descending</string>
+    <string name="preis_aufsteigend">Price ascending</string>
+    <string name="lieferkosten">(without delivery costs)</string>
+    <string name="anzahl">QTY:</string>
+    <string name="hinzufügen">ADD TO CART</string>
+    <string name="berühmte">Most popular brands</string>
+    <string name="felder">Please fill in all fields!</string>
+    <string name="passwort">The password must be at least 6 characters long.</string>
+    <string name="registrierung">Registration successful!</string>
+    <string name="e_mail">The email address is already in use.</string>
+    <string name="angemeldet">Successfully Logged In!</string>
+    <string name="falsche_mail">The entered e-mail is not registered.</string>
+    <string name="falsches_passwort">Wrong password!</string>
+    <string name="fehler_anmeldung">Error during registration. Please try again.</string>
+    <string name="erfolgreich_ausgeloggt">You have successfully logged out!</string>
+
+
+</resources>

@@ -46,21 +46,28 @@ class FavoriteFragment : Fragment() {
         toolbar.visibility = View.VISIBLE
 
 
-        var adapter = FavoriteAdapter(emptyList(), viewModel,requireContext())
+        var adapter = FavoriteAdapter(emptyList(), viewModel, requireContext())
         binding.favoriteRV.adapter = adapter
 
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
 
         // Ändere den Text des TextViews
-        titleTextView.text = "FAVORITEN"
+        titleTextView.text = "${getString(R.string.favoriten3)}"
 
-        val spinner = requireActivity().findViewById<Spinner>(R.id.spinner)
-        val spinnerItems = arrayOf("Zuletzt Hinzugefügt", "Preis absteigend", "Preis aufsteigend")
-        val adapter2 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
+        val spinner = binding.spinner
+
+        val spinnerItems = arrayOf(
+            "${getString(R.string.zuletzt_hinzugefuegt)}",
+            "${getString(R.string.preis_absteigend)}",
+            "${getString(R.string.preis_aufsteigend)}"
+        )
+
+        val adapter2 =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
         spinner.adapter = adapter2
 
 
-        if (viewModel.firebaseAuth.currentUser != null){
+        if (viewModel.firebaseAuth.currentUser != null) {
             binding.favoriteRV.visibility = View.VISIBLE
             viewModel.getAllLiked().observe(viewLifecycleOwner) {
                 adapter.update(it)
@@ -75,11 +82,11 @@ class FavoriteFragment : Fragment() {
                     binding.Int2TV.visibility = View.VISIBLE
                     binding.aktuelleFavTV.visibility = View.VISIBLE
                     binding.Int2TV.text = adapter.itemCount.toString()
-                    binding.aktuelleFavTV.text = "Artikel"
+                    binding.aktuelleFavTV.text = "${getString(R.string.artikel)}"
                     binding.spinner.visibility = View.VISIBLE
                 }
             }
-        }else {
+        } else {
 
             binding.favoriteCV.visibility = View.VISIBLE
 
