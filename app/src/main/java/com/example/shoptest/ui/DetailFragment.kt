@@ -117,7 +117,7 @@ class DetailFragment : Fragment() {
                 } else {
                     val toast = Toast.makeText(
                         requireContext(),
-                        "Sie sind nicht angemeldet.",
+                        "${requireContext().getString(R.string.notLoggedIn)}",
                         Toast.LENGTH_LONG
                     )
                     toast.show()

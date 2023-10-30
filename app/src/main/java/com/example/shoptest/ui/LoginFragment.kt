@@ -32,20 +32,24 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
 
+
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+
 
         // Ändere den Text des TextViews
         titleTextView.text = ("")
+
 
         // Um die Sichtbarkeit auszuschalten:
         val bottomNavigationView =
             requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.GONE
 
-        // Icon setzen
+
         binding.iconIV.setImageResource(R.drawable.app_icon2)
 
         binding.loginBTN.setOnClickListener {
@@ -63,7 +67,6 @@ class LoginFragment : Fragment() {
         binding.registerTV.setOnClickListener {
             it.findNavController().navigate(R.id.registerFragment2)
         }
-
     }
 
 }

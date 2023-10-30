@@ -73,13 +73,12 @@ class ProduktAdapter(
             } else {
                 val toast = Toast.makeText(
                     context,
-                    "Sie müssen sich erst Anmelden!",
+                    context.getString(R.string.notLoggedIn),
                     Toast.LENGTH_LONG
                 )
                 toast.show()
             }
         }
-
 
         holder.binding.cardView1.setOnClickListener { view ->
 

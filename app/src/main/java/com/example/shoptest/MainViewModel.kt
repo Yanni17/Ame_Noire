@@ -17,6 +17,7 @@ import com.example.shoptest.data.datamodels.models.CartItem
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.data.datamodels.models.Kategorie
 import com.example.shoptest.data.datamodels.models.Profile
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -287,6 +288,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun startScaleAnimation(view: View) {
         val animation = AnimationUtils.loadAnimation(getApplication(), R.anim.scale_up)
         view.startAnimation(animation)
+    }
+
+    fun buttomBadgesIncrease(bottomNavigationView: BottomNavigationView,currentInt: Int){
+        var currentInt = currentInt
+        currentInt++
+        var int = bottomNavigationView.getOrCreateBadge(R.id.cashoutFragment).number
+        int = currentInt
+
+    }
+
+    fun buttomBadgesRemove(bottomNavigationView: BottomNavigationView,currentInt: Int){
+        var int = bottomNavigationView.getOrCreateBadge(R.id.cashoutFragment).number
     }
 
 

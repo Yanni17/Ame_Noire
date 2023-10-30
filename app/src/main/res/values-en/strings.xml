@@ -62,7 +62,7 @@
     <string name="lieferkosten">(without delivery costs)</string>
     <string name="anzahl">QTY:</string>
     <string name="hinzufügen">ADD TO CART</string>
-    <string name="berühmte">Most popular brands</string>
+    <string name="berühmte">Popular Brands</string>
     <string name="felder">Please fill in all fields!</string>
     <string name="passwort">The password must be at least 6 characters long.</string>
     <string name="registrierung">Registration successful!</string>
@@ -72,6 +72,7 @@
     <string name="falsches_passwort">Wrong password!</string>
     <string name="fehler_anmeldung">Error during registration. Please try again.</string>
     <string name="erfolgreich_ausgeloggt">You have successfully logged out!</string>
+    <string name="notLoggedIn">You are not logged in.</string>
 
 
 </resources>

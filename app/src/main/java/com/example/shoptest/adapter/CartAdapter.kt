@@ -11,11 +11,13 @@ import com.example.shoptest.R
 import com.example.shoptest.data.datamodels.models.CartItem
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.CartItemBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class CartAdapter(
     private var dataset: List<Clothes>,
-    private var viewModel: MainViewModel
+    private var viewModel: MainViewModel,
+    private var bottomNavigationView: BottomNavigationView
 ) : RecyclerView.Adapter<CartAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root)

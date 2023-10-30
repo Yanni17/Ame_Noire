@@ -12,6 +12,7 @@ import android.widget.VideoView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
 import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
@@ -46,12 +47,15 @@ class HomeFragment : Fragment() {
             requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
 
+        //Badges
+        //bottomNavigationView.getOrCreateBadge(R.id.cashoutFragment).number
+
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.GONE
 
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
 
-        // Text der TextViews
+        // Text der TextView-Toolbar
         titleTextView.text = "HOME"
 
         var adapter = ProduktAdapter(emptyList(), viewModel, requireContext())
@@ -73,7 +77,7 @@ class HomeFragment : Fragment() {
         binding.werbung3IV.setImageResource(R.drawable.pegador)
         binding.werbung4IV.setImageResource(R.drawable.peso1)
 
-        val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video2}"
+        val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video3}"
         binding.werbungIV1.setVideoURI(Uri.parse(videoPath))
 
 

@@ -18,6 +18,7 @@ import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.data.datamodels.models.Profile
 import com.example.shoptest.databinding.FragmentCashoutBinding
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CashoutFragment : Fragment() {
 
@@ -36,7 +37,10 @@ class CashoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cartAdapter = CartAdapter(emptyList(), viewmodel)
+        val bottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
+        val cartAdapter = CartAdapter(emptyList(), viewmodel,bottomNavigationView)
         binding.cartRV.adapter = cartAdapter
 
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
@@ -103,6 +107,7 @@ class CashoutFragment : Fragment() {
                 }
             }
         }
+
 
     }
 
