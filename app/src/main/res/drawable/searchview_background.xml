@@ -2,7 +2,7 @@
 <!-- res/drawable/search_view_background.xml -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="#232323" /> <!-- Hintergrundfarbe -->
-    <corners android:radius="8dp" /> <!-- Eckenradius -->
+    <corners android:radius="1dp" /> <!-- Eckenradius -->
     <stroke
         android:width="2dp"
     android:color="@color/transparent" />

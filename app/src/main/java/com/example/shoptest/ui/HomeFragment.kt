@@ -6,22 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.VideoView
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
-import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.ProduktAdapter
 import com.example.shoptest.databinding.FragmentHomeBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.Timer
-import java.util.TimerTask
+
 
 class HomeFragment : Fragment() {
 
@@ -46,9 +39,6 @@ class HomeFragment : Fragment() {
         val bottomNavigationView =
             requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
-
-        //Badges
-        //bottomNavigationView.getOrCreateBadge(R.id.cashoutFragment).number
 
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.GONE

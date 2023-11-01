@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
-import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.data.datamodels.models.Profile
@@ -66,30 +63,16 @@ class ProfilFragment : Fragment() {
 
                 viewmodel.signOut()
 
-                val alertDialogBuilder = AlertDialog.Builder(requireContext())
-                alertDialogBuilder.setTitle("${getString(R.string.ausloggen)}")
-                alertDialogBuilder.setMessage("${getString(R.string.erfolgreich_ausgeloggt)}")
-                alertDialogBuilder.setPositiveButton("OK") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                val alertDialog = alertDialogBuilder.create()
-                alertDialog.show()
-
-                val navOptions = NavOptions.Builder()
-                    .setEnterAnim(R.anim.slide_in_right)
-                    .setExitAnim(R.anim.slide_out_left)
-                    .build()
-
-                it.findNavController().navigate(R.id.homeFragment, null, navOptions)
+                it.findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToHomeFragment())
 
             }
         } else {
             binding.noaccountCV.visibility = View.VISIBLE
             binding.anmelde2BTN.setOnClickListener {
-                it.findNavController().navigate(R.id.loginFragment)
+                it.findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToLoginFragment())
             }
             binding.registrieren2BTN.setOnClickListener {
-                it.findNavController().navigate(R.id.registerFragment2)
+                it.findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToRegisterFragment2())
             }
         }
 

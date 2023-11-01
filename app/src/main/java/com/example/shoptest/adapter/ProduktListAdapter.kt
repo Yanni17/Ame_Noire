@@ -2,16 +2,11 @@ package com.example.shoptest.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.ScaleAnimation
 import android.widget.Toast
-import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
-
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -20,7 +15,6 @@ import com.example.shoptest.R
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.ProduktItemBinding
 import com.example.shoptest.ui.ProductsFragmentDirections
-import com.squareup.moshi.internal.Util
 
 class ProduktListAdapter(
     var viewModel: MainViewModel,
@@ -62,7 +56,7 @@ class ProduktListAdapter(
                     } else {
                         val toast = Toast.makeText(
                             context,
-                            "Sie müssen sich erst Anmelden!",
+                            "${context.getString(R.string.notLoggedIn)}",
                             Toast.LENGTH_LONG
                         )
                         toast.show()
@@ -72,11 +66,9 @@ class ProduktListAdapter(
                 }
 
                 binding.ivImage.setOnClickListener { view ->
-
-                    val extras = FragmentNavigatorExtras(binding.ivImage to "image_big")
                     val action =
                         ProductsFragmentDirections.actionProductsFragmentToDetailFragment(item.id)
-                    view.findNavController().navigate(action, extras)
+                    view.findNavController().navigate(action)
 
                 }
             }

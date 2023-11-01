@@ -1,12 +1,15 @@
 package com.example.shoptest.ui
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -15,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
@@ -29,17 +33,6 @@ class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailBinding
     private val viewModel: MainViewModel by activityViewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // Im Zielfragment
-        val inflater = TransitionInflater.from(context)
-        val transition = inflater.inflateTransition(android.R.transition.move)
-        sharedElementEnterTransition = transition
-        sharedElementReturnTransition = transition
-
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,26 +83,17 @@ class DetailFragment : Fragment() {
 
                     viewModel.addToCart(item.id)
 
-                    val message = requireContext().getString(R.string.erfolgreichWarenkorb)
-                    val snackbar = Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT)
+                    val alertDialog = AlertDialog.Builder(requireContext())
+                        .setTitle("Erfolgreich")
+                        .setMessage("Artikel wurde erfolgreich zum Warenkorb hinzugefügt.")
+                        .create()
+                    alertDialog.show()
 
-                    snackbar.view.setBackgroundColor(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.black
-                        )
-                    )
-                    snackbar.setBackgroundTint(
-                        ContextCompat.getColor(
-                            requireContext(),
-                            R.color.grey
-                        )
-                    )
-                    val textView =
-                        snackbar.view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
-                    textView.setTextColor(requireContext().getColor(R.color.text))
-
-                    snackbar.show()
+                    // 1.5sek verschwindet das Fenster
+                    val handler = Handler()
+                    handler.postDelayed({
+                        alertDialog.dismiss()
+                    }, 1500) // 1000 Millisekunden entsprechen 1 Sekunde
 
                     it.findNavController().navigateUp()
 
@@ -121,6 +105,7 @@ class DetailFragment : Fragment() {
                         Toast.LENGTH_LONG
                     )
                     toast.show()
+                    findNavController().navigate(R.id.homeFragment)
                 }
 
             }
@@ -137,10 +122,12 @@ class DetailFragment : Fragment() {
                 } else {
                     val toast = Toast.makeText(
                         requireContext(),
-                        "Sie sind nicht angemeldet.",
+                        "${requireContext().getString(R.string.notLoggedIn)}",
                         Toast.LENGTH_LONG
+
                     )
                     toast.show()
+                    findNavController().navigate(R.id.homeFragment)
                 }
 
 

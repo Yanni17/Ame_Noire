@@ -7,11 +7,19 @@
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorSurface">@color/background</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAnimationStyle">@style/animation</item>
+
 
     </style>
 
     <style name="CustomBottomNavMenuActiveItemIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/grey</item>
     </style>
+    
+    <style name="animation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
 
 </resources>

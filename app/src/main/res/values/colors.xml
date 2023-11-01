@@ -8,6 +8,8 @@
     <color name="background">#151515</color>
 
     <color name="transparent">#00309106</color>
+    <color name="transparent2">#12151515</color>
+
 
     <color name="bottomNavigationActiveColor">@color/gold</color>
     <color name="bottomNavigationInactiveColor">@color/white</color>

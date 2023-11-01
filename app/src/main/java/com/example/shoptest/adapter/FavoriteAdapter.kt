@@ -1,7 +1,6 @@
 package com.example.shoptest.adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
-import com.example.shoptest.data.datamodels.models.CartItem
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.FavoriteItemBinding
 import com.example.shoptest.ui.FavoriteFragmentDirections

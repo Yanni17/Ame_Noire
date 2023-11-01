@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
-import com.example.shoptest.data.datamodels.models.CartItem
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.CartItemBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView

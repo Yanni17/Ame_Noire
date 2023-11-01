@@ -166,7 +166,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         var profile = it.toObject(Profile::class.java)
                         if (profile?.likedList != null) {
                             for (item in profile!!.likedList) {
-                                addLikedItem(item)
                                 updateLike(true, item)
                             }
                         }
@@ -289,18 +288,4 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val animation = AnimationUtils.loadAnimation(getApplication(), R.anim.scale_up)
         view.startAnimation(animation)
     }
-
-    fun buttomBadgesIncrease(bottomNavigationView: BottomNavigationView,currentInt: Int){
-        var currentInt = currentInt
-        currentInt++
-        var int = bottomNavigationView.getOrCreateBadge(R.id.cashoutFragment).number
-        int = currentInt
-
-    }
-
-    fun buttomBadgesRemove(bottomNavigationView: BottomNavigationView,currentInt: Int){
-        var int = bottomNavigationView.getOrCreateBadge(R.id.cashoutFragment).number
-    }
-
-
 }
