@@ -1,8 +1,11 @@
+
 package com.example.shoptest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -16,9 +19,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val navHostFragment: NavHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
+
+
+        navController.currentBackStack.value.find { it.destination.id == R.id.startFragment }?.let {
+            Log.d("IDS", "${it.destination.id},${R.id.startFragment}")
+            navController.popBackStack()
+        }
+
 
         binding.bottomNavigationView.setupWithNavController(navController)
 
@@ -29,37 +40,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
 
-            when (item.itemId) {
-                R.id.homeFragment -> {
-                    navController.popBackStack(R.id.homeFragment, false)
-                    false
+            Log.d(
+                "Stack",
+                navController.currentBackStack.value.joinToString { it.destination.displayName + "\n" })
 
-                }
-
-                R.id.cashoutFragment -> {
-                    navController.navigate(R.id.cashoutFragment)
-                    true
-                }
-
-                R.id.searchFragment -> {
-                    navController.navigate(R.id.searchFragment)
-                    true
-                }
-
-                R.id.favoriteFragment -> {
-                    navController.navigate(R.id.favoriteFragment)
-                    true
-                }
-
-                R.id.profilFragment -> {
-                    navController.navigate(R.id.profilFragment)
-                    true
-                }
-
-                else -> {
-                    NavigationUI.onNavDestinationSelected(item, navController)
-                }
+            if (navController.currentDestination!!.id != item.itemId) {
+                navController.navigate(item.itemId)
             }
+            false
+
         }
     }
 }
+

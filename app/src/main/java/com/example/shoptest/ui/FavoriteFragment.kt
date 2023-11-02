@@ -91,9 +91,11 @@ class FavoriteFragment : Fragment() {
             binding.favoriteCV.visibility = View.VISIBLE
 
             binding.anmeldeBTN.setOnClickListener {
+                it.findNavController().popBackStack(R.id.loginFragment,false)
                 it.findNavController().navigate(R.id.loginFragment)
             }
             binding.registrierenBTN.setOnClickListener {
+                it.findNavController().popBackStack(R.id.registerFragment2,false)
                 it.findNavController().navigate(R.id.registerFragment2)
             }
         }

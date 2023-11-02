@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.data.datamodels.models.Profile
@@ -62,17 +64,20 @@ class ProfilFragment : Fragment() {
             binding.loggoutCV.setOnClickListener {
 
                 viewmodel.signOut()
-
-                it.findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToHomeFragment())
+                it.findNavController().popBackStack(R.id.homeFragment,false)
+                it.findNavController().navigate(R.id.homeFragment)
 
             }
         } else {
             binding.noaccountCV.visibility = View.VISIBLE
+
             binding.anmelde2BTN.setOnClickListener {
-                it.findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToLoginFragment())
+                it.findNavController().popBackStack()
+                it.findNavController().navigate(R.id.loginFragment)
             }
             binding.registrieren2BTN.setOnClickListener {
-                it.findNavController().navigate(ProfilFragmentDirections.actionProfilFragmentToRegisterFragment2())
+                it.findNavController().popBackStack()
+                it.findNavController().navigate(R.id.registerFragment2)
             }
         }
 

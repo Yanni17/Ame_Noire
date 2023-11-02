@@ -1,11 +1,15 @@
 package com.example.shoptest.ui
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import com.example.shoptest.MainViewModel
@@ -43,11 +47,6 @@ class HomeFragment : Fragment() {
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.GONE
 
-        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-
-        // Text der TextView-Toolbar
-        titleTextView.text = "HOME"
-
         var adapter = ProduktAdapter(emptyList(), viewModel, requireContext())
         binding.herrenRV.adapter = adapter
 
@@ -71,11 +70,29 @@ class HomeFragment : Fragment() {
         binding.werbungIV1.setVideoURI(Uri.parse(videoPath))
 
 
-        // Vorpuffern des Videos
         binding.werbungIV1.setOnPreparedListener { mp ->
             mp.setVolume(0F, 0F)
             mp.start()
+
+            // Erstelle eine Animation für die Transparenz
+            val fadeOut = AlphaAnimation(1.2f, 0.0f)
+            fadeOut.duration = 3000
+
+            // Füge eine Listener hinzu, um die View nach Abschluss der Animation unsichtbar zu machen
+            fadeOut.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                }
+                override fun onAnimationEnd(animation: Animation?) {
+                    binding.imageView.visibility = View.GONE
+                }
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+
+            // Starte die Animation
+            binding.imageView.startAnimation(fadeOut)
         }
+
+
 
         // Optional: Überwache den Abschluss des Videos und wiederhole es bei Bedarf
         binding.werbungIV1.setOnCompletionListener { mp ->

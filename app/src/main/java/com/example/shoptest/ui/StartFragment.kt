@@ -47,6 +47,7 @@ class StartFragment : Fragment() {
         // Die Aktion ausführen, nachdem die Verzögerung abgelaufen ist
         handler.postDelayed({
             findNavController().navigate(R.id.homeFragment)
+
         }, delayMillis)
 
 

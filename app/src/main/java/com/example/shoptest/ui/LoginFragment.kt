@@ -60,11 +60,13 @@ class LoginFragment : Fragment() {
 
         viewmodel.user.observe(viewLifecycleOwner) {
             if (it != null) {
+                findNavController().popBackStack()
                 findNavController().navigate(R.id.homeFragment)
             }
         }
 
         binding.registerTV.setOnClickListener {
+            it.findNavController().popBackStack()
             it.findNavController().navigate(R.id.registerFragment2)
         }
     }
