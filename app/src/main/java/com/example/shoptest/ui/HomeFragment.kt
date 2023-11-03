@@ -26,6 +26,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
+    private lateinit var bottomNavigationView: BottomNavigationView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,16 +35,25 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel.loadData()
+
+        bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+
+        bottomNavigationView.visibility = View.VISIBLE
+
+        viewModel.updateBadge(bottomNavigationView)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Um die Sichtbarkeit anszuschalten:
-        val bottomNavigationView =
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        bottomNavigationView.visibility = View.VISIBLE
+//        // Um die Sichtbarkeit anszuschalten:
+//        val bottomNavigationView =
+//            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+//        bottomNavigationView.visibility = View.VISIBLE
+//
+//        viewModel.updateBadge(bottomNavigationView)
 
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.GONE
@@ -75,7 +86,7 @@ class HomeFragment : Fragment() {
             mp.start()
 
             // Erstelle eine Animation für die Transparenz
-            val fadeOut = AlphaAnimation(1.2f, 0.0f)
+            val fadeOut = AlphaAnimation(1.8f, 0.0f)
             fadeOut.duration = 3000
 
             // Füge eine Listener hinzu, um die View nach Abschluss der Animation unsichtbar zu machen
@@ -92,8 +103,6 @@ class HomeFragment : Fragment() {
             binding.imageView.startAnimation(fadeOut)
         }
 
-
-
         // Optional: Überwache den Abschluss des Videos und wiederhole es bei Bedarf
         binding.werbungIV1.setOnCompletionListener { mp ->
             mp.setVolume(0F, 0F)
@@ -101,5 +110,7 @@ class HomeFragment : Fragment() {
         }
 
     }
+
+
 
 }

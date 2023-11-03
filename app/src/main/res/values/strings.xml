@@ -72,5 +72,7 @@
     <string name="fehler_anmeldung">Fehler bei der Anmeldung. Bitte versuchen Sie es erneut.</string>
     <string name="erfolgreich_ausgeloggt">Sie haben sich erfolgreich ausgeloggt!</string>
     <string name="notLoggedIn">Sie sind nicht angemeldet.</string>
+    <string name="erfolgreich_hinzu">Artikel erfolgreich hinzugefügt.</string>
+    <string name="abbrechen">Abbrechen</string>
 
 </resources>

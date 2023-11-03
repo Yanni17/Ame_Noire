@@ -2,17 +2,23 @@ package com.example.shoptest.adapter
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Handler
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.FragmentContainer
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.data.datamodels.models.Clothes
@@ -48,20 +54,6 @@ class ProduktAdapter(
             binding.preisTV.text = String.format("%.2f", item.price) + " €"
         }
 
-//        var dialog = Dialog(context)
-//        dialog.setContentView (R.layout.custom_layout)
-//        dialog.window?.setBackgroundDrawable(AppCompatResources.getDrawable(context,R.drawable.dialog_background))
-//        dialog.window?.setLayout (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-//        dialog.setCancelable(true)
-//
-//        var cancelBTN = dialog.findViewById<MaterialButton>(R.id.cancelBTN)
-//        var loginBTN = dialog.findViewById<MaterialButton>(R.id.loginBTN1)
-//
-//        cancelBTN.setOnClickListener {
-//            holder.binding.root.findNavController().navigate(R.id.homeFragment)
-//            dialog.dismiss()
-//        }
-
 
         if (item.isLiked) {
             holder.binding.likeBTN.setImageResource(R.drawable.baseline_favorite_24)
@@ -82,13 +74,52 @@ class ProduktAdapter(
                 viewModel.updateLike(!item.isLiked, item.id)
 
             } else {
-                //dialog.show()
-                val toast = Toast.makeText(
-                    context,
-                    context.getString(R.string.notLoggedIn),
-                    Toast.LENGTH_LONG
-                )
-                toast.show()
+
+                // Aufblasen des Layouts
+                val inflater = LayoutInflater.from(context)
+                val customView = inflater.inflate(R.layout.custom_layout, null)
+
+                val container = (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
+                container.visibility = View.VISIBLE
+
+
+                // Erstellen und Anzeigen des AlertDialog
+                val alertDialog = AlertDialog.Builder(context)
+                    .setView(customView)
+                    .create()
+
+                alertDialog.setCancelable(false)
+
+                // Setze die Position des Dialogs oben auf dem Bildschirm
+                alertDialog.window?.setGravity(Gravity.CENTER)
+
+                // Setze die Anfangsalpha auf 0 (Fenster ist unsichtbar)
+                customView.alpha = 0.7f
+                alertDialog.show()
+
+                // Erzeuge eine Einblendungsanimation
+                customView.animate()
+                    .alpha(1f)
+                    .setDuration(1000)
+                    .setListener(null)
+
+                var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN1)
+                var cancelBtn = customView.findViewById<MaterialButton>(R.id.cancelBTN)
+
+                loginBtn.setOnClickListener {
+                    holder.binding.root.findNavController().navigate(R.id.loginFragment)
+                    alertDialog.dismiss()
+                    container.visibility = View.INVISIBLE
+
+                }
+
+                cancelBtn.setOnClickListener {
+                    alertDialog.dismiss()
+                    container.visibility = View.INVISIBLE
+
+                }
+
+
             }
         }
 

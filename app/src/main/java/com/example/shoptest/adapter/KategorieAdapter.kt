@@ -36,8 +36,6 @@ class KategorieAdapter(
 
         holder.binding.textView2.text = item.name
 
-
-
         holder.binding.kategorieCV.setOnClickListener {
 
             val action = SearchFragmentDirections.actionSearchFragmentToProductsFragment(item.name)
@@ -49,9 +47,6 @@ class KategorieAdapter(
 
             it.findNavController().navigate(action, navOptions)
         }
-
-        //it.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToProductsFragment(item.name))
-
 
     }
 

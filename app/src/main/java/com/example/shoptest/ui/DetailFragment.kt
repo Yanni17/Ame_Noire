@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.transition.TransitionInflater
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,9 +54,8 @@ class DetailFragment : Fragment() {
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
 
-        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-
         // Ändere den Text des TextViews
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
         titleTextView.text = "${getString(R.string.produkt_details)}"
 
         //Argument holen
@@ -82,20 +82,35 @@ class DetailFragment : Fragment() {
                 if (viewModel.firebaseAuth.currentUser != null) {
 
                     viewModel.addToCart(item.id)
+                    viewModel.updateBadge(bottomNavigationView)
 
+                    // Aufblasen des Layouts
+                    val inflater = LayoutInflater.from(context)
+                    val customView = inflater.inflate(R.layout.custom_alert, null)
+
+                    // Erstellen und Anzeigen des AlertDialog
                     val alertDialog = AlertDialog.Builder(requireContext())
-                        .setTitle("Erfolgreich")
-                        .setMessage("Artikel wurde erfolgreich zum Warenkorb hinzugefügt.")
+                        .setView(customView)
                         .create()
+
+                    // Setze die Position des Dialogs oben auf dem Bildschirm
+                    alertDialog.window?.setGravity(Gravity.TOP)
+
+                    // Setze die Anfangsalpha auf 0 (Fenster ist unsichtbar)
+                    customView.alpha = 0.3f
                     alertDialog.show()
 
-                    // 1.5sek verschwindet das Fenster
+                    // Erzeuge eine Einblendungsanimation
+                    customView.animate()
+                        .alpha(1f)
+                        .setDuration(1000)
+                        .setListener(null)
+
+                    // 2 Sekunden warten und das Fenster verschwinden lassen
                     val handler = Handler()
                     handler.postDelayed({
                         alertDialog.dismiss()
-                    }, 1500) // 1000 Millisekunden entsprechen 1 Sekunde
-
-                    it.findNavController().navigateUp()
+                    }, 3000)
 
 
                 } else {
@@ -105,7 +120,6 @@ class DetailFragment : Fragment() {
                         Toast.LENGTH_LONG
                     )
                     toast.show()
-                    findNavController().navigate(R.id.homeFragment)
                 }
 
             }
@@ -124,12 +138,10 @@ class DetailFragment : Fragment() {
                         requireContext(),
                         "${requireContext().getString(R.string.notLoggedIn)}",
                         Toast.LENGTH_LONG
-
                     )
                     toast.show()
-                    findNavController().navigate(R.id.homeFragment)
-                }
 
+                }
 
             }
 

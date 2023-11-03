@@ -36,10 +36,7 @@ class LoginFragment : Fragment() {
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
 
-
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-
-
         // Ändere den Text des TextViews
         titleTextView.text = ("")
 
@@ -56,6 +53,7 @@ class LoginFragment : Fragment() {
             val email = binding.loginMailET.text.toString()
             val password = binding.loginPwET.text.toString()
             viewmodel.signIn(email, password)
+
         }
 
         viewmodel.user.observe(viewLifecycleOwner) {

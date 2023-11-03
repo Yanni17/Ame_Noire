@@ -2,6 +2,7 @@ package com.example.shoptest
 
 import ClothesApi
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -29,13 +30,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(private val application: Application) : AndroidViewModel(application) {
 
     // Firestore - Firebase.
     val firebaseAuth = FirebaseAuth.getInstance()
     val firestore = FirebaseFirestore.getInstance()
     var listOfClothes = mutableListOf<Int>()
     var listOfCartItems = mutableListOf<CartItem>()
+
     private val _user: MutableLiveData<FirebaseUser?> = MutableLiveData()
     val user: LiveData<FirebaseUser?>
         get() = _user
@@ -62,7 +64,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     //FIREBASE_
-
     fun setupUserEnv() {
 
         _user.value = firebaseAuth.currentUser
@@ -76,11 +77,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     listOfCartItems = cartList!!.toMutableList()
                     val likedList = profile?.likedList
                     listOfClothes = likedList!!.toMutableList()
+
                 }
             }
         }
     }
-
     fun signUp(email: String, password: String, name: String, telefonnummer: String) {
 
         if (email.isEmpty() || password.isEmpty() || name.isEmpty() || telefonnummer.isEmpty()) {
@@ -92,6 +93,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             )
             toast.show()
             return
+
         } else if (password.length < 6) {
             val toast = Toast.makeText(
                 getApplication(),
@@ -129,7 +131,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
-
     fun signOut() {
 
         if (listOfClothes != null) {
@@ -142,7 +143,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         listOfCartItems.clear()
         _user.value = firebaseAuth.currentUser
     }
-
     fun signIn(email: String, password: String) {
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -216,13 +216,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
             .update("likedList", listOfClothes)
     }
-
     fun removeLikedItem(id: Int) {
         listOfClothes.remove(id)
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
             .update("likedList", listOfClothes)
     }
-
     fun removeFromCart(productId: Int) {
 
         val existingItem = listOfCartItems.find { it.productId == productId }
@@ -236,8 +234,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 .update("cartList", listOfCartItems)
         }
     }
-
-
     fun addToCart(productId: Int) {
 
         val existingItem = listOfCartItems.find { it.productId == productId }
@@ -253,39 +249,47 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     //ROOM_
-
     fun getAllHerren(): LiveData<List<Clothes>> {
         return repository.getAllHerren()
     }
-
     fun getAllDamen(): LiveData<List<Clothes>> {
         return repository.getAllDamen()
     }
-
     fun getAllElectrics(): LiveData<List<Clothes>> {
         return repository.getAllElectrics()
     }
-
     fun getAllJewelry(): LiveData<List<Clothes>> {
         return repository.getAllJewelry()
     }
-
     fun getAllLiked(): LiveData<List<Clothes>> {
         return repository.getAllLiked()
     }
-
     fun updateLike(liked: Boolean, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateLike(liked, id)
         }
     }
-
     fun getDetail(id: Int): LiveData<Clothes> {
         return repository.getDetail(id)
     }
 
+
+    // UTILS
     fun startScaleAnimation(view: View) {
         val animation = AnimationUtils.loadAnimation(getApplication(), R.anim.scale_up)
         view.startAnimation(animation)
+    }
+    fun updateBadge(bottomNavigationView: BottomNavigationView){
+
+        var badge = bottomNavigationView.getOrCreateBadge(R.id.cashoutFragment)
+
+        if (listOfCartItems.sumOf { it.quantity } < 1){
+            badge.isVisible = false
+        }else {
+            badge.isVisible = true
+            badge.number = listOfCartItems.sumOf { it.quantity }
+            badge.backgroundColor = getApplication<Application>().getColor(R.color.gold)
+        }
+
     }
 }

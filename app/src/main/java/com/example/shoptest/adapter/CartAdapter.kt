@@ -42,11 +42,12 @@ class CartAdapter(
         var cartList = viewModel.listOfCartItems
         var produkt = cartList.find { it.productId == item.id }
 
-        Log.e("Cartlist", "$cartList")
         holder.binding.IntTV.text = produkt!!.quantity.toString()
 
-        holder.binding.imageButton3.setOnClickListener {
+        holder.binding.deleteBTN.setOnClickListener {
+
             viewModel.removeFromCart(item.id)
+            viewModel.updateBadge(bottomNavigationView)
 
             it.findNavController().navigate(R.id.cashoutFragment)
         }

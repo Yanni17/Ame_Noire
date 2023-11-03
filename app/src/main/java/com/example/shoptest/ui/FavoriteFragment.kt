@@ -46,7 +46,7 @@ class FavoriteFragment : Fragment() {
         toolbar.visibility = View.VISIBLE
 
 
-        var adapter = FavoriteAdapter(emptyList(), viewModel, requireContext())
+        var adapter = FavoriteAdapter(emptyList(), viewModel, requireContext(),bottomNavigationView)
         binding.favoriteRV.adapter = adapter
 
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
