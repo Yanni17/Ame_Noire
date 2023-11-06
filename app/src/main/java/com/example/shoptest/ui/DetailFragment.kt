@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -28,6 +29,7 @@ import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.FragmentDetailBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 
 class DetailFragment : Fragment() {
@@ -114,18 +116,48 @@ class DetailFragment : Fragment() {
 
 
                 } else {
-                    val toast = Toast.makeText(
-                        requireContext(),
-                        "${requireContext().getString(R.string.notLoggedIn)}",
-                        Toast.LENGTH_LONG
-                    )
-                    toast.show()
+                    //Alert
+                    val inflater = LayoutInflater.from(context)
+                    val customView = inflater.inflate(R.layout.custom_layout, null)
+
+                    val container = (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
+                    container.visibility = View.VISIBLE
+
+                    val alertDialog = AlertDialog.Builder(requireContext())
+                        .setView(customView)
+                        .create()
+
+                    alertDialog.setCancelable(false)
+                    alertDialog.window?.setGravity(Gravity.CENTER)
+
+                    customView.alpha = 0.7f
+                    alertDialog.show()
+
+                    customView.animate()
+                        .alpha(1f)
+                        .setDuration(1000)
+                        .setListener(null)
+
+                    var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN1)
+                    var cancelBtn = customView.findViewById<MaterialButton>(R.id.cancelBTN)
+
+                    loginBtn.setOnClickListener {
+                        binding.root.findNavController().navigate(R.id.loginFragment)
+                        alertDialog.dismiss()
+                        container.visibility = View.INVISIBLE
+
+                    }
+
+                    cancelBtn.setOnClickListener {
+                        alertDialog.dismiss()
+                        container.visibility = View.INVISIBLE
+
+                    }
                 }
 
             }
 
             binding.likeBTN2.setOnClickListener {
-
                 if (viewModel.firebaseAuth.currentUser != null) {
 
                     if (!item.isLiked) {
@@ -134,13 +166,44 @@ class DetailFragment : Fragment() {
                     viewModel.updateLike(!item.isLiked, item.id)
 
                 } else {
-                    val toast = Toast.makeText(
-                        requireContext(),
-                        "${requireContext().getString(R.string.notLoggedIn)}",
-                        Toast.LENGTH_LONG
-                    )
-                    toast.show()
 
+                    val inflater = LayoutInflater.from(context)
+                    val customView = inflater.inflate(R.layout.custom_layout, null)
+
+                    val container = (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
+                    container.visibility = View.VISIBLE
+
+                    val alertDialog = AlertDialog.Builder(requireContext())
+                        .setView(customView)
+                        .create()
+
+                    alertDialog.setCancelable(false)
+
+                    alertDialog.window?.setGravity(Gravity.CENTER)
+
+                    customView.alpha = 0.7f
+                    alertDialog.show()
+
+                    customView.animate()
+                        .alpha(1f)
+                        .setDuration(1000)
+                        .setListener(null)
+
+                    var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN1)
+                    var cancelBtn = customView.findViewById<MaterialButton>(R.id.cancelBTN)
+
+                    loginBtn.setOnClickListener {
+                        binding.root.findNavController().navigate(R.id.loginFragment)
+                        alertDialog.dismiss()
+                        container.visibility = View.INVISIBLE
+
+                    }
+
+                    cancelBtn.setOnClickListener {
+                        alertDialog.dismiss()
+                        container.visibility = View.INVISIBLE
+
+                    }
                 }
 
             }

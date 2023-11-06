@@ -74,5 +74,7 @@
     <string name="notLoggedIn">Sie sind nicht angemeldet.</string>
     <string name="erfolgreich_hinzu">Artikel erfolgreich hinzugefügt.</string>
     <string name="abbrechen">Abbrechen</string>
+    <string name="nicht_angemeldet">Sie sind nicht Angemeldet!</string>
+    <string name="bitte_anmelden">Bitte melden Sie sich erst an, um die Aktion durchzuführen</string>
 
 </resources>

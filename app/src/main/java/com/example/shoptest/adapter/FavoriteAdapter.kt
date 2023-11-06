@@ -51,18 +51,20 @@ class FavoriteAdapter(
                 binding.likeBtn.setImageResource(R.drawable.baseline_favorite_border_24)
             }
         }
+
         holder.binding.likeBtn.setOnClickListener {
 
-            if (!item.isLiked) {
-                viewModel.addLikedItem(item.id)
-            } else viewModel.removeLikedItem(item.id)
+            if (!item.isLiked) viewModel.addLikedItem(item.id) else viewModel.removeLikedItem(item.id)
+
             viewModel.updateLike(!item.isLiked, item.id)
         }
+
 
         holder.binding.favortieCV.setOnClickListener {
             it.findNavController()
                 .navigate(FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(item.id))
         }
+
 
         holder.binding.hinzufuegenBTN.setOnClickListener {
             viewModel.addToCart(item.id)

@@ -3,6 +3,7 @@ package com.example.shoptest.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -32,20 +33,20 @@ class CartAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-
-        var item = dataset[position]
+        val item = dataset[position]
 
         holder.binding.preis5TV.text = String.format("%.2f", item.price) + " €"
         holder.binding.title5TV.text = item.title
         holder.binding.imageView5.load(item.image)
 
-        var cartList = viewModel.listOfCartItems
-        var produkt = cartList.find { it.productId == item.id }
+        val cartList = viewModel.listOfCartItems
+        val produkt = cartList.find { it.productId == item.id }
+
 
         holder.binding.IntTV.text = produkt!!.quantity.toString()
 
-        holder.binding.deleteBTN.setOnClickListener {
 
+        holder.binding.deleteBTN.setOnClickListener {
             viewModel.removeFromCart(item.id)
             viewModel.updateBadge(bottomNavigationView)
 

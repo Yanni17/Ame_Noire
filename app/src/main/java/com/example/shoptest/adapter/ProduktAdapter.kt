@@ -65,39 +65,30 @@ class ProduktAdapter(
 
             if (viewModel.firebaseAuth.currentUser != null) {
 
-                if (!item.isLiked) {
-
-                    viewModel.addLikedItem(item.id)
-
-                } else viewModel.removeLikedItem(item.id)
+                if (!item.isLiked) viewModel.addLikedItem(item.id) else viewModel.removeLikedItem(item.id)
 
                 viewModel.updateLike(!item.isLiked, item.id)
 
             } else {
 
-                // Aufblasen des Layouts
+                //Alert
                 val inflater = LayoutInflater.from(context)
                 val customView = inflater.inflate(R.layout.custom_layout, null)
 
                 val container = (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
                 container.visibility = View.VISIBLE
 
-
-                // Erstellen und Anzeigen des AlertDialog
                 val alertDialog = AlertDialog.Builder(context)
                     .setView(customView)
                     .create()
 
                 alertDialog.setCancelable(false)
 
-                // Setze die Position des Dialogs oben auf dem Bildschirm
                 alertDialog.window?.setGravity(Gravity.CENTER)
 
-                // Setze die Anfangsalpha auf 0 (Fenster ist unsichtbar)
                 customView.alpha = 0.7f
                 alertDialog.show()
 
-                // Erzeuge eine Einblendungsanimation
                 customView.animate()
                     .alpha(1f)
                     .setDuration(1000)
@@ -110,9 +101,7 @@ class ProduktAdapter(
                     holder.binding.root.findNavController().navigate(R.id.loginFragment)
                     alertDialog.dismiss()
                     container.visibility = View.INVISIBLE
-
                 }
-
                 cancelBtn.setOnClickListener {
                     alertDialog.dismiss()
                     container.visibility = View.INVISIBLE

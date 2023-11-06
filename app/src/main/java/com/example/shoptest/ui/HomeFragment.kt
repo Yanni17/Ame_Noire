@@ -37,9 +37,7 @@ class HomeFragment : Fragment() {
         viewModel.loadData()
 
         bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
-
         bottomNavigationView.visibility = View.VISIBLE
-
         viewModel.updateBadge(bottomNavigationView)
 
         return binding.root
@@ -52,7 +50,6 @@ class HomeFragment : Fragment() {
 //        val bottomNavigationView =
 //            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 //        bottomNavigationView.visibility = View.VISIBLE
-//
 //        viewModel.updateBadge(bottomNavigationView)
 
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)

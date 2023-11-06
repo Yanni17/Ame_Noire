@@ -10,15 +10,13 @@ class Datasource(
 ) {
 
     fun loadCategories(): List<Kategorie> {
-
-        val kategorien = mutableListOf(
+        return mutableListOf(
             Kategorie(context.getString(R.string.herren)),
             Kategorie(context.getString(R.string.damen)),
             Kategorie(context.getString(R.string.elektronik)),
             Kategorie(context.getString(R.string.schmuck)),
 
             )
-        return kategorien
     }
 
 

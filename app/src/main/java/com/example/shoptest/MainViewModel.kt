@@ -38,6 +38,10 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
     var listOfClothes = mutableListOf<Int>()
     var listOfCartItems = mutableListOf<CartItem>()
 
+    private val _liveListOfCartItems = MutableLiveData<List<CartItem>>()
+    val liveListOfCartItems: LiveData<List<CartItem>>
+        get() = _liveListOfCartItems
+
     private val _user: MutableLiveData<FirebaseUser?> = MutableLiveData()
     val user: LiveData<FirebaseUser?>
         get() = _user
@@ -77,6 +81,7 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
                     listOfCartItems = cartList!!.toMutableList()
                     val likedList = profile?.likedList
                     listOfClothes = likedList!!.toMutableList()
+                    _liveListOfCartItems.value = listOfCartItems
 
                 }
             }

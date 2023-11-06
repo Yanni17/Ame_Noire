@@ -29,7 +29,7 @@
     <string name="hallo">Hello,</string>
     <string name="leereTasche">Theres nothing in your bag.</string>
     <string name="anmeldenFuerCashout">Register or log in to see what you already have in your bag.</string>
-    <string name="noProfil">Renew your current orders and all your details whenever you want.</string>
+    <string name="noProfil">Renew your current orders and all your details.</string>
     <string name="animation">articleImageTransition</string>
     <string name="erfolgreichWarenkorb">Item was successfully added to your shopping cart</string>
     <string name="bezahlen">CHECKOUT</string>
@@ -75,6 +75,7 @@
     <string name="notLoggedIn">You are not logged in.</string>
     <string name="erfolgreich_hinzu">Item successfully added!</string>
     <string name="abbrechen">Cancel</string>
-
+    <string name="nicht_angemeldet">You are not logged in!</string>
+    <string name="bitte_anmelden">Please register or Log in, to carry out the action</string>
 
 </resources>

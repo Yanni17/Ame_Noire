@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/cashoutFragment"
-        android:name="com.example.shoptest.ui.CashoutFragment"
+        android:name="com.example.shoptest.ui.CartFragment"
         android:label="fragment_cashout"
         tools:layout="@layout/fragment_cashout" />
     <fragment
