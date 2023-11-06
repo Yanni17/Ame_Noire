@@ -33,9 +33,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        viewModel.loadData()
 
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
         viewModel.updateBadge(bottomNavigationView)
@@ -45,12 +44,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        // Um die Sichtbarkeit anszuschalten:
-//        val bottomNavigationView =
-//            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-//        bottomNavigationView.visibility = View.VISIBLE
-//        viewModel.updateBadge(bottomNavigationView)
 
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.GONE
@@ -82,7 +75,7 @@ class HomeFragment : Fragment() {
             mp.setVolume(0F, 0F)
             mp.start()
 
-            // Erstelle eine Animation für die Transparenz
+            // Animation
             val fadeOut = AlphaAnimation(1.8f, 0.0f)
             fadeOut.duration = 3000
 
@@ -100,7 +93,7 @@ class HomeFragment : Fragment() {
             binding.imageView.startAnimation(fadeOut)
         }
 
-        // Optional: Überwache den Abschluss des Videos und wiederhole es bei Bedarf
+        // wiederholung des Videos
         binding.werbungIV1.setOnCompletionListener { mp ->
             mp.setVolume(0F, 0F)
             mp.start()

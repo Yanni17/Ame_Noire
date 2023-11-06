@@ -37,11 +37,11 @@ class LoginFragment : Fragment() {
         toolbar.visibility = View.VISIBLE
 
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-        // Ändere den Text des TextViews
+        //Text der TextViews
         titleTextView.text = ("")
 
 
-        // Um die Sichtbarkeit auszuschalten:
+        //Sichtbarkeit ausschalten:
         val bottomNavigationView =
             requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.GONE

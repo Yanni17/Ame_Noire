@@ -27,6 +27,7 @@ class StartFragment : Fragment() {
     ): View? {
         binding = FragmentStartBinding.inflate(inflater, container, false)
         viewmodel.startScaleAnimation(binding.logoIV)
+        viewmodel.loadData()
         return binding.root
     }
 
@@ -43,7 +44,7 @@ class StartFragment : Fragment() {
 
         val handler = Handler()
         // Verzögerung in Millisekunden
-        val delayMillis = 4000L
+        val delayMillis = 3000L
         // Die Aktion ausführen, nachdem die Verzögerung abgelaufen ist
         handler.postDelayed({
             findNavController().navigate(R.id.homeFragment)

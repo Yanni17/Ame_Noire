@@ -16,13 +16,12 @@ class AppRepository(private val api: ClothesApi, private val database: ClothesDa
     suspend fun getClothes() {
 
         try {
+            if (database.clothesDatabaseDao.count() == 0){
 
-            var clothes = api.retrofitService.getAllProducts()
-
-            if (database.clothesDatabaseDao.count() == 0) database.clothesDatabaseDao.insertAll(
-                clothes
-            )
-
+                var clothes = api.retrofitService.getAllProducts()
+                database.clothesDatabaseDao.insertAll(
+                    clothes)
+            }
         } catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
         }

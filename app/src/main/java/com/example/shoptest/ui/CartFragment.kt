@@ -57,13 +57,14 @@ class CartFragment : Fragment() {
 
                 profileRef.get().addOnSuccessListener { documentSnapshot ->
                     if (documentSnapshot.exists()) {
+
                         val profile = documentSnapshot.toObject(Profile::class.java)
                         val cartList = profile?.cartList // Warenkorbliste
 
                         val productsInCart: List<Clothes> = clothesList.filter { clothes ->
-
                             cartList!!.any { it.productId == clothes.id }
                         }
+
                         cartAdapter.updateData(productsInCart)
 
                         var total = 0.0
@@ -92,6 +93,7 @@ class CartFragment : Fragment() {
                     // Fehler bei der Firestore-Abfrage.
                 }
             } else {
+
                 binding.cashoutCV.visibility = View.VISIBLE
 
                 binding.anmeldeBTN.setOnClickListener {
