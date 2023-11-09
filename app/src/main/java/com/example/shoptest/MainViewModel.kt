@@ -2,7 +2,6 @@ package com.example.shoptest
 
 import ClothesApi
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -24,13 +23,12 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     // Firestore - Firebase.
     val firebaseAuth = FirebaseAuth.getInstance()
@@ -279,7 +277,7 @@ class MainViewModel(private val application: Application) : AndroidViewModel(app
     }
 
 
-    // UTILS
+    //
     fun startScaleAnimation(view: View) {
         val animation = AnimationUtils.loadAnimation(getApplication(), R.anim.scale_up)
         view.startAnimation(animation)

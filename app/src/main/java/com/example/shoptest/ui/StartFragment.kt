@@ -19,15 +19,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class StartFragment : Fragment() {
 
     private lateinit var binding: FragmentStartBinding
-    val viewmodel: MainViewModel by activityViewModels()
+    val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStartBinding.inflate(inflater, container, false)
-        viewmodel.startScaleAnimation(binding.logoIV)
-        viewmodel.loadData()
+        viewModel.startScaleAnimation(binding.logoIV)
+        viewModel.loadData()
         return binding.root
     }
 

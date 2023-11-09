@@ -65,7 +65,9 @@ class ProduktAdapter(
 
             if (viewModel.firebaseAuth.currentUser != null) {
 
-                if (!item.isLiked) viewModel.addLikedItem(item.id) else viewModel.removeLikedItem(item.id)
+                if (!item.isLiked) viewModel.addLikedItem(item.id) else viewModel.removeLikedItem(
+                    item.id
+                )
 
                 viewModel.updateLike(!item.isLiked, item.id)
 
@@ -75,7 +77,8 @@ class ProduktAdapter(
                 val inflater = LayoutInflater.from(context)
                 val customView = inflater.inflate(R.layout.custom_layout, null)
 
-                val container = (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
+                val container =
+                    (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
                 container.visibility = View.VISIBLE
 
                 val alertDialog = AlertDialog.Builder(context)
@@ -108,7 +111,6 @@ class ProduktAdapter(
 
                 }
 
-
             }
         }
 
@@ -117,12 +119,14 @@ class ProduktAdapter(
             val navOptions = NavOptions.Builder()
                 .setEnterAnim(R.anim.slide_in_right)
                 .setExitAnim(R.anim.slide_out_left)
+                .setPopEnterAnim(R.anim.slide_in_left) // Animation beim Zurücknavigieren
+                .setPopExitAnim(R.anim.slide_out_right) // Animation beim Zurücknavigieren
                 .build()
 
             val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(item.id)
             view.findNavController().navigate(action, navOptions)
-        }
 
+        }
     }
 
     fun update(list: List<Clothes>) {

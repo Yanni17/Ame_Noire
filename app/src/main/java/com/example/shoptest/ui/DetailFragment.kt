@@ -1,36 +1,25 @@
 package com.example.shoptest.ui
 
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.transition.TransitionInflater
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
-import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.FragmentDetailBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.snackbar.Snackbar
 
 class DetailFragment : Fragment() {
 
@@ -113,7 +102,6 @@ class DetailFragment : Fragment() {
                     handler.postDelayed({
                         alertDialog.dismiss()
                     }, 3000)
-
 
                 } else {
                     //Alert

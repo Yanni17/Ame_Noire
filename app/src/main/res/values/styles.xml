@@ -2,6 +2,7 @@
 <resources>
 
     <style name="Ame_NoireTheme" parent="Theme.Material3.Dark.NoActionBar">
+
         <item name="colorPrimary">@color/background</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorSurface">@color/background</item>
