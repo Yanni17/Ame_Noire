@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -56,7 +54,7 @@ class ProduktListAdapter(
                             imageButton.setImageResource(R.drawable.baseline_favorite_border_24)
                         }
                     } else {
-//
+
                         // Alert
                         val inflater = LayoutInflater.from(context)
                         val customView = inflater.inflate(R.layout.custom_layout, null)
@@ -78,7 +76,7 @@ class ProduktListAdapter(
                             .setDuration(1000)
                             .setListener(null)
 
-                        var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN1)
+                        var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN2)
                         var cancelBtn = customView.findViewById<MaterialButton>(R.id.cancelBTN)
 
                         loginBtn.setOnClickListener {

@@ -45,12 +45,10 @@ class StartFragment : Fragment() {
         val handler = Handler()
         // Verzögerung in Millisekunden
         val delayMillis = 3000L
-        // Die Aktion ausführen, nachdem die Verzögerung abgelaufen ist
+        // Die Aktion ausführen
         handler.postDelayed({
             findNavController().navigate(R.id.homeFragment)
-
         }, delayMillis)
-
 
     }
 

@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/anmeldenTV" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginBTN1"
+        android:id="@+id/loginBTN2"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
@@ -66,7 +66,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginBTN1"
+        app:layout_constraintTop_toBottomOf="@+id/loginBTN2"
         app:strokeColor="@color/gold"
         app:strokeWidth="1dp" />
 

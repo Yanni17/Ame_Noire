@@ -18,7 +18,6 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.firestore.ktx.toObject
 
 class ProfilFragment : Fragment() {
-
     val viewmodel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentProfilBinding
 
@@ -40,7 +39,6 @@ class ProfilFragment : Fragment() {
         titleTextView.text = "ACCOUNT"
 
         if (viewmodel.firebaseAuth.currentUser != null) {
-
             binding.loggoutCV.visibility = View.VISIBLE
             binding.aktuellerNameTV.visibility = View.VISIBLE
             binding.angabenCV.visibility = View.VISIBLE
@@ -62,13 +60,13 @@ class ProfilFragment : Fragment() {
             }
 
             binding.loggoutCV.setOnClickListener {
-
                 viewmodel.signOut()
                 it.findNavController().popBackStack(R.id.homeFragment,false)
                 it.findNavController().navigate(R.id.homeFragment)
 
             }
         } else {
+
             binding.noaccountCV.visibility = View.VISIBLE
 
             binding.anmelde2BTN.setOnClickListener {

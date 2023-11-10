@@ -42,29 +42,25 @@ class FavoriteFragment : Fragment() {
             requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
 
+        // Ändere den Text des TextViews
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
-
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+        titleTextView.text = "${getString(R.string.favoriten3)}"
 
         var adapter = FavoriteAdapter(emptyList(), viewModel, requireContext(),bottomNavigationView)
         binding.favoriteRV.adapter = adapter
 
-        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-
-        // Ändere den Text des TextViews
-        titleTextView.text = "${getString(R.string.favoriten3)}"
-
+        // Spinner
         val spinner = binding.spinner
-
         val spinnerItems = arrayOf(
             "${getString(R.string.zuletzt_hinzugefuegt)}",
             "${getString(R.string.preis_absteigend)}",
             "${getString(R.string.preis_aufsteigend)}"
         )
-
-        val adapter2 =
+        val spinnerAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
-        spinner.adapter = adapter2
+        spinner.adapter = spinnerAdapter
 
 
         if (viewModel.firebaseAuth.currentUser != null) {

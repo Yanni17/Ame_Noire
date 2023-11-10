@@ -17,7 +17,6 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class LoginFragment : Fragment() {
-
     val viewmodel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentLoginBinding
 
@@ -31,15 +30,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        //Toolbar
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
 
-        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
         //Text der TextViews
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
         titleTextView.text = ("")
-
 
         //Sichtbarkeit ausschalten:
         val bottomNavigationView =
@@ -49,6 +46,7 @@ class LoginFragment : Fragment() {
 
         binding.iconIV.setImageResource(R.drawable.app_icon2)
 
+        //Login
         binding.loginBTN.setOnClickListener {
             val email = binding.loginMailET.text.toString()
             val password = binding.loginPwET.text.toString()
@@ -56,6 +54,7 @@ class LoginFragment : Fragment() {
 
         }
 
+        //implement user
         viewmodel.user.observe(viewLifecycleOwner) {
             if (it != null) {
                 findNavController().popBackStack()
@@ -63,6 +62,7 @@ class LoginFragment : Fragment() {
             }
         }
 
+        //register
         binding.registerTV.setOnClickListener {
             it.findNavController().popBackStack()
             it.findNavController().navigate(R.id.registerFragment2)

@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="TextView"
+        android:textStyle="bold"
         android:fontFamily="@font/supreme_regular"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBTN2"
         app:layout_constraintEnd_toEndOf="parent"

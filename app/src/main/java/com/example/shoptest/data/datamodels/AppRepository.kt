@@ -3,30 +3,35 @@ package com.example.shoptest.data.datamodels
 import ClothesApi
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.shoptest.data.datamodels.local.ClothesDatabase
 import com.example.shoptest.data.datamodels.models.Clothes
+import kotlinx.coroutines.coroutineScope
 import java.lang.Exception
 
 const val TAG = "AppRepositoryTAG"
 
 class AppRepository(private val api: ClothesApi, private val database: ClothesDatabase) {
 
-    val allClothes = database.clothesDatabaseDao.getAll()
 
     suspend fun getClothes() {
 
         try {
             // mache nur den call, wenn die datenbank leer ist.
-            if (database.clothesDatabaseDao.count() == 0){
+            if (database.clothesDatabaseDao.count() == 0) {
                 var clothes = api.retrofitService.getAllProducts()
                 database.clothesDatabaseDao.insertAll(
-                    clothes)
-
+                    clothes
+                )
             }
 
         } catch (e: Exception) {
             Log.e(TAG, "Error loading Data from API: $e")
         }
+    }
+
+    fun getAllClothes(): List<Clothes>{
+        return database.clothesDatabaseDao.getAll()
     }
 
     fun getAllHerren(): LiveData<List<Clothes>> {

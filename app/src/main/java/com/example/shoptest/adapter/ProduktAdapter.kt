@@ -1,19 +1,12 @@
 package com.example.shoptest.adapter
 
-import android.app.Dialog
 import android.content.Context
-import android.os.Handler
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.fragment.app.FragmentContainer
-import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -97,7 +90,7 @@ class ProduktAdapter(
                     .setDuration(1000)
                     .setListener(null)
 
-                var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN1)
+                var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN2)
                 var cancelBtn = customView.findViewById<MaterialButton>(R.id.cancelBTN)
 
                 loginBtn.setOnClickListener {

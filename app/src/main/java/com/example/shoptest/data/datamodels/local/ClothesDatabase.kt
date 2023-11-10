@@ -17,12 +17,13 @@ private lateinit var INSTANCE: ClothesDatabase
 
 fun getDatabase(context: Context): ClothesDatabase {
     synchronized(ClothesDatabase::class.java) {
+
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room.databaseBuilder(
                 context.applicationContext,
                 ClothesDatabase::class.java,
                 "clothes_database"
-            ).build()
+            ).allowMainThreadQueries().build()
 
         }
     }

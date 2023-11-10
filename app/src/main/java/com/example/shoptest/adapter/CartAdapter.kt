@@ -1,23 +1,18 @@
 package com.example.shoptest.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.shoptest.MainViewModel
-import com.example.shoptest.R
+import com.example.shoptest.data.datamodels.models.CartItem
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.databinding.CartItemBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class CartAdapter(
-    private var dataset: List<Clothes>,
+    private var dataset: List<CartItem>,
     private var viewModel: MainViewModel,
-    private var bottomNavigationView: BottomNavigationView
 ) : RecyclerView.Adapter<CartAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -39,23 +34,17 @@ class CartAdapter(
         holder.binding.title5TV.text = item.title
         holder.binding.imageView5.load(item.image)
 
-        val cartList = viewModel.listOfCartItems
-        val produkt = cartList.find { it.productId == item.id }
-
-
-        holder.binding.IntTV.text = produkt!!.quantity.toString()
-
+        holder.binding.IntTV.text = item.quantity.toString()
 
         holder.binding.deleteBTN.setOnClickListener {
-            viewModel.removeFromCart(item.id)
-            viewModel.updateBadge(bottomNavigationView)
+            viewModel.removeCartLive(item.productId)
+            notifyDataSetChanged()
 
-            it.findNavController().navigate(R.id.cashoutFragment)
         }
 
     }
 
-    fun updateData(list: List<Clothes>) {
+    fun update(list: List<CartItem>) {
         dataset = list
         notifyDataSetChanged()
     }

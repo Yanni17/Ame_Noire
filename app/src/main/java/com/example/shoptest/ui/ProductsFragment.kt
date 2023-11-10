@@ -6,10 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
-import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.ProduktListAdapter
@@ -50,7 +47,7 @@ class ProductsFragment : Fragment() {
 
         binding.produktRV.adapter = produktListAdapter
 
-
+        //Adapter anpassen
         when (kategorie) {
 
             "Herren","Men" -> viewModel.getAllHerren().observe(viewLifecycleOwner) {

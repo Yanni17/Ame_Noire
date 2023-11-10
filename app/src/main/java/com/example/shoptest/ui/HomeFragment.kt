@@ -33,12 +33,10 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         bottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
-        viewModel.updateBadge(bottomNavigationView)
-
+        viewModel.getAllClothes()
         return binding.root
     }
 
@@ -48,18 +46,18 @@ class HomeFragment : Fragment() {
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.GONE
 
-        var adapter = ProduktAdapter(emptyList(), viewModel, requireContext())
-        binding.herrenRV.adapter = adapter
+        var herrenAdapter = ProduktAdapter(emptyList(), viewModel, requireContext())
+        binding.herrenRV.adapter = herrenAdapter
 
-        var adapter2 = ProduktAdapter(emptyList(), viewModel, requireContext())
-        binding.damenRV.adapter = adapter2
+        var damenAdapter = ProduktAdapter(emptyList(), viewModel, requireContext())
+        binding.damenRV.adapter = damenAdapter
 
         viewModel.getAllHerren().observe(viewLifecycleOwner) {
-            adapter.update(it)
+            herrenAdapter.update(it)
         }
 
         viewModel.getAllDamen().observe(viewLifecycleOwner) {
-            adapter2.update(it)
+            damenAdapter.update(it)
         }
 
         // WERBUNG
@@ -67,10 +65,10 @@ class HomeFragment : Fragment() {
         binding.werbung3IV.setImageResource(R.drawable.pegador)
         binding.werbung4IV.setImageResource(R.drawable.peso1)
 
+
+        //Video
         val videoPath = "android.resource://${requireContext().packageName}/${R.raw.video3}"
         binding.werbungIV1.setVideoURI(Uri.parse(videoPath))
-
-
         binding.werbungIV1.setOnPreparedListener { mp ->
             mp.setVolume(0F, 0F)
             mp.start()
@@ -92,7 +90,6 @@ class HomeFragment : Fragment() {
             // Starte die Animation
             binding.imageView.startAnimation(fadeOut)
         }
-
         // wiederholung des Videos
         binding.werbungIV1.setOnCompletionListener { mp ->
             mp.setVolume(0F, 0F)

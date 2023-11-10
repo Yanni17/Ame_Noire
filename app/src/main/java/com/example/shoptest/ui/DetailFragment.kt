@@ -22,10 +22,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 
 class DetailFragment : Fragment() {
-
     private lateinit var binding: FragmentDetailBinding
     private val viewModel: MainViewModel by activityViewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,10 +40,9 @@ class DetailFragment : Fragment() {
             requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
 
+        // Ändere den Text des TextViews
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
-
-        // Ändere den Text des TextViews
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
         titleTextView.text = "${getString(R.string.produkt_details)}"
 
@@ -72,8 +69,7 @@ class DetailFragment : Fragment() {
 
                 if (viewModel.firebaseAuth.currentUser != null) {
 
-                    viewModel.addToCart(item.id)
-                    viewModel.updateBadge(bottomNavigationView)
+                    viewModel.addToCartLive(item.id,item.title,item.price,item.image)
 
                     // Aufblasen des Layouts
                     val inflater = LayoutInflater.from(context)
@@ -126,7 +122,7 @@ class DetailFragment : Fragment() {
                         .setDuration(1000)
                         .setListener(null)
 
-                    var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN1)
+                    var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN2)
                     var cancelBtn = customView.findViewById<MaterialButton>(R.id.cancelBTN)
 
                     loginBtn.setOnClickListener {
@@ -177,7 +173,7 @@ class DetailFragment : Fragment() {
                         .setDuration(1000)
                         .setListener(null)
 
-                    var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN1)
+                    var loginBtn = customView.findViewById<MaterialButton>(R.id.loginBTN2)
                     var cancelBtn = customView.findViewById<MaterialButton>(R.id.cancelBTN)
 
                     loginBtn.setOnClickListener {

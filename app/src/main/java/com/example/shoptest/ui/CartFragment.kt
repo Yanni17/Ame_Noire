@@ -1,27 +1,32 @@
 package com.example.shoptest.ui
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.CartAdapter
+import com.example.shoptest.data.datamodels.models.CartItem
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.data.datamodels.models.Profile
 import com.example.shoptest.databinding.FragmentCashoutBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
 
 class CartFragment : Fragment() {
-
     private lateinit var binding: FragmentCashoutBinding
     val viewModel: MainViewModel by activityViewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,80 +39,98 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomNavigationView =
-            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
-        val cartAdapter = CartAdapter(emptyList(), viewModel,bottomNavigationView)
-        binding.cartRV.adapter = cartAdapter
-
+        // Ändere den Text des TextViews
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
-
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-
-        // Ändere den Text des TextViews
         titleTextView.text = "${getString(R.string.warenkorb1)}"
 
-        viewModel.allClothes.observe(viewLifecycleOwner) { clothesList ->
-            // Dieser Codeblock wird aufgerufen, wenn sich die Daten in allClothes ändern
+        var cartAdapter = CartAdapter(emptyList(),viewModel)
+        binding.cartRV.adapter = cartAdapter
+
+        viewModel.liveListOfCartItems.observe(viewLifecycleOwner) { cartItemsList ->
+
             if (viewModel.firebaseAuth.currentUser != null) {
 
-                val userId = viewModel.firebaseAuth.currentUser!!.uid
-                val profileRef = viewModel.firestore.collection("Profile").document(userId)
-
-                profileRef.get().addOnSuccessListener { documentSnapshot ->
-                    if (documentSnapshot.exists()) {
-
-                        val profile = documentSnapshot.toObject(Profile::class.java)
-                        val cartList = profile?.cartList // Warenkorbliste
-
-                        val productsInCart: List<Clothes> = clothesList.filter { clothes ->
-                            cartList!!.any { it.productId == clothes.id }
-                        }
-
-                        cartAdapter.updateData(productsInCart)
-
-                        var total = 0.0
-
-                        if (cartAdapter.itemCount == 0) {
-                            binding.noBasketTV.visibility = View.VISIBLE
-                        } else {
-                            binding.noBasketTV.visibility = View.GONE
-                            binding.cartRV.visibility = View.VISIBLE
-                            binding.bezahlenBTN.visibility = View.VISIBLE
-                            binding.priceTV.visibility = View.VISIBLE
-                            binding.totalTV.visibility = View.VISIBLE
-                            binding.lieferkostenTV.visibility = View.VISIBLE
-
-                            for (produkt in productsInCart) {
-                                val quantity = cartList?.find { it.productId == produkt.id }?.quantity ?: 0
-                                total += produkt.price * quantity
-                            }
-                            binding.priceTV.text = String.format("%.2f €", total)
-                        }
-
-                    } else {
-                        // Das Profil des Benutzers existiert nicht.
-                    }
-                }.addOnFailureListener { exception ->
-                    // Fehler bei der Firestore-Abfrage.
+                val productsInCart = viewModel.allClothes.filter { clothes ->
+                    cartItemsList.any { cartItem -> cartItem.productId == clothes.id }
                 }
-            } else {
 
+                cartAdapter.update(cartItemsList)
+
+                var total = 0.0
+
+                if (productsInCart.isEmpty()) {
+                    binding.noBasketTV.visibility = View.VISIBLE
+                    binding.cartRV.visibility = View.GONE
+                    binding.bezahlenBTN.visibility = View.GONE
+                    binding.priceTV.visibility = View.GONE
+                    binding.totalTV.visibility = View.GONE
+                    binding.lieferkostenTV.visibility = View.GONE
+                } else {
+                    binding.noBasketTV.visibility = View.GONE
+                    binding.cartRV.visibility = View.VISIBLE
+                    binding.bezahlenBTN.visibility = View.VISIBLE
+                    binding.priceTV.visibility = View.VISIBLE
+                    binding.totalTV.visibility = View.VISIBLE
+                    binding.lieferkostenTV.visibility = View.VISIBLE
+
+                    for (produkt in productsInCart) {
+                        val quantity = cartItemsList.find { it.productId == produkt.id }?.quantity ?: 0
+                        total += produkt.price * quantity
+                    }
+                    binding.priceTV.text = String.format("%.2f €", total)
+                }
+
+            } else {
                 binding.cashoutCV.visibility = View.VISIBLE
 
                 binding.anmeldeBTN.setOnClickListener {
-                    it.findNavController().popBackStack(R.id.loginFragment,false)
                     it.findNavController().navigate(R.id.loginFragment)
                 }
                 binding.registrierenBTN.setOnClickListener {
-                    it.findNavController().popBackStack(R.id.registerFragment2,false)
                     it.findNavController().navigate(R.id.registerFragment2)
                 }
             }
         }
 
+        binding.bezahlenBTN.setOnClickListener {
+            //Alert
+            val inflater = LayoutInflater.from(context)
+            val customView = inflater.inflate(R.layout.custom_successfull_orderd, null)
 
+            val container =
+                (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
+            container.visibility = View.VISIBLE
+
+            val alertDialog = AlertDialog.Builder(requireContext())
+                .setView(customView)
+                .create()
+
+            alertDialog.setCancelable(false)
+
+            alertDialog.window?.setGravity(Gravity.CENTER)
+
+            customView.alpha = 0.7f
+            alertDialog.show()
+
+            customView.animate()
+                .alpha(1f)
+                .setDuration(1000)
+                .setListener(null)
+
+            var ok = customView.findViewById<MaterialButton>(R.id.button)
+
+            ok.setOnClickListener {
+                viewModel.clearList()
+                alertDialog.dismiss()
+
+                container.visibility = View.GONE
+            }
+
+
+        }
     }
+
 
 }

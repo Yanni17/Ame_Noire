@@ -1,4 +1,3 @@
-
 package com.example.shoptest
 
 import android.app.Application
@@ -42,16 +41,20 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        Log.d("yanni", "${viewModel.liveListOfCartItems.value}")
+
         viewModel.liveListOfCartItems.observe(this, Observer {
 
+            Log.d("yanni2", "${viewModel.liveListOfCartItems.value}")
             var badge = binding.bottomNavigationView.getOrCreateBadge(R.id.cashoutFragment)
 
-            if (it.sumOf { it.quantity } < 1){
+            if (it.sumOf { it.quantity } < 1) {
                 badge.isVisible = false
-            }else {
+            } else {
                 badge.isVisible = true
                 badge.number = it.sumOf { it.quantity }
                 badge.backgroundColor = this.getColor(R.color.gold)
+
             }
 
         })

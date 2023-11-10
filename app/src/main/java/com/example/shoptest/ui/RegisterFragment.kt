@@ -19,10 +19,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class RegisterFragment : Fragment() {
 
-    val viewmodel: MainViewModel by activityViewModels()
+    val viewModel: MainViewModel by activityViewModels()
+
     private lateinit var binding: FragmentRegisterBinding
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,12 +33,10 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Ändere den Text des TextViews
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
-
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-
-        // Ändere den Text des TextViews
         titleTextView.text = ("")
 
         // Um die Sichtbarkeit anszuschalten:
@@ -50,21 +47,24 @@ class RegisterFragment : Fragment() {
         // Icon setzen
         binding.icon2IV.setImageResource(R.drawable.app_icon2)
 
+        //register
         binding.registerBTN.setOnClickListener {
             val email = binding.loginMailET.text.toString()
             val password = binding.loginPwET.text.toString()
             val telefonNummer = binding.phoneET.text.toString()
             val name = binding.nameET.text.toString()
 
-            viewmodel.signUp(email, password, name, telefonNummer)
+            viewModel.signUp(email, password, name, telefonNummer)
         }
 
-        viewmodel.user.observe(viewLifecycleOwner) {
+        //implement user
+        viewModel.user.observe(viewLifecycleOwner) {
             if (it != null) {
                 findNavController().navigate(R.id.homeFragment)
             }
         }
 
+        //einloggen
         binding.einloggenTV.setOnClickListener {
             it.findNavController().navigate(R.id.loginFragment)
         }

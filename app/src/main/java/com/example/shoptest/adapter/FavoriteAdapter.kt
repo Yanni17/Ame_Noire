@@ -67,8 +67,9 @@ class FavoriteAdapter(
 
 
         holder.binding.hinzufuegenBTN.setOnClickListener {
-            viewModel.addToCart(item.id)
-            viewModel.updateBadge(bottomNavigationView)
+
+            viewModel.addToCartLive(item.id,item.title,item.price,item.image)
+
 
             // Aufblasen des Layouts
             val inflater = LayoutInflater.from(context)

@@ -36,18 +36,15 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Ändere den Text des TextViews
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
-
-        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
+        titleTextView.text = (requireActivity().getString(R.string.suche))
 
         // Um die Sichtbarkeit anszuschalten:
+        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.visibility = View.VISIBLE
-
-        val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-
-        // Ändere den Text des TextViews
-        titleTextView.text = (requireActivity().getString(R.string.suche))
 
         binding.imageView2.setImageResource(R.drawable.test31)
 

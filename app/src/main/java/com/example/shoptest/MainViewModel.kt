@@ -34,9 +34,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val firebaseAuth = FirebaseAuth.getInstance()
     val firestore = FirebaseFirestore.getInstance()
     var listOfClothes = mutableListOf<Int>()
-    var listOfCartItems = mutableListOf<CartItem>()
 
-    private val _liveListOfCartItems = MutableLiveData<List<CartItem>>()
+    private val _liveListOfCartItems = MutableLiveData<List<CartItem>>(emptyList())
     val liveListOfCartItems: LiveData<List<CartItem>>
         get() = _liveListOfCartItems
 
@@ -52,7 +51,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val datasource: LiveData<List<Kategorie>>
         get() = _datasource
 
-    val allClothes = repository.allClothes
+    var allClothes: List<Clothes> = emptyList()
 
     init {
         _datasource.postValue(Datasource(application).loadCategories())
@@ -70,17 +69,28 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         _user.value = firebaseAuth.currentUser
 
-        firebaseAuth.currentUser?.let {
-            profileRef = firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
-            profileRef.get().addOnSuccessListener { documentSnapshot ->
-                if (documentSnapshot.exists()) {
-                    val profile = documentSnapshot.toObject(Profile::class.java)
-                    val cartList = profile?.cartList // Warenkorbliste
-                    listOfCartItems = cartList!!.toMutableList()
-                    val likedList = profile?.likedList
-                    listOfClothes = likedList!!.toMutableList()
-                    _liveListOfCartItems.value = listOfCartItems
+        firebaseAuth.currentUser?.let { user ->
+            profileRef = firestore.collection("Profile").document(user.uid)
 
+            profileRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val documentSnapshot = task.result
+
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
+                        val profile = documentSnapshot.toObject(Profile::class.java)
+
+                        val cartList = profile?.cartList
+                        if (cartList != null) {
+                            _liveListOfCartItems.value = cartList.toMutableList()
+                        }
+
+                        val likedList = profile?.likedList
+                        if (likedList != null) {
+                            listOfClothes = likedList.toMutableList()
+                        }
+                    }
+                } else {
+                    // Fehler beim Abrufen der Daten aus Firestore
                 }
             }
         }
@@ -143,7 +153,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             listOfClothes.clear()
         }
         firebaseAuth.signOut()
-        listOfCartItems.clear()
+        _liveListOfCartItems.postValue(emptyList())
         _user.value = firebaseAuth.currentUser
     }
     fun signIn(email: String, password: String) {
@@ -224,34 +234,42 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
             .update("likedList", listOfClothes)
     }
-    fun removeFromCart(productId: Int) {
+    fun addToCartLive(productId: Int,title: String,price: Double,image: String){
 
-        val existingItem = listOfCartItems.find { it.productId == productId }
+        val existingItem = _liveListOfCartItems.value!!.find { it.productId == productId }
+
+        if (existingItem != null) {
+            existingItem.quantity++
+        } else {
+            val newItem = CartItem(productId, 1,title,price,image)
+            val currentCartItems = _liveListOfCartItems.value!!.toMutableList()
+            currentCartItems.add(newItem)
+            _liveListOfCartItems.value = currentCartItems
+        }
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+            .update("cartList", _liveListOfCartItems.value)
+    }
+    fun removeCartLive(productId: Int){
+
+        val existingItem = _liveListOfCartItems.value!!.find { it.productId == productId }
         if (existingItem != null) {
             if (existingItem.quantity > 1) {
                 existingItem.quantity--
             } else {
-                listOfCartItems.remove(existingItem)
+                val currentCartItems = _liveListOfCartItems.value!!.toMutableList()
+                currentCartItems.remove(existingItem)
+                _liveListOfCartItems.value = currentCartItems
             }
             firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
-                .update("cartList", listOfCartItems)
+                .update("cartList", _liveListOfCartItems.value)
         }
-    }
-    fun addToCart(productId: Int) {
-
-        val existingItem = listOfCartItems.find { it.productId == productId }
-        if (existingItem != null) {
-            existingItem.quantity++
-        } else {
-            val newItem = CartItem(productId, 1)
-            listOfCartItems.add(newItem)
-        }
-        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
-            .update("cartList", listOfCartItems)
 
     }
 
     //ROOM_
+    fun getAllClothes(){
+        allClothes = repository.getAllClothes()
+    }
     fun getAllHerren(): LiveData<List<Clothes>> {
         return repository.getAllHerren()
     }
@@ -276,23 +294,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return repository.getDetail(id)
     }
 
-
-    //
+    // ANIMATION
     fun startScaleAnimation(view: View) {
         val animation = AnimationUtils.loadAnimation(getApplication(), R.anim.scale_up)
         view.startAnimation(animation)
     }
-    fun updateBadge(bottomNavigationView: BottomNavigationView){
 
-        var badge = bottomNavigationView.getOrCreateBadge(R.id.cashoutFragment)
+    fun clearList(){
 
-        if (listOfCartItems.sumOf { it.quantity } < 1){
-            badge.isVisible = false
-        }else {
-            badge.isVisible = true
-            badge.number = listOfCartItems.sumOf { it.quantity }
-            badge.backgroundColor = getApplication<Application>().getColor(R.color.gold)
-        }
-
+        _liveListOfCartItems.postValue(emptyList())
+        val new = listOf<CartItem>()
+        firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
+            .update("cartList", new)
     }
+
 }
