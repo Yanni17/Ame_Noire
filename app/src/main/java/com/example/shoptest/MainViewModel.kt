@@ -2,6 +2,7 @@ package com.example.shoptest
 
 import ClothesApi
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -27,6 +28,9 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -306,6 +310,59 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val new = listOf<CartItem>()
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
             .update("cartList", new)
+    }
+
+    fun berechneLieferzeitraum(): String {
+        val heute = Calendar.getInstance()
+
+        // Ersten Tag berechnen (3 Tage später)
+        val ersterTag = Calendar.getInstance()
+        ersterTag.add(Calendar.DAY_OF_MONTH, 3)
+
+        // Zweiten Tag berechnen (4 Tage später)
+        val zweiterTag = Calendar.getInstance()
+        zweiterTag.add(Calendar.DAY_OF_MONTH, 4)
+
+        // Datumsformat festlegen (zum Beispiel "EEE d MMM")
+        val dateFormat = SimpleDateFormat("EEE d MMM", Locale.getDefault())
+
+        // Format für die Rückgabe erstellen
+        val lieferzeitraum = "${dateFormat.format(ersterTag.time)} - ${dateFormat.format(zweiterTag.time)}"
+
+        return lieferzeitraum
+    }
+
+    fun updateProfile(firstName: String, lastName: String, adress: String, zipCode: String, city: String) {
+        if (lastName.isNotEmpty() && adress.isNotEmpty() && zipCode.isNotEmpty() && city.isNotEmpty()) {
+            firestore.collection("Profile")
+                .document(firebaseAuth.currentUser!!.uid)
+                .update("vorName", "$firstName")
+            firestore.collection("Profile")
+                .document(firebaseAuth.currentUser!!.uid)
+                .update("nachName", "$lastName")
+            firestore.collection("Profile")
+                .document(firebaseAuth.currentUser!!.uid)
+                .update("adresse", "$adress")
+            firestore.collection("Profile")
+                .document(firebaseAuth.currentUser!!.uid)
+                .update("stadt", "$city")
+            firestore.collection("Profile")
+                .document(firebaseAuth.currentUser!!.uid)
+                .update("plz", "$zipCode")
+
+            showToast(getApplication<Application>().getString(R.string.erfolgreich))
+        } else {
+            showToast("Error")
+        }
+    }
+
+    fun showToast(message: String) {
+        val toast = Toast.makeText(
+            getApplication(),
+            message,
+            Toast.LENGTH_LONG
+        )
+        toast.show()
     }
 
 }

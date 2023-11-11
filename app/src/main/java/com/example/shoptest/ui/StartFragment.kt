@@ -34,6 +34,10 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //View(Divider)
+        val view = requireActivity().findViewById<View>(R.id.view)
+        view.visibility = View.INVISIBLE
+
         // Um die Sichtbarkeit auszuschalten:
         val bottomNavigationView =
             requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)

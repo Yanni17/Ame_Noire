@@ -2,6 +2,7 @@ package com.example.shoptest.ui
 
 import android.content.Context
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -42,6 +43,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //View(Divider)
+        val view = requireActivity().findViewById<View>(R.id.view)
+        view.visibility = View.INVISIBLE
 
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.GONE

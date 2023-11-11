@@ -32,9 +32,12 @@ class ProfilFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //View(Divider)
+        val view = requireActivity().findViewById<View>(R.id.view)
+        view.visibility = View.VISIBLE
+
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
-
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
         titleTextView.text = "ACCOUNT"
 
@@ -53,7 +56,7 @@ class ProfilFragment : Fragment() {
                 if (documentSnapshot.exists()) {
                     val profile = documentSnapshot.toObject<Profile>()
                     if (profile != null) {
-                        val userName = profile.name.uppercase()
+                        val userName = profile.vorName.uppercase()
                         binding.aktuellerNameTV.text = userName
                     }
                 }
@@ -61,8 +64,8 @@ class ProfilFragment : Fragment() {
 
             binding.loggoutCV.setOnClickListener {
                 viewmodel.signOut()
-                it.findNavController().popBackStack(R.id.homeFragment,false)
-                it.findNavController().navigate(R.id.homeFragment)
+                it.findNavController().popBackStack(R.id.profilFragment,false)
+                it.findNavController().navigate(R.id.profilFragment)
 
             }
         } else {

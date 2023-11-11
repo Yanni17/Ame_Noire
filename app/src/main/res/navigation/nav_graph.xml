@@ -103,4 +103,14 @@
             android:id="@+id/action_startFragment_to_registerFragment2"
             app:destination="@id/registerFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/payFragment"
+        android:name="com.example.shoptest.ui.PayFragment"
+        android:label="fragment_pay"
+        tools:layout="@layout/fragment_pay" />
+    <fragment
+        android:id="@+id/adressFragment"
+        android:name="com.example.shoptest.ui.AdressFragment"
+        android:label="fragment_adress"
+        tools:layout="@layout/fragment_adress" />
 </navigation>

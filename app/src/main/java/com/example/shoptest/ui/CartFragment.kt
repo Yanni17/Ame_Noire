@@ -39,6 +39,10 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //View(Divider)
+        val view = requireActivity().findViewById<View>(R.id.view)
+        view.visibility = View.VISIBLE
+
         // Ändere den Text des TextViews
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
@@ -95,38 +99,39 @@ class CartFragment : Fragment() {
         }
 
         binding.bezahlenBTN.setOnClickListener {
-            //Alert
-            val inflater = LayoutInflater.from(context)
-            val customView = inflater.inflate(R.layout.custom_successfull_orderd, null)
 
-            val container =
-                (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
-            container.visibility = View.VISIBLE
-
-            val alertDialog = AlertDialog.Builder(requireContext())
-                .setView(customView)
-                .create()
-
-            alertDialog.setCancelable(false)
-
-            alertDialog.window?.setGravity(Gravity.CENTER)
-
-            customView.alpha = 0.7f
-            alertDialog.show()
-
-            customView.animate()
-                .alpha(1f)
-                .setDuration(1000)
-                .setListener(null)
-
-            var ok = customView.findViewById<MaterialButton>(R.id.button)
-
-            ok.setOnClickListener {
-                viewModel.clearList()
-                alertDialog.dismiss()
-
-                container.visibility = View.GONE
-            }
+            it.findNavController().navigate(R.id.payFragment)
+//            //Alert
+//            val inflater = LayoutInflater.from(context)
+//            val customView = inflater.inflate(R.layout.custom_successfull_orderd, null)
+//
+//            val container =
+//                (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
+//            container.visibility = View.VISIBLE
+//
+//            val alertDialog = AlertDialog.Builder(requireContext())
+//                .setView(customView)
+//                .create()
+//
+//            alertDialog.setCancelable(false)
+//
+//            alertDialog.window?.setGravity(Gravity.CENTER)
+//
+//            customView.alpha = 0.7f
+//            alertDialog.show()
+//
+//            customView.animate()
+//                .alpha(1f)
+//                .setDuration(1000)
+//                .setListener(null)
+//
+//            var ok = customView.findViewById<MaterialButton>(R.id.button)
+//
+//            ok.setOnClickListener {
+//                viewModel.clearList()
+//                alertDialog.dismiss()
+//                container.visibility = View.GONE
+//            }
 
 
         }

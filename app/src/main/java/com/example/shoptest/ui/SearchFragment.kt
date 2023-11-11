@@ -36,6 +36,10 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //View(Divider)
+        val view = requireActivity().findViewById<View>(R.id.view)
+        view.visibility = View.VISIBLE
+
         // Ändere den Text des TextViews
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE

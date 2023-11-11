@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/name"
+        android:hint="@string/vornname"
         android:textColorHint="@color/text"
         app:boxBackgroundMode="outline"
         app:boxStrokeColor="@color/text"

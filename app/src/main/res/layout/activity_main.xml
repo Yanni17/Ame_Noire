@@ -77,4 +77,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/main_menu" />
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

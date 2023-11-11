@@ -77,5 +77,22 @@
     <string name="abbrechen">Cancel</string>
     <string name="nicht_angemeldet">You are not logged in!</string>
     <string name="bitte_anmelden">Please register or Log in, to carry out the action</string>
+    <string name="vornname">First name</string>
+    <string name="adresse_hinzu">Add address</string>
+    <string name="versand">SHIPPING OPTIONS</string>
+    <string name="dpd">7.99 € DPD Economy Service</string>
+    <string name="zahlungsmethoden1">PAYMENT DETAILS</string>
+    <string name="zwischensumme">Subtotal:</string>
+    <string name="versandsumme">Shipping:</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="lieferadresse">SHIP TO</string>
+    <string name="anzeigen">Show</string>
+    <string name="bearbeiten">Edit</string>
+    <string name="versandadresse">SHIPPING ADDRESS</string>
+    <string name="deutschland">Germany</string>
+    <string name="meineTasche">MY BAG</string>
+    <string name="erfolgreich">Successful</string>
+
+
 
 </resources>

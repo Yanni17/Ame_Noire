@@ -76,5 +76,19 @@
     <string name="abbrechen">Abbrechen</string>
     <string name="nicht_angemeldet">Sie sind nicht Angemeldet!</string>
     <string name="bitte_anmelden">Bitte melden Sie sich erst an, um die Aktion durchzuführen</string>
-
+    <string name="vornname">Vorname</string>
+    <string name="adresse_hinzu">Adresse hinzufügen</string>
+    <string name="versand">VERSAND OPTIONEN</string>
+    <string name="dpd">7.99 € DPD Economy Service</string>
+    <string name="zahlungsmethoden1">ZAHLUNGSMETHODEN</string>
+    <string name="zwischensumme">Zwischensumme:</string>
+    <string name="versandsumme">Versand:</string>
+    <string name="checkout">KASSE</string>
+    <string name="lieferadresse">LIEFERADRESSE</string>
+    <string name="anzeigen">Anzeigen</string>
+    <string name="bearbeiten">Bearbeiten</string>
+    <string name="versandadresse">VERSAND ADRESSE</string>
+    <string name="deutschland">Deutschland</string>
+    <string name="meineTasche">MEINE TASCHE</string>
+    <string name="erfolgreich">Erfolgreich</string>
 </resources>
