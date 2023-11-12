@@ -69,12 +69,13 @@ class AdressFragment : Fragment() {
 
                     binding.saveBTN.setOnClickListener {
 
+                        val firstName1 = binding.firstNameET.text.toString()
                         val lastName1 = binding.lastNameET.text.toString()
                         val adress1 = binding.adressET.text.toString()
                         val zipCode1 = binding.zipCodeET.text.toString()
                         val city1 = binding.cityET.text.toString()
 
-                        viewModel.updateProfile(firstName,lastName1,adress1,zipCode1,city1)
+                        viewModel.updateProfile(firstName1,lastName1,adress1,zipCode1,city1)
 
                         it.findNavController().navigateUp()
 

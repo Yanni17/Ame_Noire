@@ -101,38 +101,6 @@ class CartFragment : Fragment() {
         binding.bezahlenBTN.setOnClickListener {
 
             it.findNavController().navigate(R.id.payFragment)
-//            //Alert
-//            val inflater = LayoutInflater.from(context)
-//            val customView = inflater.inflate(R.layout.custom_successfull_orderd, null)
-//
-//            val container =
-//                (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
-//            container.visibility = View.VISIBLE
-//
-//            val alertDialog = AlertDialog.Builder(requireContext())
-//                .setView(customView)
-//                .create()
-//
-//            alertDialog.setCancelable(false)
-//
-//            alertDialog.window?.setGravity(Gravity.CENTER)
-//
-//            customView.alpha = 0.7f
-//            alertDialog.show()
-//
-//            customView.animate()
-//                .alpha(1f)
-//                .setDuration(1000)
-//                .setListener(null)
-//
-//            var ok = customView.findViewById<MaterialButton>(R.id.button)
-//
-//            ok.setOnClickListener {
-//                viewModel.clearList()
-//                alertDialog.dismiss()
-//                container.visibility = View.GONE
-//            }
-
 
         }
     }

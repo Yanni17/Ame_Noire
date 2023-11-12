@@ -8,7 +8,7 @@
     android:layout_margin="8dp"
     app:cardElevation="4dp"
     app:strokeColor="@color/grey"
-    app:cardBackgroundColor="@color/grey">
+    app:cardBackgroundColor="@color/grey2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
