@@ -1,15 +1,14 @@
 package com.example.shoptest.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.databinding.FragmentLoginBinding
@@ -34,7 +33,6 @@ class LoginFragment : Fragment() {
         //View(Divider)
         val view = requireActivity().findViewById<View>(R.id.view)
         view.visibility = View.INVISIBLE
-
 
         //Toolbar
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)

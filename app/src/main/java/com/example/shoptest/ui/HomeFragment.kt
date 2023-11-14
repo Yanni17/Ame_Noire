@@ -1,17 +1,14 @@
 package com.example.shoptest.ui
 
-import android.content.Context
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Bundle
-import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.TextView
+import android.widget.ImageButton
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
@@ -43,6 +40,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val cancelBtn = requireActivity().findViewById<ImageButton>(R.id.cancel2BTN)
+        cancelBtn.visibility = View.GONE
 
         //View(Divider)
         val view = requireActivity().findViewById<View>(R.id.view)
@@ -86,9 +86,11 @@ class HomeFragment : Fragment() {
             fadeOut.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {
                 }
+
                 override fun onAnimationEnd(animation: Animation?) {
                     binding.imageView.visibility = View.GONE
                 }
+
                 override fun onAnimationRepeat(animation: Animation?) {}
             })
 
@@ -102,7 +104,6 @@ class HomeFragment : Fragment() {
         }
 
     }
-
 
 
 }

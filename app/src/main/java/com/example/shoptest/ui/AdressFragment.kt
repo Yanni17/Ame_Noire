@@ -1,16 +1,15 @@
 package com.example.shoptest.ui
 
-import android.app.Application
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.shoptest.MainViewModel
@@ -36,6 +35,8 @@ class AdressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var navController = findNavController()
+
         val toolbar = requireActivity().findViewById<MaterialToolbar>(R.id.materialToolbar)
         toolbar.visibility = View.VISIBLE
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
@@ -60,7 +61,7 @@ class AdressFragment : Fragment() {
                         binding.firstNameET.setText(firstName)
                     }
 
-                    if(lastName.isNotEmpty() && adress.isNotEmpty() && zipCode.isNotEmpty() && city.isNotEmpty()){
+                    if (lastName.isNotBlank() && adress.isNotBlank() && zipCode.isNotBlank() && city.isNotBlank()) {
                         binding.lastNameET.setText(lastName)
                         binding.adressET.setText(adress)
                         binding.zipCodeET.setText(zipCode)
@@ -69,19 +70,27 @@ class AdressFragment : Fragment() {
 
                     binding.saveBTN.setOnClickListener {
 
-                        val firstName1 = binding.firstNameET.text.toString()
-                        val lastName1 = binding.lastNameET.text.toString()
-                        val adress1 = binding.adressET.text.toString()
-                        val zipCode1 = binding.zipCodeET.text.toString()
-                        val city1 = binding.cityET.text.toString()
+                        val firstName1 = binding.firstNameET.text.toString().trim()
+                        val lastName1 = binding.lastNameET.text.toString().trim()
+                        val adress1 = binding.adressET.text.toString().trim()
+                        val zipCode1 = binding.zipCodeET.text.toString().trim()
+                        val city1 = binding.cityET.text.toString().trim()
 
-                        viewModel.updateProfile(firstName1,lastName1,adress1,zipCode1,city1)
+                        if (lastName1.isNotBlank() && adress1.isNotBlank() && zipCode1.isNotBlank() && city1.isNotBlank()) {
 
-                        it.findNavController().navigateUp()
+                            viewModel.updateProfile(firstName1, lastName1, adress1, zipCode1, city1)
 
+                            it.findNavController().navigateUp()
+
+                        } else {
+                            viewModel.showToast(requireContext().getString(R.string.alle_felder))
+                        }
                     }
+                }
+                var cancelBtn = requireActivity().findViewById<ImageView>(R.id.cancel2BTN)
 
-
+                cancelBtn.setOnClickListener {
+                    navController.navigateUp()
                 }
 
             }

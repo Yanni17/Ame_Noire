@@ -68,7 +68,7 @@ class FavoriteAdapter(
 
         holder.binding.hinzufuegenBTN.setOnClickListener {
 
-            viewModel.addToCartLive(item.id,item.title,item.price,item.image)
+            viewModel.addToCartLive(item.id, item.title, item.price, item.image)
 
 
             // Aufblasen des Layouts

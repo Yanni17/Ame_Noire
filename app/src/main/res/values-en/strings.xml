@@ -92,6 +92,9 @@
     <string name="deutschland">Germany</string>
     <string name="meineTasche">MY BAG</string>
     <string name="erfolgreich">Successful</string>
+    <string name="wirklich_abbrechen">Do you really want to cancel the payment?</string>
+    <string name="bezahlung_abbrechen">Cancel payment?</string>
+    <string name="alle_felder">Please fill out all fields!</string>
 
 
 

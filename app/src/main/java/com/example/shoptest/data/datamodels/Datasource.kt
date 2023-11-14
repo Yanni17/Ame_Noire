@@ -13,7 +13,6 @@ class Datasource(
         return mutableListOf(
             Kategorie(context.getString(R.string.herren)),
             Kategorie(context.getString(R.string.damen)),
-            Kategorie(context.getString(R.string.elektronik)),
             Kategorie(context.getString(R.string.schmuck)),
 
             )

@@ -2,27 +2,19 @@ package com.example.shoptest.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.CartAdapter
-import com.example.shoptest.data.datamodels.models.CartItem
-import com.example.shoptest.data.datamodels.models.Clothes
-import com.example.shoptest.data.datamodels.models.Profile
 import com.example.shoptest.databinding.FragmentCashoutBinding
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.button.MaterialButton
+
 
 class CartFragment : Fragment() {
     private lateinit var binding: FragmentCashoutBinding
@@ -49,22 +41,17 @@ class CartFragment : Fragment() {
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
         titleTextView.text = "${getString(R.string.warenkorb1)}"
 
-        var cartAdapter = CartAdapter(emptyList(),viewModel)
+        var cartAdapter = CartAdapter(emptyList(), viewModel)
         binding.cartRV.adapter = cartAdapter
 
         viewModel.liveListOfCartItems.observe(viewLifecycleOwner) { cartItemsList ->
 
+            Log.d("Delete", "bin da")
             if (viewModel.firebaseAuth.currentUser != null) {
-
-                val productsInCart = viewModel.allClothes.filter { clothes ->
-                    cartItemsList.any { cartItem -> cartItem.productId == clothes.id }
-                }
-
                 cartAdapter.update(cartItemsList)
-
                 var total = 0.0
 
-                if (productsInCart.isEmpty()) {
+                if (cartItemsList.isEmpty()) {
                     binding.noBasketTV.visibility = View.VISIBLE
                     binding.cartRV.visibility = View.GONE
                     binding.bezahlenBTN.visibility = View.GONE
@@ -79,8 +66,9 @@ class CartFragment : Fragment() {
                     binding.totalTV.visibility = View.VISIBLE
                     binding.lieferkostenTV.visibility = View.VISIBLE
 
-                    for (produkt in productsInCart) {
-                        val quantity = cartItemsList.find { it.productId == produkt.id }?.quantity ?: 0
+                    for (produkt in cartItemsList) {
+                        val quantity =
+                            cartItemsList.find { it.productId == produkt.productId }?.quantity ?: 0
                         total += produkt.price * quantity
                     }
                     binding.priceTV.text = String.format("%.2f €", total)

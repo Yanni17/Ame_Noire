@@ -44,7 +44,9 @@ class ProduktListAdapter(
 
                     if (viewModel.firebaseAuth.currentUser != null) {
 
-                        if (!item.isLiked) viewModel.addLikedItem(item.id) else viewModel.removeLikedItem(item.id)
+                        if (!item.isLiked) viewModel.addLikedItem(item.id) else viewModel.removeLikedItem(
+                            item.id
+                        )
 
                         viewModel.updateLike(!item.isLiked, item.id)
 
@@ -59,7 +61,8 @@ class ProduktListAdapter(
                         val inflater = LayoutInflater.from(context)
                         val customView = inflater.inflate(R.layout.custom_layout, null)
 
-                        val container = (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
+                        val container =
+                            (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
                         container.visibility = View.VISIBLE
 
                         val alertDialog = AlertDialog.Builder(context)

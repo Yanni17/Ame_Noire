@@ -91,4 +91,7 @@
     <string name="deutschland">Deutschland</string>
     <string name="meineTasche">MEINE TASCHE</string>
     <string name="erfolgreich">Erfolgreich</string>
+    <string name="wirklich_abbrechen">Möchtest du die Bezahlung wirklich abbrechen?</string>
+    <string name="bezahlung_abbrechen">Bezahlung abbrechen?</string>
+    <string name="alle_felder">Bitte fülle alle Felder aus!</string>
 </resources>

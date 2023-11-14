@@ -25,10 +25,13 @@
         android:id="@+id/materialToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:contentInsetStart="0dp"
         android:theme="?attr/actionBarTheme"
+        app:contentInsetStart="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -36,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="22dp">
 
@@ -45,10 +48,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="text"
                 android:textColor="@color/text"
                 android:textSize="14sp"
                 android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/cancel2BTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="@color/transparent"
+                android:src="@drawable/baseline_cancel_presentation_24"
+                android:visibility="gone" />
         </LinearLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 

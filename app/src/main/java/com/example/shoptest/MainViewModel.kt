@@ -2,7 +2,6 @@ package com.example.shoptest
 
 import ClothesApi
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -18,7 +17,6 @@ import com.example.shoptest.data.datamodels.models.CartItem
 import com.example.shoptest.data.datamodels.models.Clothes
 import com.example.shoptest.data.datamodels.models.Kategorie
 import com.example.shoptest.data.datamodels.models.Profile
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -70,10 +68,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     //FIREBASE_
     fun setupUserEnv() {
-
+        // user in die Livedata speichern
         _user.value = firebaseAuth.currentUser
 
         firebaseAuth.currentUser?.let { user ->
+            //profileref holen
             profileRef = firestore.collection("Profile").document(user.uid)
 
             profileRef.get().addOnCompleteListener { task ->
@@ -82,12 +81,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                     if (documentSnapshot != null && documentSnapshot.exists()) {
                         val profile = documentSnapshot.toObject(Profile::class.java)
-
+                        //Warenkorbliste holen
                         val cartList = profile?.cartList
                         if (cartList != null) {
                             _liveListOfCartItems.value = cartList.toMutableList()
                         }
-
+                        //Wunschliste holen
                         val likedList = profile?.likedList
                         if (likedList != null) {
                             listOfClothes = likedList.toMutableList()
@@ -99,6 +98,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
     fun signUp(email: String, password: String, name: String, telefonnummer: String) {
 
         if (email.isEmpty() || password.isEmpty() || name.isEmpty() || telefonnummer.isEmpty()) {
@@ -148,6 +148,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
     fun signOut() {
 
         if (listOfClothes != null) {
@@ -160,6 +161,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _liveListOfCartItems.postValue(emptyList())
         _user.value = firebaseAuth.currentUser
     }
+
     fun signIn(email: String, password: String) {
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -233,32 +235,42 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
             .update("likedList", listOfClothes)
     }
+
     fun removeLikedItem(id: Int) {
         listOfClothes.remove(id)
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
             .update("likedList", listOfClothes)
     }
-    fun addToCartLive(productId: Int,title: String,price: Double,image: String){
 
+    fun addToCartLive(productId: Int, title: String, price: Double, image: String) {
+        //aktuelles Item holen
         val existingItem = _liveListOfCartItems.value!!.find { it.productId == productId }
 
+        //ggf. quantity erhöhen
         if (existingItem != null) {
             existingItem.quantity++
+            val currentCartItems2 = _liveListOfCartItems.value!!.toMutableList()
+            _liveListOfCartItems.value = currentCartItems2
+            //neues Item erstellen
         } else {
-            val newItem = CartItem(productId, 1,title,price,image)
+            val newItem = CartItem(productId, 1, title, price, image)
             val currentCartItems = _liveListOfCartItems.value!!.toMutableList()
             currentCartItems.add(newItem)
             _liveListOfCartItems.value = currentCartItems
         }
+        //liste für firestore updaten
         firestore.collection("Profile").document(firebaseAuth.currentUser!!.uid)
             .update("cartList", _liveListOfCartItems.value)
     }
-    fun removeCartLive(productId: Int){
+
+    fun removeCartLive(productId: Int) {
 
         val existingItem = _liveListOfCartItems.value!!.find { it.productId == productId }
         if (existingItem != null) {
             if (existingItem.quantity > 1) {
                 existingItem.quantity--
+                val currentCartItems2 = _liveListOfCartItems.value!!.toMutableList()
+                _liveListOfCartItems.value = currentCartItems2
             } else {
                 val currentCartItems = _liveListOfCartItems.value!!.toMutableList()
                 currentCartItems.remove(existingItem)
@@ -271,29 +283,36 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     //ROOM_
-    fun getAllClothes(){
+    fun getAllClothes() {
         allClothes = repository.getAllClothes()
     }
+
     fun getAllHerren(): LiveData<List<Clothes>> {
         return repository.getAllHerren()
     }
+
     fun getAllDamen(): LiveData<List<Clothes>> {
         return repository.getAllDamen()
     }
+
     fun getAllElectrics(): LiveData<List<Clothes>> {
         return repository.getAllElectrics()
     }
+
     fun getAllJewelry(): LiveData<List<Clothes>> {
         return repository.getAllJewelry()
     }
+
     fun getAllLiked(): LiveData<List<Clothes>> {
         return repository.getAllLiked()
     }
+
     fun updateLike(liked: Boolean, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateLike(liked, id)
         }
     }
+
     fun getDetail(id: Int): LiveData<Clothes> {
         return repository.getDetail(id)
     }
@@ -304,7 +323,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         view.startAnimation(animation)
     }
 
-    fun clearList(){
+    fun clearList() {
 
         _liveListOfCartItems.postValue(emptyList())
         val new = listOf<CartItem>()
@@ -327,12 +346,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val dateFormat = SimpleDateFormat("EEE d MMM", Locale.getDefault())
 
         // Format für die Rückgabe erstellen
-        val lieferzeitraum = "${dateFormat.format(ersterTag.time)} - ${dateFormat.format(zweiterTag.time)}"
+        val lieferzeitraum =
+            "${dateFormat.format(ersterTag.time)} - ${dateFormat.format(zweiterTag.time)}"
 
         return lieferzeitraum
     }
 
-    fun updateProfile(firstName: String, lastName: String, adress: String, zipCode: String, city: String) {
+    fun updateProfile(
+        firstName: String,
+        lastName: String,
+        adress: String,
+        zipCode: String,
+        city: String
+    ) {
         if (lastName.isNotEmpty() && adress.isNotEmpty() && zipCode.isNotEmpty() && city.isNotEmpty()) {
             firestore.collection("Profile")
                 .document(firebaseAuth.currentUser!!.uid)

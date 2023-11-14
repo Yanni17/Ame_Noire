@@ -3,13 +3,13 @@ package com.example.shoptest.ui
 import android.os.Bundle
 import android.os.Handler
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import coil.load
@@ -73,7 +73,7 @@ class DetailFragment : Fragment() {
 
                 if (viewModel.firebaseAuth.currentUser != null) {
 
-                    viewModel.addToCartLive(item.id,item.title,item.price,item.image)
+                    viewModel.addToCartLive(item.id, item.title, item.price, item.image)
 
                     // Aufblasen des Layouts
                     val inflater = LayoutInflater.from(context)
@@ -108,7 +108,8 @@ class DetailFragment : Fragment() {
                     val inflater = LayoutInflater.from(context)
                     val customView = inflater.inflate(R.layout.custom_layout, null)
 
-                    val container = (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
+                    val container =
+                        (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
                     container.visibility = View.VISIBLE
 
                     val alertDialog = AlertDialog.Builder(requireContext())
@@ -158,7 +159,8 @@ class DetailFragment : Fragment() {
                     val inflater = LayoutInflater.from(context)
                     val customView = inflater.inflate(R.layout.custom_layout, null)
 
-                    val container = (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
+                    val container =
+                        (context as MainActivity).findViewById<FrameLayout>(R.id.framelayout)
                     container.visibility = View.VISIBLE
 
                     val alertDialog = AlertDialog.Builder(requireContext())

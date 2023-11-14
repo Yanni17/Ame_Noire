@@ -1,18 +1,14 @@
 package com.example.shoptest.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.TextView
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.adapter.FavoriteAdapter
@@ -52,7 +48,8 @@ class FavoriteFragment : Fragment() {
         val titleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
         titleTextView.text = "${getString(R.string.favoriten3)}"
 
-        var adapter = FavoriteAdapter(emptyList(), viewModel, requireContext(),bottomNavigationView)
+        var adapter =
+            FavoriteAdapter(emptyList(), viewModel, requireContext(), bottomNavigationView)
         binding.favoriteRV.adapter = adapter
 
         // Spinner
@@ -91,11 +88,11 @@ class FavoriteFragment : Fragment() {
             binding.favoriteCV.visibility = View.VISIBLE
 
             binding.anmeldeBTN.setOnClickListener {
-                it.findNavController().popBackStack(R.id.loginFragment,false)
+                it.findNavController().popBackStack(R.id.loginFragment, false)
                 it.findNavController().navigate(R.id.loginFragment)
             }
             binding.registrierenBTN.setOnClickListener {
-                it.findNavController().popBackStack(R.id.registerFragment2,false)
+                it.findNavController().popBackStack(R.id.registerFragment2, false)
                 it.findNavController().navigate(R.id.registerFragment2)
             }
         }

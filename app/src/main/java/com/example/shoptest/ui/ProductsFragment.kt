@@ -1,11 +1,11 @@
 package com.example.shoptest.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
@@ -20,7 +20,12 @@ class ProductsFragment : Fragment() {
 
     private lateinit var binding: FragmentProductsBinding
 
-    private val produktListAdapter: ProduktListAdapter by lazy { ProduktListAdapter(viewModel,requireContext()) }
+    private val produktListAdapter: ProduktListAdapter by lazy {
+        ProduktListAdapter(
+            viewModel,
+            requireContext()
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +42,8 @@ class ProductsFragment : Fragment() {
         val view = requireActivity().findViewById<View>(R.id.view)
         view.visibility = View.VISIBLE
 
-        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val bottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         // Um die Sichtbarkeit anszuschalten:
         bottomNavigationView.visibility = View.VISIBLE
@@ -54,22 +60,17 @@ class ProductsFragment : Fragment() {
         //Adapter anpassen
         when (kategorie) {
 
-            "Herren","Men" -> viewModel.getAllHerren().observe(viewLifecycleOwner) {
+            "Herren", "Men" -> viewModel.getAllHerren().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
                 titleTextView.text = "${getString(R.string.herren1)}"
             }
 
-            "Damen","Women" -> viewModel.getAllDamen().observe(viewLifecycleOwner) {
+            "Damen", "Women" -> viewModel.getAllDamen().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
                 titleTextView.text = "${getString(R.string.damen1)}"
             }
 
-            "Elektronik","Electronics" -> viewModel.getAllElectrics().observe(viewLifecycleOwner) {
-                produktListAdapter.submitList(it)
-                titleTextView.text = "${getString(R.string.elektronik1)}"
-            }
-
-            "Schmuck","Jewelry" -> viewModel.getAllJewelry().observe(viewLifecycleOwner) {
+            "Schmuck", "Jewelry" -> viewModel.getAllJewelry().observe(viewLifecycleOwner) {
                 produktListAdapter.submitList(it)
                 titleTextView.text = "${getString(R.string.schmuck1)}"
             }

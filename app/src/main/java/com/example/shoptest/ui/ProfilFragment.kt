@@ -1,15 +1,13 @@
 package com.example.shoptest.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import com.example.shoptest.MainActivity
 import com.example.shoptest.MainViewModel
 import com.example.shoptest.R
 import com.example.shoptest.data.datamodels.models.Profile
@@ -64,7 +62,7 @@ class ProfilFragment : Fragment() {
 
             binding.loggoutCV.setOnClickListener {
                 viewmodel.signOut()
-                it.findNavController().popBackStack(R.id.profilFragment,false)
+                it.findNavController().popBackStack(R.id.profilFragment, false)
                 it.findNavController().navigate(R.id.profilFragment)
 
             }
