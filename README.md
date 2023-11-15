@@ -1,5 +1,19 @@
 # Âme Noire - Clothing Shopping Application <br>(Android)
 
+<br>
+<br>
+
+<div align="center">
+  <a >
+    <img src="/Âme Noire Images/âme noire..png" width="600">
+  </a>
+  </div>
+
+
+<br>
+<br>
+
+
 > [!Note]
 > This app requiers a valid network connection to pull data once for offline-mode. <br>
 > Minimal [SDK version](https://apilevels.com) required to run the app: **24**
