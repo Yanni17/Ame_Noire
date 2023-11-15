@@ -19,7 +19,7 @@ This application relies on the [Fakestore API](https://fakestoreapi.com) to cura
 
 [Features](#Features)
 
-[Android Technology Implementation](#Android_Technology_Implementation)
+[Android Technology Implementation](#AndroidTechnologyImplementation)
 
 [Libraries](#Libraries)
 
