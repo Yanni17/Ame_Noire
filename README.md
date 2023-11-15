@@ -37,7 +37,6 @@ This application relies on the [Fakestore API](https://fakestoreapi.com) to cura
   <img src="/Âme Noire Images/favoritescreen.png" width="150" />
   <img src="/Âme Noire Images/cartscreen.png" width="150" />
   <img src="/Âme Noire Images/profilescreen.png" width="150" />
-  <img src="/Âme Noire Images/checkoutscreen.png" width="150" />
 </p>
 
 
