@@ -69,7 +69,7 @@
     <string name="angemeldet">Erfolgreich Angemeldet!</string>
     <string name="falsche_mail">Die eingegebene E-Mail ist nicht registriert.</string>
     <string name="falsches_passwort">Falsches Passwort!</string>
-    <string name="fehler_anmeldung">Fehler bei der Anmeldung. Bitte versuchen Sie es erneut.</string>
+    <string name="fehler_anmeldung">E-mail oder Passwort ist falsch</string>
     <string name="erfolgreich_ausgeloggt">Sie haben sich erfolgreich ausgeloggt!</string>
     <string name="notLoggedIn">Sie sind nicht angemeldet.</string>
     <string name="erfolgreich_hinzu">Artikel erfolgreich hinzugefügt.</string>

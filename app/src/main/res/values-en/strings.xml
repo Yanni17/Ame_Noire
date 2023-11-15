@@ -70,7 +70,7 @@
     <string name="angemeldet">Successfully Logged In!</string>
     <string name="falsche_mail">The entered e-mail is not registered.</string>
     <string name="falsches_passwort">Wrong password!</string>
-    <string name="fehler_anmeldung">Error during registration. Please try again.</string>
+    <string name="fehler_anmeldung">Incorrect Email or Password</string>
     <string name="erfolgreich_ausgeloggt">You have successfully logged out!</string>
     <string name="notLoggedIn">You are not logged in.</string>
     <string name="erfolgreich_hinzu">Item successfully added!</string>

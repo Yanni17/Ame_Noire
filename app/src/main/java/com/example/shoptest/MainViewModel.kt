@@ -197,33 +197,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     .show()
             } else {
 
-                Log.e("Error", "${it.exception}")
+                // alle anderen
+                val toast = Toast.makeText(
+                    getApplication(),
+                    "${getApplication<Application>().getString(R.string.fehler_anmeldung)}",
+                    Toast.LENGTH_LONG
+                )
+                toast.show()
 
-                if (it.exception is FirebaseAuthInvalidUserException) {
-                    // e-mail existiert nicht
-                    val toast = Toast.makeText(
-                        getApplication(),
-                        "${getApplication<Application>().getString(R.string.falsche_mail)}",
-                        Toast.LENGTH_LONG
-                    )
-                    toast.show()
-                } else if (it.exception is FirebaseAuthInvalidCredentialsException) {
-                    // passwort falsch
-                    val toast = Toast.makeText(
-                        getApplication(),
-                        "${getApplication<Application>().getString(R.string.falsches_passwort)}",
-                        Toast.LENGTH_LONG
-                    )
-                    toast.show()
-                } else {
-                    // alle anderen
-                    val toast = Toast.makeText(
-                        getApplication(),
-                        "${getApplication<Application>().getString(R.string.fehler_anmeldung)}",
-                        Toast.LENGTH_LONG
-                    )
-                    toast.show()
-                }
             }
         }
     }
