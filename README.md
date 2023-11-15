@@ -15,17 +15,17 @@ This application relies on the [Fakestore API](https://fakestoreapi.com) to cura
 
 [Screenshots](#Screenshots)
 
-[Installation](README.md#Installation)
+[Installation](#Installation)
 
-[Features](README.md#Features)
+[Features](#Features)
 
-[Android Technology Implementation](README.md#Android_Technology_Implementation)
+[Android Technology Implementation](#Android_Technology_Implementation)
 
-[Libraries](README.md#Libraries)
+[Libraries](#Libraries)
 
-[Contributing](README.md#Contributing)
+[Contributing](#Contributing)
 
-[Contact/Authors](README.md#Contact/Authors)
+[Contact/Authors](#Contact/Authors)
 
 
 
