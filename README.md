@@ -13,7 +13,7 @@ This application relies on the [Fakestore API](https://fakestoreapi.com) to cura
 
 ## Index
 
-[Screenshots](README.md#Screenshots)
+[Screenshots](#Screenshots)
 
 [Installation](README.md#Installation)
 
