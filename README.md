@@ -67,7 +67,7 @@ This application relies on the [Fakestore API](https://fakestoreapi.com) to cura
 
 
 ## Android Technology Implementation
-- **[MVVM Pattern](https://developer.android.com/topic/architecture)**
+- **[MVVM Pattern](https://www.geeksforgeeks.org/introduction-to-model-view-view-model-mvvm/)**
 - **[Fragments](https://developer.android.com/guide/fragments)**
 - **[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)**
 - **[LiveData](https://developer.android.com/topic/libraries/architecture/livedata)**
